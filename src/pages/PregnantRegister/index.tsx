@@ -20,13 +20,13 @@ export function PregnantRegister() {
               placeHolder="vai ser mudado"
               type="text"
             />
-            <Select label="Raça:" />
-            <Input label={'Sexo:'} placeHolder="vai ser mudado" type="text" />
+            <Select label="Raça:" defaut="Selecione uma opcão" />
+            <Select label="Sexo:" defaut="Selecione uma opcão" />
             <Input label={'Cpf:'} placeHolder="xxx.xxx.xxx-xx" type="text" />
           </div>
           <div>
             <Input label={'Chefe de familia:'} />
-            <Input label={'Estado civil:'} />
+            <Select label="Estado civil:" defaut="Selecione uma opcão" />
             <Input
               label={'Escolaridade:'}
               placeHolder="Digite a escolaridade..."
@@ -44,7 +44,7 @@ export function PregnantRegister() {
               placeHolder="Digite municipio..."
               type="text"
             />
-            <Input label={'Moradia:'} />
+            <Select label="Moradia:" defaut="Selecione uma opcão" />
             <Input label={'Eletricidade:'} />
             <Input label={'Rede de esgoto:'} />
             <Input label={'Agua tratada:'} />
