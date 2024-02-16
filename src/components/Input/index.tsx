@@ -1,5 +1,7 @@
 import React from 'react';
 import * as S from './styles';
+import { Tooltip } from 'antd';
+import { Info } from '@phosphor-icons/react';
 
 interface InputProps {
   label?: string;
@@ -11,6 +13,9 @@ interface InputProps {
   leftAdd?: React.ReactNode;
   color?: string;
   inputFunction?: React.ChangeEventHandler<HTMLInputElement>;
+  infoText?: string;
+  status?: '' | 'warning' | 'error' | undefined;
+  errorShow?: boolean;
 }
 export const Input: React.FC<InputProps> = ({
   label,
@@ -20,11 +25,29 @@ export const Input: React.FC<InputProps> = ({
   disabled,
   rightAdd,
   leftAdd,
-  inputFunction
+  inputFunction,
+  infoText,
+  errorShow,
+  color,
+  status
 }) => {
   return (
     <S.Container>
-      {label && <S.Label>{label}</S.Label>}
+      {label && (
+        <S.Label>
+          {label}
+          {infoText &&
+            (errorShow === true ? (
+              <Tooltip title={infoText} color={'red'} open={errorShow}>
+                <Info size={20} color={color} />
+              </Tooltip>
+            ) : (
+              <Tooltip title={infoText} color={color}>
+                <Info size={20} color={color} />
+              </Tooltip>
+            ))}
+        </S.Label>
+      )}
       <S.InputArea
         disabled={disabled}
         type={type}
@@ -33,6 +56,7 @@ export const Input: React.FC<InputProps> = ({
         suffix={rightAdd}
         prefix={leftAdd}
         onChange={inputFunction}
+        status={status}
       />
     </S.Container>
   );

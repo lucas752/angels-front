@@ -10,7 +10,15 @@ export const Container = styled.div`
   gap: 12px;
 `;
 
-export const DataArea = styled(DatePicker)``;
+export const DataArea = styled(DatePicker)`
+  border-radius: 1rem !important;
+  border: 2px var(--gray-100) solid;
+
+  &:focus {
+    border-color: var(--red-500) !important;
+    outline: none !important;
+  }
+`;
 
 export const Label = styled.label`
   display: flex;

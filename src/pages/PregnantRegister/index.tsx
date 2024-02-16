@@ -16,7 +16,7 @@ export function PregnantRegister() {
             <Input label={'Nome:'} placeHolder="Digite o nome..." type="text" />
           </div>
           <div>
-            <DateSelect label="Nascimento:" />
+            <DateSelect label="Nascimento:" placeHolder="Selecione uma data" />
             <Select label="Raça:" defaut="Selecione uma opcão" />
             <Select label="Sexo:" defaut="Selecione uma opcão" />
             <Input label={'Cpf:'} placeHolder="xxx.xxx.xxx-xx" type="text" />
@@ -47,7 +47,10 @@ export function PregnantRegister() {
             <Input label={'Agua tratada:'} />
           </div>
           <div>
-            <Input label={'Ultima gestacao:'} />
+            <DateSelect
+              label="Última gestação:"
+              placeHolder="Selecione uma data"
+            />
             <Input label={'Nutrida:'} />
             <Input label={'Amamentacao:'} />
             <Input
