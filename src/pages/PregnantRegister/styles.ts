@@ -2,14 +2,18 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  height: 100dvh;
 `;
 
 export const Contente = styled.div`
-  width: 80%;
-  height: 80%;
+  width: 70%;
+  height: 90%;
   background: rgba(177, 72, 138, 0.2);
+  align-self: center;
+  justify-self: center;
 `;
 
 export const TopContainer = styled.section`
@@ -19,4 +23,11 @@ export const TopContainer = styled.section`
   padding: 1rem;
 `;
 
-export const FormContainer = styled.section``;
+export const FormContainer = styled.section`
+  div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+`;

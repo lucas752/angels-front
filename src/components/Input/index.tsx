@@ -1,9 +1,12 @@
 import * as S from './styles';
 
-export const Input = () => {
+interface InputProps {
+  label?: string;
+}
+export const Input: React.FC<InputProps> = ({ label }) => {
   return (
     <S.Container>
-      <S.Label>teste</S.Label>
+      {label && <S.Label>{label}</S.Label>}
       <S.InputArea />
     </S.Container>
   );

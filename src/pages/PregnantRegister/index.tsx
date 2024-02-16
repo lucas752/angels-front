@@ -10,7 +10,35 @@ export function PregnantRegister() {
           <img src={Logo} alt="angels logo" />
         </S.TopContainer>
         <S.FormContainer>
-          <Input />
+          <div>
+            <Input label={'Nome:'} />
+          </div>
+          <div>
+            <Input label={'Nascimento:'} />
+            <Input label={'Raca:'} />
+            <Input label={'Sexo:'} />
+            <Input label={'Cpf:'} />
+          </div>
+          <div>
+            <Input label={'Chefe de familia:'} />
+            <Input label={'Estado civil:'} />
+            <Input label={'Escolaridade:'} />
+            <Input label={'Renda Familiar:'} />
+          </div>
+          <div>
+            <Input label={'Minicipio:'} />
+            <Input label={'Moradia:'} />
+            <Input label={'Eletricidade:'} />
+            <Input label={'Rede de esgoto:'} />
+            <Input label={'Agua tratada:'} />
+          </div>
+          <div>
+            <Input label={'Ultima gestacao:'} />
+            <Input label={'Nutrida:'} />
+            <Input label={'Amamentacao:'} />
+            <Input label={'Contato:'} />
+            <Input label={'contato:'} />
+          </div>
         </S.FormContainer>
       </S.Contente>
     </S.Container>
