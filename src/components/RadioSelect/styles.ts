@@ -8,6 +8,11 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 12px;
+  div {
+    align-self: flex-start;
+    justify-self: start;
+    width: max-content;
+  }
 `;
 
 export const Label = styled.label`
@@ -18,4 +23,8 @@ export const Label = styled.label`
   color: var(--red-500);
 `;
 
-export const RadioArea = styled(Radio)``;
+export const RadioArea = styled(Radio)`
+  .ant-radio {
+    color: var(--red-500);
+  }
+`;

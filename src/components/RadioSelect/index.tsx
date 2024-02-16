@@ -44,10 +44,12 @@ export const RadioSelect: React.FC<RadioProps> = ({
             ))}
         </S.Label>
       )}
-      <Radio.Group onChange={radioFunction} value={value}>
-        <S.RadioArea value={firstValue}>{firstOption}</S.RadioArea>
-        <S.RadioArea value={secondValue}>{secondOption}</S.RadioArea>
-      </Radio.Group>
+      <div>
+        <Radio.Group onChange={radioFunction} value={value}>
+          <S.RadioArea value={firstValue}>{firstOption}</S.RadioArea>
+          <S.RadioArea value={secondValue}>{secondOption}</S.RadioArea>
+        </Radio.Group>
+      </div>
     </S.Container>
   );
 };
