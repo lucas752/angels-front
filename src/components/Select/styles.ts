@@ -1,23 +1,13 @@
-import { Input } from 'antd';
+import { Select } from 'antd';
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
-`;
-
-export const InputArea = styled(Input)`
-  border-radius: 1rem !important;
-  border: 2px var(--gray-100) solid;
-
-  &:focus {
-    border-color: var(--red-500);
-    outline: none;
-  }
+  padding: 1rem;
 `;
 
 export const Label = styled.label`
@@ -26,4 +16,15 @@ export const Label = styled.label`
   align-self: start;
   font-weight: 600;
   color: var(--red-500);
+`;
+
+export const SelectArea = styled(Select)`
+  background: #fff;
+  border-radius: 1rem !important;
+  border: 2px var(--gray-100) solid !important;
+
+  &:focus {
+    border-color: var(--red-500) !important;
+    outline: none;
+  }
 `;

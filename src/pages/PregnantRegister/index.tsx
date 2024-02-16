@@ -1,6 +1,7 @@
 import * as S from './styles';
 import Logo from '../../assets/angelsLogo.svg';
 import { Input } from '../../components/Input';
+import { Select } from '../../components/Select';
 
 export function PregnantRegister() {
   return (
@@ -19,7 +20,7 @@ export function PregnantRegister() {
               placeHolder="vai ser mudado"
               type="text"
             />
-            <Input label={'Raca:'} placeHolder="vai ser mudado" type="text" />
+            <Select label="Raça:" />
             <Input label={'Sexo:'} placeHolder="vai ser mudado" type="text" />
             <Input label={'Cpf:'} placeHolder="xxx.xxx.xxx-xx" type="text" />
           </div>
