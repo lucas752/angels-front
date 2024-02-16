@@ -10,6 +10,19 @@ export const Container = styled.div`
   gap: 12px;
 `;
 
-export const InputArea = styled(Input)``;
+export const InputArea = styled(Input)`
+  border-radius: 1rem !important;
+  border: 2px var(--gray-100) solid;
 
-export const Label = styled.label``;
+  &:focus {
+    border-color: var(--red-500);
+  }
+`;
+
+export const Label = styled.label`
+  display: flex;
+  justify-content: space-between;
+  align-self: start;
+  font-weight: 600;
+  color: var(--red-500);
+`;

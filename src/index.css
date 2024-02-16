@@ -1,0 +1,11 @@
+:root {
+  --gray-100: #d5deef;
+  --red-500: #b1488a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: roboto, sans-serif;
+}
