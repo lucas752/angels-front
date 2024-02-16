@@ -4,8 +4,6 @@ import { Input } from '../../components/Input';
 import { Select } from '../../components/Select';
 import { DateSelect } from '../../components/DateSelect';
 import { RadioSelect } from '../../components/RadioSelect';
-import { RadioChangeEvent } from 'antd';
-import { useState } from 'react';
 
 export function PregnantRegister() {
   return (
@@ -51,17 +49,49 @@ export function PregnantRegister() {
               type="text"
             />
             <Select label="Moradia:" defaut="Selecione uma opcão" />
-            <Input label={'Eletricidade:'} />
-            <Input label={'Rede de esgoto:'} />
-            <Input label={'Agua tratada:'} />
+            <RadioSelect
+              label="Eletricidade:"
+              firstOption="Sim"
+              secondOption="Nao"
+              firstValue={1}
+              secondValue={2}
+            />
+            <RadioSelect
+              label="Rede de esgoto:"
+              firstOption="Sim"
+              secondOption="Nao"
+              firstValue={1}
+              secondValue={2}
+            />
+            <RadioSelect
+              label="Agua tratada:"
+              firstOption="Sim"
+              secondOption="Nao"
+              firstValue={1}
+              secondValue={2}
+            />
           </div>
           <div>
             <DateSelect
               label="Última gestação:"
               placeHolder="Selecione uma data"
             />
-            <Input label={'Nutrida:'} />
-            <Input label={'Amamentacao:'} />
+
+            <RadioSelect
+              label="Nutrida:"
+              firstOption="Sim"
+              secondOption="Nao"
+              firstValue={1}
+              secondValue={2}
+            />
+
+            <RadioSelect
+              label="Amamentacao:"
+              firstOption="Sim"
+              secondOption="Nao"
+              firstValue={1}
+              secondValue={2}
+            />
             <Input
               label={'Contato:'}
               placeHolder="Digite o contatto..."
