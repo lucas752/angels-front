@@ -11,22 +11,38 @@ export function PregnantRegister() {
         </S.TopContainer>
         <S.FormContainer>
           <div>
-            <Input label={'Nome:'} />
+            <Input label={'Nome:'} placeHolder="Digite o nome..." type="text" />
           </div>
           <div>
-            <Input label={'Nascimento:'} />
-            <Input label={'Raca:'} />
-            <Input label={'Sexo:'} />
-            <Input label={'Cpf:'} />
+            <Input
+              label={'Nascimento:'}
+              placeHolder="vai ser mudado"
+              type="text"
+            />
+            <Input label={'Raca:'} placeHolder="vai ser mudado" type="text" />
+            <Input label={'Sexo:'} placeHolder="vai ser mudado" type="text" />
+            <Input label={'Cpf:'} placeHolder="xxx.xxx.xxx-xx" type="text" />
           </div>
           <div>
             <Input label={'Chefe de familia:'} />
             <Input label={'Estado civil:'} />
-            <Input label={'Escolaridade:'} />
-            <Input label={'Renda Familiar:'} />
+            <Input
+              label={'Escolaridade:'}
+              placeHolder="Digite a escolaridade..."
+              type="text"
+            />
+            <Input
+              label={'Renda Familiar:'}
+              placeHolder="Digite a renda..."
+              type="text"
+            />
           </div>
           <div>
-            <Input label={'Minicipio:'} />
+            <Input
+              label={'Minicipio:'}
+              placeHolder="Digite municipio..."
+              type="text"
+            />
             <Input label={'Moradia:'} />
             <Input label={'Eletricidade:'} />
             <Input label={'Rede de esgoto:'} />
@@ -36,8 +52,16 @@ export function PregnantRegister() {
             <Input label={'Ultima gestacao:'} />
             <Input label={'Nutrida:'} />
             <Input label={'Amamentacao:'} />
-            <Input label={'Contato:'} />
-            <Input label={'contato:'} />
+            <Input
+              label={'Contato:'}
+              placeHolder="Digite o contatto..."
+              type="text"
+            />
+            <Input
+              label={'contato de emergencia:'}
+              placeHolder="Digite o contato de emergencia..."
+              type="text"
+            />
           </div>
         </S.FormContainer>
       </S.Contente>
