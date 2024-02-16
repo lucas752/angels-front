@@ -17,8 +17,6 @@ export const TopContainer = styled.section`
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  div {
-  }
 `;
 
 export const FormContainer = styled.section``;
