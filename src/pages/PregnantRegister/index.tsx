@@ -3,6 +3,7 @@ import Logo from '../../assets/angelsLogo.svg';
 import { Input } from '../../components/Input';
 import { Select } from '../../components/Select';
 import { DateSelect } from '../../components/DateSelect';
+import { RadioSelect } from '../../components/RadioSelect';
 
 export function PregnantRegister() {
   return (
@@ -22,7 +23,7 @@ export function PregnantRegister() {
             <Input label={'Cpf:'} placeHolder="xxx.xxx.xxx-xx" type="text" />
           </div>
           <div>
-            <Input label={'Chefe de familia:'} />
+            <RadioSelect label="Chefe de familia:" />
             <Select label="Estado civil:" defaut="Selecione uma opcão" />
             <Input
               label={'Escolaridade:'}
