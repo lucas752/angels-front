@@ -4,6 +4,8 @@ import { Input } from '../../components/Input';
 import { Select } from '../../components/Select';
 import { DateSelect } from '../../components/DateSelect';
 import { RadioSelect } from '../../components/RadioSelect';
+import { RadioChangeEvent } from 'antd';
+import { useState } from 'react';
 
 export function PregnantRegister() {
   return (
@@ -23,7 +25,13 @@ export function PregnantRegister() {
             <Input label={'Cpf:'} placeHolder="xxx.xxx.xxx-xx" type="text" />
           </div>
           <div>
-            <RadioSelect label="Chefe de familia:" />
+            <RadioSelect
+              label="Chefe de familia:"
+              firstOption="Sim"
+              secondOption="Nao"
+              firstValue={1}
+              secondValue={2}
+            />
             <Select label="Estado civil:" defaut="Selecione uma opcão" />
             <Input
               label={'Escolaridade:'}

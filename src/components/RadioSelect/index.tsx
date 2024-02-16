@@ -1,5 +1,5 @@
 import { Info } from '@phosphor-icons/react';
-import { Tooltip } from 'antd';
+import { Radio, RadioChangeEvent, Tooltip } from 'antd';
 import * as S from './styles';
 interface RadioProps {
   label?: string;
@@ -7,13 +7,25 @@ interface RadioProps {
   status?: '' | 'warning' | 'error' | undefined;
   errorShow?: boolean;
   color?: string;
+  firstOption?: string;
+  secondOption?: string;
+  firstValue?: string | number;
+  secondValue?: string | number;
+  value?: string | number;
+  radioFunction?: (e: RadioChangeEvent) => void;
 }
 
 export const RadioSelect: React.FC<RadioProps> = ({
   label,
   infoText,
   errorShow,
-  color
+  color,
+  firstValue,
+  secondValue,
+  value,
+  radioFunction,
+  firstOption,
+  secondOption
 }) => {
   return (
     <S.Container>
@@ -32,10 +44,10 @@ export const RadioSelect: React.FC<RadioProps> = ({
             ))}
         </S.Label>
       )}
-      <div>
-        <S.RadioArea>Sim</S.RadioArea>
-        <S.RadioArea>Nao</S.RadioArea>
-      </div>
+      <Radio.Group onChange={radioFunction} value={value}>
+        <S.RadioArea value={firstValue}>{firstOption}</S.RadioArea>
+        <S.RadioArea value={secondValue}>{secondOption}</S.RadioArea>
+      </Radio.Group>
     </S.Container>
   );
 };
