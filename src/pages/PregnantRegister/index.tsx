@@ -1,5 +1,9 @@
 import * as S from './styles';
 
 export function PregnantRegister() {
-  return <div>teste</div>;
+  return (
+    <S.Container>
+      <div>teste</div>
+    </S.Container>
+  );
 }
