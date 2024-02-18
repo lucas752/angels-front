@@ -9,9 +9,9 @@ export const Container = styled.div`
   align-items: center;
   gap: 12px;
   div {
-    align-self: flex-start;
-    justify-self: start;
-    width: max-content;
+    align-self: flex-start !important;
+    justify-self: start !important;
+    width: max-content !important;
   }
 `;
 

@@ -32,8 +32,9 @@ export const FormContainer = styled.section`
   }
 `;
 
-export const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div<{ $progress?: boolean }>`
   display: flex;
-  justify-content: flex-end;
+  justify-content: ${(props) =>
+    props.$progress ? 'space-between' : 'flex-end'};
   padding: 1rem;
 `;
