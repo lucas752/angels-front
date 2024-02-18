@@ -4,6 +4,7 @@ import { Input } from '../../components/Input';
 import { Select } from '../../components/Select';
 import { DateSelect } from '../../components/DateSelect';
 import { RadioSelect } from '../../components/RadioSelect';
+import { Button } from '../../components/Button';
 
 export function PregnantRegister() {
   return (
@@ -104,6 +105,9 @@ export function PregnantRegister() {
             />
           </div>
         </S.FormContainer>
+        <S.ButtonContainer>
+          <Button />
+        </S.ButtonContainer>
       </S.Contente>
     </S.Container>
   );
