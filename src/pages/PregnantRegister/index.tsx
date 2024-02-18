@@ -5,6 +5,7 @@ import { Select } from '../../components/Select';
 import { DateSelect } from '../../components/DateSelect';
 import { RadioSelect } from '../../components/RadioSelect';
 import { Button } from '../../components/Button';
+import { ArrowRight } from '@phosphor-icons/react';
 
 export function PregnantRegister() {
   return (
@@ -106,7 +107,11 @@ export function PregnantRegister() {
           </div>
         </S.FormContainer>
         <S.ButtonContainer>
-          <Button />
+          <Button
+            label="Próximo"
+            icon={<ArrowRight size={18} weight="fill" />}
+            shape="round"
+          />
         </S.ButtonContainer>
       </S.Contente>
     </S.Container>
