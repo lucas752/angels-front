@@ -35,26 +35,26 @@ export function PregnantRegister() {
   const [emergencyContact, setEmergencyContact] = useState<string>();
 
   //segunda parte
-  const [abortions, setAbortions] = useState<number>();
-  const [liveChildren, setLiveChildren] = useState<number>();
-  const [twins, setTwins] = useState<number>();
-  const [liveBirths, setLiveBirths] = useState<number>();
-  const [stillbirths, setStillbirths] = useState<number>();
-  const [birthWeight25004000, setBirthWeight25004000] = useState<number>();
-  const [birthWeightlt2500, setBirthWeightlt2500] = useState<number>();
-  const [birthWeightgt4000, setBirthWeightgt4000] = useState<number>();
-  const [deathsFirstWeek, setDeathsFirstWeek] = useState<number>();
-  const [deathsAfterFirstWeek, setDeathsAfterFirstWeek] = useState<number>();
-  const [diabetes, setDiabetes] = useState<boolean>();
-  const [pelvicSurgery, setPelvicSurgery] = useState<boolean>();
-  const [deliveries, setDeliveries] = useState<number>();
-  const [vaginalDeliveries, setVaginalDeliveries] = useState<number>();
-  const [cesareanDeliveries, setCesareanDeliveries] = useState<number>();
-  const [urinaryInfection, setUrinaryInfection] = useState<boolean>();
+  const [abortions, setAbortions] = useState<string>();
+  const [liveChildren, setLiveChildren] = useState<string>();
+  const [twins, setTwins] = useState<string>();
+  const [liveBirths, setLiveBirths] = useState<string>();
+  const [stillbirths, setStillbirths] = useState<string>();
+  const [birthWeight25004000, setBirthWeight25004000] = useState<string>();
+  const [birthWeightlt2500, setBirthWeightlt2500] = useState<string>();
+  const [birthWeightgt4000, setBirthWeightgt4000] = useState<string>();
+  const [deathsFirstWeek, setDeathsFirstWeek] = useState<string>();
+  const [deathsAfterFirstWeek, setDeathsAfterFirstWeek] = useState<string>();
+  const [diabetes, setDiabetes] = useState<number>();
+  const [pelvicSurgery, setPelvicSurgery] = useState<number>();
+  const [deliveries, setDeliveries] = useState<string>();
+  const [vaginalDeliveries, setVaginalDeliveries] = useState<string>();
+  const [cesareanDeliveries, setCesareanDeliveries] = useState<string>();
+  const [urinaryInfection, setUrinaryInfection] = useState<number>();
   const [congenitalMalformation, setCongenitalMalformation] =
-    useState<boolean>();
-  const [hypertension, setHypertension] = useState<boolean>();
-  const [twinFamilyHistory, setTwinFamilyHistory] = useState<boolean>();
+    useState<number>();
+  const [hypertension, setHypertension] = useState<number>();
+  const [twinFamilyHistory, setTwinFamilyHistory] = useState<number>();
 
   const handleChangeName = (e: { target: { value: string } }) => {
     const { value } = e.target;
@@ -156,97 +156,97 @@ export function PregnantRegister() {
   };
 
   //segunda parte
-  const handleChangeAbortions = (e: { target: { value: number } }) => {
+  const handleChangeAbortions = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setAbortions(value);
   };
 
-  const handleChangeLiveChildren = (e: { target: { value: number } }) => {
+  const handleChangeLiveChildren = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setLiveChildren(value);
   };
 
-  const handleChangeTwins = (e: { target: { value: number } }) => {
+  const handleChangeTwins = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setTwins(value);
   };
 
-  const handleChangeLiveBirths = (e: { target: { value: number } }) => {
+  const handleChangeLiveBirths = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setLiveBirths(value);
   };
 
-  const handleChangeStillbirths = (e: { target: { value: number } }) => {
+  const handleChangeStillbirths = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setStillbirths(value);
   };
 
   const handleChangeBirthWeight25004000 = (e: {
-    target: { value: number };
+    target: { value: string };
   }) => {
     const { value } = e.target;
     setBirthWeight25004000(value);
   };
 
-  const handleChangeBirthWeightlt2500 = (e: { target: { value: number } }) => {
+  const handleChangeBirthWeightlt2500 = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setBirthWeightlt2500(value);
   };
 
-  const handleChangeBirthWeightgt4000 = (e: { target: { value: number } }) => {
+  const handleChangeBirthWeightgt4000 = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setBirthWeightgt4000(value);
   };
 
-  const handleChangeDeathsFirstWeek = (e: { target: { value: number } }) => {
+  const handleChangeDeathsFirstWeek = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setDeathsFirstWeek(value);
   };
 
   const handleChangeDeathsAfterFirstWeek = (e: {
-    target: { value: number };
+    target: { value: string };
   }) => {
     const { value } = e.target;
     setDeathsAfterFirstWeek(value);
   };
 
-  const handleChangeDiabetes = (value: boolean) => {
-    setDiabetes(value);
+  const handleChangeDiabetes = (e: RadioChangeEvent) => {
+    setDiabetes(e.target.value);
   };
 
-  const handleChangePelvicSurgery = (value: boolean) => {
-    setPelvicSurgery(value);
+  const handleChangePelvicSurgery = (e: RadioChangeEvent) => {
+    setPelvicSurgery(e.target.value);
   };
 
-  const handleChangeDeliveries = (e: { target: { value: number } }) => {
+  const handleChangeDeliveries = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setDeliveries(value);
   };
 
-  const handleChangeVaginalDeliveries = (e: { target: { value: number } }) => {
+  const handleChangeVaginalDeliveries = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setVaginalDeliveries(value);
   };
 
-  const handleChangeCesareanDeliveries = (e: { target: { value: number } }) => {
+  const handleChangeCesareanDeliveries = (e: { target: { value: string } }) => {
     const { value } = e.target;
     setCesareanDeliveries(value);
   };
 
-  const handleChangeUrinaryInfection = (value: boolean) => {
-    setUrinaryInfection(value);
+  const handleChangeUrinaryInfection = (e: RadioChangeEvent) => {
+    setUrinaryInfection(e.target.value);
   };
 
-  const handleChangeCongenitalMalformation = (value: boolean) => {
-    setCongenitalMalformation(value);
+  const handleChangeCongenitalMalformation = (e: RadioChangeEvent) => {
+    setCongenitalMalformation(e.target.value);
   };
 
-  const handleChangeHypertension = (value: boolean) => {
-    setHypertension(value);
+  const handleChangeHypertension = (e: RadioChangeEvent) => {
+    setHypertension(e.target.value);
   };
 
-  const handleChangeTwinFamilyHistory = (value: boolean) => {
-    setTwinFamilyHistory(value);
+  const handleChangeTwinFamilyHistory = (e: RadioChangeEvent) => {
+    setTwinFamilyHistory(e.target.value);
   };
 
   //select objetos
@@ -452,39 +452,69 @@ export function PregnantRegister() {
         {progress && (
           <S.FormContainer>
             <div>
-              <Input label={'Abortos:'} placeHolder="0" type="number" />
-              <Input label={'Filhos vivos:'} placeHolder="0" type="number" />
-              <Input label={'Gemelares:'} placeHolder="0" type="number" />
-              <Input label={'Nascidos vivos:'} placeHolder="0" type="number" />
-              <Input label={'Nascidos mortos:'} placeHolder="0" type="number" />
+              <Input
+                label={'Abortos:'}
+                placeHolder="0"
+                type="string"
+                inputFunction={handleChangeAbortions}
+              />
+              <Input
+                label={'Filhos vivos:'}
+                placeHolder="0"
+                type="string"
+                inputFunction={handleChangeLiveChildren}
+              />
+              <Input
+                label={'Gemelares:'}
+                placeHolder="0"
+                type="string"
+                inputFunction={handleChangeTwins}
+              />
+              <Input
+                label={'Nascidos vivos:'}
+                placeHolder="0"
+                type="string"
+                inputFunction={handleChangeLiveBirths}
+              />
+              <Input
+                label={'Nascidos mortos:'}
+                placeHolder="0"
+                type="string"
+                inputFunction={handleChangeStillbirths}
+              />
             </div>
             <div>
               <Input
                 label={'rn peso entre 2500 e 4000:'}
                 placeHolder="0"
-                type="number"
+                type="string"
+                inputFunction={handleChangeBirthWeight25004000}
               />
               <Input
                 label={'rn peso menor 2500:'}
                 placeHolder="0"
-                type="number"
+                type="string"
+                inputFunction={handleChangeBirthWeightlt2500}
               />
               <Input
                 label={'rn peso maior 4000:'}
                 placeHolder="0"
-                type="number"
+                type="string"
+                inputFunction={handleChangeBirthWeightgt4000}
               />
             </div>
             <div>
               <Input
                 label={'Óbitos na primeira semana:'}
                 placeHolder="0"
-                type="number"
+                type="string"
+                inputFunction={handleChangeDeathsFirstWeek}
               />
               <Input
                 label={'Óbitos após primeira semana:'}
                 placeHolder="0"
-                type="number"
+                type="string"
+                inputFunction={handleChangeDeathsAfterFirstWeek}
               />
               <RadioSelect
                 label="Diabetes:"
@@ -492,6 +522,8 @@ export function PregnantRegister() {
                 secondOption="Nao"
                 firstValue={1}
                 secondValue={2}
+                radioFunction={handleChangeDiabetes}
+                value={diabetes}
               />
               <RadioSelect
                 label="Cirugia pélvica:"
@@ -499,12 +531,29 @@ export function PregnantRegister() {
                 secondOption="Nao"
                 firstValue={1}
                 secondValue={2}
+                radioFunction={handleChangePelvicSurgery}
+                value={pelvicSurgery}
               />
             </div>
             <div>
-              <Input label={'Partos:'} placeHolder="0" type="number" />
-              <Input label={'Partos vaginais:'} placeHolder="0" type="number" />
-              <Input label={'Partos cesarios:'} placeHolder="0" type="number" />
+              <Input
+                label={'Partos:'}
+                placeHolder="0"
+                type="string"
+                inputFunction={handleChangeDeliveries}
+              />
+              <Input
+                label={'Partos vaginais:'}
+                placeHolder="0"
+                type="string"
+                inputFunction={handleChangeVaginalDeliveries}
+              />
+              <Input
+                label={'Partos cesarios:'}
+                placeHolder="0"
+                type="string"
+                inputFunction={handleChangeCesareanDeliveries}
+              />
             </div>
             <div>
               <RadioSelect
@@ -513,6 +562,8 @@ export function PregnantRegister() {
                 secondOption="Nao"
                 firstValue={1}
                 secondValue={2}
+                radioFunction={handleChangeUrinaryInfection}
+                value={urinaryInfection}
               />
               <RadioSelect
                 label="Má formação congênica:"
@@ -520,6 +571,8 @@ export function PregnantRegister() {
                 secondOption="Nao"
                 firstValue={1}
                 secondValue={2}
+                radioFunction={handleChangeCongenitalMalformation}
+                value={congenitalMalformation}
               />
               <RadioSelect
                 label="Hipertensão:"
@@ -527,6 +580,8 @@ export function PregnantRegister() {
                 secondOption="Nao"
                 firstValue={1}
                 secondValue={2}
+                radioFunction={handleChangeHypertension}
+                value={hypertension}
               />
               <RadioSelect
                 label="Familiar gêmeos:"
@@ -534,6 +589,8 @@ export function PregnantRegister() {
                 secondOption="Nao"
                 firstValue={1}
                 secondValue={2}
+                radioFunction={handleChangeTwinFamilyHistory}
+                value={twinFamilyHistory}
               />
             </div>
           </S.FormContainer>
