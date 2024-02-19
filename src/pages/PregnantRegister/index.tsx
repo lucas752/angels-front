@@ -7,30 +7,34 @@ import { RadioSelect } from '../../components/RadioSelect';
 import { Button } from '../../components/Button';
 import { ArrowLeft, ArrowRight } from '@phosphor-icons/react';
 import { useState } from 'react';
+import { RadioChangeEvent } from 'antd';
 
 export function PregnantRegister() {
   const [progress, setProgress] = useState<boolean>(false);
 
   const [name, setName] = useState<string>();
-  const [birthDate, setBirthDate] = useState<Date>();
+  const [birthDate, setBirthDate] = useState<string | string[]>();
   const [race, setRace] = useState<string>();
   const [gender, setGender] = useState<string>();
   const [cpf, setCpf] = useState<string>();
-  const [headOfHousehold, setHeadOfHousehold] = useState<boolean>();
+  const [headOfHousehold, setHeadOfHousehold] = useState<number>();
   const [maritalStatus, setMaritalStatus] = useState<string>();
   const [educationLevel, setEducationLevel] = useState<string>();
-  const [familyIncome, setFamilyIncome] = useState<number>();
+  const [familyIncome, setFamilyIncome] = useState<string>();
   const [city, setCity] = useState<string>();
   const [housing, setHousing] = useState<string>();
-  const [electricity, setElectricity] = useState<boolean>();
-  const [sewageNetwork, setSewageNetwork] = useState<boolean>();
-  const [treatedWater, setTreatedWater] = useState<boolean>();
-  const [lastPregnancyDate, setLastPregnancyDate] = useState<Date>();
-  const [wellFed, setWellFed] = useState<boolean>();
-  const [breastfeeding, setBreastfeeding] = useState<boolean>();
+  const [electricity, setElectricity] = useState<number>();
+  const [sewageNetwork, setSewageNetwork] = useState<number>();
+  const [treatedWater, setTreatedWater] = useState<number>();
+  const [lastPregnancyDate, setLastPregnancyDate] = useState<
+    string | string[]
+  >();
+  const [wellFed, setWellFed] = useState<number>();
+  const [breastfeeding, setBreastfeeding] = useState<number>();
   const [contact, setContact] = useState<string>();
   const [emergencyContact, setEmergencyContact] = useState<string>();
 
+  //segunda parte
   const [abortions, setAbortions] = useState<number>();
   const [liveChildren, setLiveChildren] = useState<number>();
   const [twins, setTwins] = useState<number>();
@@ -57,6 +61,238 @@ export function PregnantRegister() {
     setName(value);
   };
 
+  const handleChangeBirthDate = (
+    date: unknown,
+    dateString: string | string[]
+  ) => {
+    console.log(date);
+    setBirthDate(dateString);
+  };
+
+  const handleChangeRace = (value: unknown) => {
+    if (typeof value === 'string') {
+      setRace(value);
+    }
+  };
+
+  const handleChangeGender = (value: unknown) => {
+    if (typeof value === 'string') {
+      setGender(value);
+    }
+  };
+
+  const handleChangeCpf = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+    setCpf(value);
+  };
+
+  const handleChangeHeadOfHousehold = (e: RadioChangeEvent) => {
+    setHeadOfHousehold(e.target.value);
+  };
+
+  const handleChangeMaritalStatus = (value: unknown) => {
+    if (typeof value === 'string') {
+      setMaritalStatus(value);
+    }
+  };
+
+  const handleChangeEducationLevel = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+    setEducationLevel(value);
+  };
+
+  const handleChangeFamilyIncome = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+    setFamilyIncome(value);
+  };
+
+  const handleChangeCity = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+    setCity(value);
+  };
+
+  const handleChangeHousing = (value: unknown) => {
+    if (typeof value === 'string') {
+      setHousing(value);
+    }
+  };
+
+  const handleChangeElectricity = (e: RadioChangeEvent) => {
+    setElectricity(e.target.value);
+  };
+
+  const handleChangeSewageNetwork = (e: RadioChangeEvent) => {
+    setSewageNetwork(e.target.value);
+  };
+
+  const handleChangeTreatedWater = (e: RadioChangeEvent) => {
+    setTreatedWater(e.target.value);
+  };
+
+  const handleChangeLastPregnancyDate = (
+    date: unknown,
+    dateString: string | string[]
+  ) => {
+    console.log(date);
+    setLastPregnancyDate(dateString);
+  };
+
+  const handleChangeWellFed = (e: RadioChangeEvent) => {
+    setWellFed(e.target.value);
+  };
+
+  const handleChangeBreastfeeding = (e: RadioChangeEvent) => {
+    setBreastfeeding(e.target.value);
+  };
+
+  const handleChangeContact = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+    setContact(value);
+  };
+
+  const handleChangeEmergencyContact = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+    setEmergencyContact(value);
+  };
+
+  //segunda parte
+  const handleChangeAbortions = (e: { target: { value: number } }) => {
+    const { value } = e.target;
+    setAbortions(value);
+  };
+
+  const handleChangeLiveChildren = (e: { target: { value: number } }) => {
+    const { value } = e.target;
+    setLiveChildren(value);
+  };
+
+  const handleChangeTwins = (e: { target: { value: number } }) => {
+    const { value } = e.target;
+    setTwins(value);
+  };
+
+  const handleChangeLiveBirths = (e: { target: { value: number } }) => {
+    const { value } = e.target;
+    setLiveBirths(value);
+  };
+
+  const handleChangeStillbirths = (e: { target: { value: number } }) => {
+    const { value } = e.target;
+    setStillbirths(value);
+  };
+
+  const handleChangeBirthWeight25004000 = (e: {
+    target: { value: number };
+  }) => {
+    const { value } = e.target;
+    setBirthWeight25004000(value);
+  };
+
+  const handleChangeBirthWeightlt2500 = (e: { target: { value: number } }) => {
+    const { value } = e.target;
+    setBirthWeightlt2500(value);
+  };
+
+  const handleChangeBirthWeightgt4000 = (e: { target: { value: number } }) => {
+    const { value } = e.target;
+    setBirthWeightgt4000(value);
+  };
+
+  const handleChangeDeathsFirstWeek = (e: { target: { value: number } }) => {
+    const { value } = e.target;
+    setDeathsFirstWeek(value);
+  };
+
+  const handleChangeDeathsAfterFirstWeek = (e: {
+    target: { value: number };
+  }) => {
+    const { value } = e.target;
+    setDeathsAfterFirstWeek(value);
+  };
+
+  const handleChangeDiabetes = (value: boolean) => {
+    setDiabetes(value);
+  };
+
+  const handleChangePelvicSurgery = (value: boolean) => {
+    setPelvicSurgery(value);
+  };
+
+  const handleChangeDeliveries = (e: { target: { value: number } }) => {
+    const { value } = e.target;
+    setDeliveries(value);
+  };
+
+  const handleChangeVaginalDeliveries = (e: { target: { value: number } }) => {
+    const { value } = e.target;
+    setVaginalDeliveries(value);
+  };
+
+  const handleChangeCesareanDeliveries = (e: { target: { value: number } }) => {
+    const { value } = e.target;
+    setCesareanDeliveries(value);
+  };
+
+  const handleChangeUrinaryInfection = (value: boolean) => {
+    setUrinaryInfection(value);
+  };
+
+  const handleChangeCongenitalMalformation = (value: boolean) => {
+    setCongenitalMalformation(value);
+  };
+
+  const handleChangeHypertension = (value: boolean) => {
+    setHypertension(value);
+  };
+
+  const handleChangeTwinFamilyHistory = (value: boolean) => {
+    setTwinFamilyHistory(value);
+  };
+
+  //select objetos
+  const raceList = [
+    { value: 'indígena', label: 'Indígena' },
+    { value: 'branco', label: 'Branco' },
+    { value: 'negro', label: 'Negro' },
+    { value: 'pardo', label: 'Pardo' },
+    { value: 'asiático', label: 'Asiático' },
+    { value: 'árabe', label: 'Árabe' },
+    { value: 'judeu', label: 'Judeu' },
+    { value: 'europeu_oriental', label: 'Europeu Oriental' },
+    { value: 'latino_americano', label: 'Latino Americano' },
+    { value: 'africana_não_negra', label: 'Africana Não Negra' }
+  ];
+
+  const genderList = [
+    { value: 'masculino', label: 'Masculino' },
+    { value: 'feminino', label: 'Feminino' },
+    { value: 'não_binário', label: 'Não Binário' },
+    { value: 'agênero', label: 'Agênero' },
+    { value: 'outro', label: 'Outro' }
+  ];
+
+  const maritalStatusList = [
+    { value: 'solteiro', label: 'Solteiro(a)' },
+    { value: 'casado', label: 'Casado(a)' },
+    { value: 'união_estável', label: 'União Estável' },
+    { value: 'divorciado', label: 'Divorciado(a)' },
+    { value: 'viúvo', label: 'Viúvo(a)' },
+    { value: 'separado', label: 'Separado(a)' }
+  ];
+
+  const housingTypesList = [
+    { value: 'casa', label: 'Casa' },
+    { value: 'apartamento', label: 'Apartamento' },
+    { value: 'condomínio', label: 'Condomínio' },
+    { value: 'sítio', label: 'Sítio' },
+    { value: 'chácara', label: 'Chácara' },
+    { value: 'fazenda', label: 'Fazenda' },
+    { value: 'kitnet', label: 'Kitnet' },
+    { value: 'casa_de_vila', label: 'Casa de Vila' },
+    { value: 'oca', label: 'Oca' },
+    { value: 'outro', label: 'Outro' }
+  ];
+
   const handleSetProgress = () => {
     setProgress(!progress);
   };
@@ -74,16 +310,33 @@ export function PregnantRegister() {
                 label={'Nome:'}
                 placeHolder="Digite o nome..."
                 type="text"
+                inputFunction={handleChangeName}
               />
             </div>
             <div>
               <DateSelect
                 label="Nascimento:"
                 placeHolder="Selecione uma data"
+                inputFunction={handleChangeBirthDate}
               />
-              <Select label="Raça:" defaut="Selecione uma opcão" />
-              <Select label="Sexo:" defaut="Selecione uma opcão" />
-              <Input label={'Cpf:'} placeHolder="xxx.xxx.xxx-xx" type="text" />
+              <Select
+                label="Raça:"
+                defaut="Selecione uma opcão"
+                list={raceList}
+                selectFunc={handleChangeRace}
+              />
+              <Select
+                label="Sexo:"
+                defaut="Selecione uma opcão"
+                list={genderList}
+                selectFunc={handleChangeGender}
+              />
+              <Input
+                label={'Cpf:'}
+                placeHolder="xxx.xxx.xxx-xx"
+                type="text"
+                inputFunction={handleChangeCpf}
+              />
             </div>
             <div>
               <RadioSelect
@@ -92,17 +345,26 @@ export function PregnantRegister() {
                 secondOption="Nao"
                 firstValue={1}
                 secondValue={2}
+                radioFunction={handleChangeHeadOfHousehold}
+                value={headOfHousehold}
               />
-              <Select label="Estado civil:" defaut="Selecione uma opcão" />
+              <Select
+                label="Estado civil:"
+                defaut="Selecione uma opcão"
+                list={maritalStatusList}
+                selectFunc={handleChangeMaritalStatus}
+              />
               <Input
                 label={'Escolaridade:'}
                 placeHolder="Digite a escolaridade..."
                 type="text"
+                inputFunction={handleChangeEducationLevel}
               />
               <Input
                 label={'Renda Familiar:'}
                 placeHolder="Digite a renda..."
                 type="text"
+                inputFunction={handleChangeFamilyIncome}
               />
             </div>
             <div>
@@ -110,14 +372,22 @@ export function PregnantRegister() {
                 label={'Minicipio:'}
                 placeHolder="Digite municipio..."
                 type="text"
+                inputFunction={handleChangeCity}
               />
-              <Select label="Moradia:" defaut="Selecione uma opcão" />
+              <Select
+                label="Moradia:"
+                defaut="Selecione uma opcão"
+                list={housingTypesList}
+                selectFunc={handleChangeHousing}
+              />
               <RadioSelect
                 label="Eletricidade:"
                 firstOption="Sim"
                 secondOption="Nao"
                 firstValue={1}
                 secondValue={2}
+                radioFunction={handleChangeElectricity}
+                value={electricity}
               />
               <RadioSelect
                 label="Rede de esgoto:"
@@ -125,6 +395,8 @@ export function PregnantRegister() {
                 secondOption="Nao"
                 firstValue={1}
                 secondValue={2}
+                radioFunction={handleChangeSewageNetwork}
+                value={sewageNetwork}
               />
               <RadioSelect
                 label="Agua tratada:"
@@ -132,12 +404,15 @@ export function PregnantRegister() {
                 secondOption="Nao"
                 firstValue={1}
                 secondValue={2}
+                radioFunction={handleChangeTreatedWater}
+                value={treatedWater}
               />
             </div>
             <div>
               <DateSelect
                 label="Última gestação:"
                 placeHolder="Selecione uma data"
+                inputFunction={handleChangeLastPregnancyDate}
               />
 
               <RadioSelect
@@ -146,6 +421,8 @@ export function PregnantRegister() {
                 secondOption="Nao"
                 firstValue={1}
                 secondValue={2}
+                radioFunction={handleChangeWellFed}
+                value={wellFed}
               />
 
               <RadioSelect
@@ -154,16 +431,20 @@ export function PregnantRegister() {
                 secondOption="Nao"
                 firstValue={1}
                 secondValue={2}
+                radioFunction={handleChangeBreastfeeding}
+                value={breastfeeding}
               />
               <Input
                 label={'Contato:'}
                 placeHolder="Digite o contatto..."
                 type="text"
+                inputFunction={handleChangeContact}
               />
               <Input
                 label={'contato de emergencia:'}
                 placeHolder="Digite o contato de emergencia..."
                 type="text"
+                inputFunction={handleChangeEmergencyContact}
               />
             </div>
           </S.FormContainer>
