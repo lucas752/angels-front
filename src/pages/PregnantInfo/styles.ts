@@ -14,5 +14,13 @@ export const LineContainer = styled.section`
 `
 
 export const Container = styled.div`
-    padding: 50px;
+    padding-top: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+`
+
+export const ContentContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 `
