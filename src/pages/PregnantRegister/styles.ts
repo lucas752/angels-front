@@ -9,14 +9,14 @@ export const Container = styled.div`
 `;
 
 export const Contente = styled.div`
-  width: 70%;
+  width: 80%;
   height: 90%;
   background: rgba(177, 72, 138, 0.2);
   align-self: center;
   justify-self: center;
   overflow-y: scroll;
   @media (min-width: 426px) and (max-width: 768px) {
-    overflow: scroll;
+    overflow-y: scroll;
   }
   @media (min-width: 1024px) {
     overflow-y: hidden;

@@ -15,8 +15,8 @@ import {
 import { ZodError } from 'zod';
 
 interface ErrorInterface {
-  errorShow: boolean;
-  errorMessage: string;
+  errorShow?: boolean;
+  errorType?: '' | 'error' | 'warning' | undefined;
 }
 
 export function PregnantRegister() {
@@ -67,21 +67,237 @@ export function PregnantRegister() {
   const [twinFamilyHistory, setTwinFamilyHistory] = useState<number>();
 
   //error states
-  const [errorName, setErrorName] = useState<ErrorInterface>();
+  const [errorName, setErrorName] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorBirthDate, setErrorBirthDate] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorRace, setErrorRace] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorGender, setErrorGender] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorCpf, setErrorCpf] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorHeadOfHousehold, setErrorHeadOfHousehold] =
+    useState<ErrorInterface>({
+      errorType: '',
+      errorShow: false
+    });
+
+  const [errorMaritalStatus, setErrorMaritalStatus] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorEducationLevel, setErrorEducationLevel] =
+    useState<ErrorInterface>({
+      errorType: '',
+      errorShow: false
+    });
+
+  const [errorFamilyIncome, setErrorFamilyIncome] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorCity, setErrorCity] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorHousing, setErrorHousing] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorElectricity, setErrorElectricity] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorSewageNetwork, setErrorSewageNetwork] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorTreatedWater, setErrorTreatedWater] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorLastPregnancyDate, setErrorLastPregnancyDate] =
+    useState<ErrorInterface>({
+      errorType: '',
+      errorShow: false
+    });
+
+  const [errorWellFed, setErrorWellFed] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorBreastfeeding, setErrorBreastfeeding] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorContact, setErrorContact] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorEmergencyContact, setErrorEmergencyContact] =
+    useState<ErrorInterface>({
+      errorType: '',
+      errorShow: false
+    });
+
+  // Segunda parte
+
+  const [errorAbortions, setErrorAbortions] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorLiveChildren, setErrorLiveChildren] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorTwins, setErrorTwins] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorLiveBirths, setErrorLiveBirths] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorStillbirths, setErrorStillbirths] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorBirthWeight25004000, setErrorBirthWeight25004000] =
+    useState<ErrorInterface>({
+      errorType: '',
+      errorShow: false
+    });
+
+  const [errorBirthWeightlt2500, setErrorBirthWeightlt2500] =
+    useState<ErrorInterface>({
+      errorType: '',
+      errorShow: false
+    });
+
+  const [errorBirthWeightgt4000, setErrorBirthWeightgt4000] =
+    useState<ErrorInterface>({
+      errorType: '',
+      errorShow: false
+    });
+
+  const [errorDeathsFirstWeek, setErrorDeathsFirstWeek] =
+    useState<ErrorInterface>({
+      errorType: '',
+      errorShow: false
+    });
+
+  const [errorDeathsAfterFirstWeek, setErrorDeathsAfterFirstWeek] =
+    useState<ErrorInterface>({
+      errorType: '',
+      errorShow: false
+    });
+
+  const [errorDiabetes, setErrorDiabetes] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorPelvicSurgery, setErrorPelvicSurgery] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorDeliveries, setErrorDeliveries] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorVaginalDeliveries, setErrorVaginalDeliveries] =
+    useState<ErrorInterface>({
+      errorType: '',
+      errorShow: false
+    });
+
+  const [errorCesareanDeliveries, setErrorCesareanDeliveries] =
+    useState<ErrorInterface>({
+      errorType: '',
+      errorShow: false
+    });
+
+  const [errorUrinaryInfection, setErrorUrinaryInfection] =
+    useState<ErrorInterface>({
+      errorType: '',
+      errorShow: false
+    });
+
+  const [errorCongenitalMalformation, setErrorCongenitalMalformation] =
+    useState<ErrorInterface>({
+      errorType: '',
+      errorShow: false
+    });
+
+  const [errorHypertension, setErrorHypertension] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorTwinFamilyHistory, setErrorTwinFamilyHistory] =
+    useState<ErrorInterface>({
+      errorType: '',
+      errorShow: false
+    });
 
   const handleChangeName = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      setName(value);
+      pregnantSchemaPartOne.shape.name.parse(value);
+      setErrorName({ errorType: '', errorShow: false });
     } catch (error) {
-      console.log(error);
+      setErrorName({ errorType: 'error', errorShow: true });
     }
+    setName(value);
   };
 
   const handleChangeBirthDate = (
     date: unknown,
     dateString: string | string[]
   ) => {
+    try {
+      pregnantSchemaPartOne.shape.birthDate.parse(dateString);
+      setErrorBirthDate({ errorType: '' });
+      if (dateString == '') {
+        setErrorBirthDate({ errorType: 'error' });
+      }
+    } catch (error) {
+      console.log(error);
+      setErrorBirthDate({ errorType: 'error' });
+    }
     console.log(date);
     setBirthDate(dateString);
   };
@@ -100,6 +316,12 @@ export function PregnantRegister() {
 
   const handleChangeCpf = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    try {
+      pregnantSchemaPartOne.shape.cpf.parse(value);
+      setErrorCpf({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorCpf({ errorType: 'error', errorShow: true });
+    }
     setCpf(value);
   };
 
@@ -121,11 +343,23 @@ export function PregnantRegister() {
 
   const handleChangeFamilyIncome = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    try {
+      pregnantSchemaPartOne.shape.familyIncome.parse(value);
+      setErrorFamilyIncome({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorFamilyIncome({ errorType: 'error', errorShow: true });
+    }
     setFamilyIncome(value);
   };
 
   const handleChangeCity = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    try {
+      pregnantSchemaPartOne.shape.city.parse(value);
+      setErrorCity({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorCity({ errorType: 'error', errorShow: true });
+    }
     setCity(value);
   };
 
@@ -167,11 +401,23 @@ export function PregnantRegister() {
 
   const handleChangeContact = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    try {
+      pregnantSchemaPartOne.shape.contact.parse(value);
+      setErrorContact({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorContact({ errorType: 'error', errorShow: true });
+    }
     setContact(value);
   };
 
   const handleChangeEmergencyContact = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    try {
+      pregnantSchemaPartOne.shape.emergencyContact.parse(value);
+      setErrorEmergencyContact({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorEmergencyContact({ errorType: 'error', errorShow: true });
+    }
     setEmergencyContact(value);
   };
 
@@ -410,7 +656,9 @@ export function PregnantRegister() {
                 inputFunction={handleChangeName}
                 value={name}
                 errorShow={errorName?.errorShow}
-                infoText={errorName?.errorMessage}
+                status={errorName?.errorType}
+                infoText="O nome precisa ter entre 2 e 80 letras"
+                color="#b1488a"
               />
             </S.InputRow>
             <S.InputRow>
@@ -418,6 +666,7 @@ export function PregnantRegister() {
                 label="Nascimento:"
                 placeHolder="Selecione uma data"
                 inputFunction={handleChangeBirthDate}
+                status={errorBirthDate.errorType}
               />
               <Select
                 label="Raça:"
@@ -437,6 +686,10 @@ export function PregnantRegister() {
                 type="text"
                 inputFunction={handleChangeCpf}
                 value={cpf}
+                errorShow={errorCpf?.errorShow}
+                status={errorCpf?.errorType}
+                infoText="O cpf precisa ser válido"
+                color="#b1488a"
               />
             </S.InputRow>
             <S.InputRow>
@@ -467,6 +720,10 @@ export function PregnantRegister() {
                 type="text"
                 inputFunction={handleChangeFamilyIncome}
                 value={familyIncome}
+                errorShow={errorFamilyIncome?.errorShow}
+                status={errorFamilyIncome?.errorType}
+                infoText="a renda precisa ser válida"
+                color="#b1488a"
               />
             </S.InputRow>
             <S.InputRow>
@@ -476,6 +733,10 @@ export function PregnantRegister() {
                 type="text"
                 inputFunction={handleChangeCity}
                 value={city}
+                errorShow={errorCity?.errorShow}
+                status={errorCity?.errorType}
+                infoText="A cidade ter entre 2 e 30 letras"
+                color="#b1488a"
               />
               <Select
                 label="Moradia:"
@@ -540,6 +801,10 @@ export function PregnantRegister() {
                 type="text"
                 inputFunction={handleChangeContact}
                 value={contact}
+                errorShow={errorContact?.errorShow}
+                status={errorContact?.errorType}
+                infoText="O contato precisa ser válido Brasil"
+                color="#b1488a"
               />
               <Input
                 label={'Contato de emergencia:'}
@@ -547,6 +812,10 @@ export function PregnantRegister() {
                 type="text"
                 inputFunction={handleChangeEmergencyContact}
                 value={emergencyContact}
+                errorShow={errorEmergencyContact?.errorShow}
+                status={errorEmergencyContact?.errorType}
+                infoText="O contato precisa ser válido no Brasil"
+                color="#b1488a"
               />
             </S.InputRow>
           </S.FormContainer>

@@ -26,6 +26,7 @@ export const InputArea = styled(Input)`
 `;
 
 export const Label = styled.label`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-self: start;
