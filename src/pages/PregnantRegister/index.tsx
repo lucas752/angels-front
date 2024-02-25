@@ -29,7 +29,7 @@ export function PregnantRegister() {
   const [lastPregnancyDate, setLastPregnancyDate] = useState<
     string | string[]
   >();
-  const [wellFed, setWellFed] = useState<number>();
+  const [wellFed, setWellFed] = useState<string>();
   const [breastfeeding, setBreastfeeding] = useState<number>();
   const [contact, setContact] = useState<string>();
   const [emergencyContact, setEmergencyContact] = useState<string>();
@@ -96,9 +96,10 @@ export function PregnantRegister() {
     }
   };
 
-  const handleChangeEducationLevel = (e: { target: { value: string } }) => {
-    const { value } = e.target;
-    setEducationLevel(value);
+  const handleChangeEducationLevel = (value: unknown) => {
+    if (typeof value === 'string') {
+      setEducationLevel(value);
+    }
   };
 
   const handleChangeFamilyIncome = (e: { target: { value: string } }) => {
@@ -137,8 +138,10 @@ export function PregnantRegister() {
     setLastPregnancyDate(dateString);
   };
 
-  const handleChangeWellFed = (e: RadioChangeEvent) => {
-    setWellFed(e.target.value);
+  const handleChangeWellFed = (value: unknown) => {
+    if (typeof value === 'string') {
+      setWellFed(value);
+    }
   };
 
   const handleChangeBreastfeeding = (e: RadioChangeEvent) => {
@@ -272,25 +275,40 @@ export function PregnantRegister() {
   ];
 
   const maritalStatusList = [
-    { value: 'solteiro', label: 'Solteiro(a)' },
-    { value: 'casado', label: 'Casado(a)' },
-    { value: 'união_estável', label: 'União Estável' },
-    { value: 'divorciado', label: 'Divorciado(a)' },
-    { value: 'viúvo', label: 'Viúvo(a)' },
-    { value: 'separado', label: 'Separado(a)' }
+    { value: 'solteira', label: 'Solteira' },
+    { value: 'casada', label: 'Casada' },
+    { value: 'viuva', label: 'Viúva' },
+    { value: 'separada_judicialmente', label: 'Separada Judicialmente' },
+    { value: 'divorciada', label: 'Divorciada' },
+    { value: 'outro', label: 'Outro' }
   ];
 
   const housingTypesList = [
-    { value: 'casa', label: 'Casa' },
-    { value: 'apartamento', label: 'Apartamento' },
-    { value: 'condomínio', label: 'Condomínio' },
-    { value: 'sítio', label: 'Sítio' },
-    { value: 'chácara', label: 'Chácara' },
-    { value: 'fazenda', label: 'Fazenda' },
-    { value: 'kitnet', label: 'Kitnet' },
-    { value: 'casa_de_vila', label: 'Casa de Vila' },
-    { value: 'oca', label: 'Oca' },
-    { value: 'outro', label: 'Outro' }
+    { value: 'palha', label: 'Palha' },
+    { value: 'madeira', label: 'Madeira' },
+    { value: 'barro', label: 'Barro' },
+    { value: 'gesso', label: 'Gesso' },
+    { value: 'tijolo', label: 'Tijolo' },
+    { value: 'outros', label: 'Outros' }
+  ];
+
+  const educationLevelsList = [
+    { value: 'nao_alfabetizado', label: 'Não alfabetizado' },
+    { value: 'fundamental_i_completo', label: 'Fundamental I completo' },
+    { value: 'fundamental_i_incompleto', label: 'Fundamental I incompleto' },
+    { value: 'fundamental_ii_completo', label: 'Fundamental II completo' },
+    { value: 'fundamental_ii_incompleto', label: 'Fundamental II incompleto' },
+    { value: 'medio_completo', label: 'Médio completo' },
+    { value: 'medio_incompleto', label: 'Médio incompleto' },
+    { value: 'superior_completo', label: 'Superior completo' },
+    { value: 'superior_incompleto', label: 'Superior incompleto' }
+  ];
+
+  const malnutritionLevelsList = [
+    { value: 'sem_diagnostico', label: 'Sem Diagnóstico de Desnutrição' },
+    { value: 'desnutricao_leve', label: 'Desnutrição Leve' },
+    { value: 'desnutricao_moderada', label: 'Desnutrição Moderada' },
+    { value: 'desnutricao_grave', label: 'Desnutrição Grave' }
   ];
 
   const handleSetProgress = () => {
@@ -311,6 +329,7 @@ export function PregnantRegister() {
                 placeHolder="Digite o nome..."
                 type="text"
                 inputFunction={handleChangeName}
+                value={name}
               />
             </div>
             <div>
@@ -336,6 +355,7 @@ export function PregnantRegister() {
                 placeHolder="xxx.xxx.xxx-xx"
                 type="text"
                 inputFunction={handleChangeCpf}
+                value={cpf}
               />
             </div>
             <div>
@@ -354,17 +374,18 @@ export function PregnantRegister() {
                 list={maritalStatusList}
                 selectFunc={handleChangeMaritalStatus}
               />
-              <Input
-                label={'Escolaridade:'}
-                placeHolder="Digite a escolaridade..."
-                type="text"
-                inputFunction={handleChangeEducationLevel}
+              <Select
+                label="Escolaridade:"
+                defaut="Selecione uma opcão"
+                list={educationLevelsList}
+                selectFunc={handleChangeEducationLevel}
               />
               <Input
                 label={'Renda Familiar:'}
                 placeHolder="Digite a renda..."
                 type="text"
                 inputFunction={handleChangeFamilyIncome}
+                value={familyIncome}
               />
             </div>
             <div>
@@ -373,6 +394,7 @@ export function PregnantRegister() {
                 placeHolder="Digite municipio..."
                 type="text"
                 inputFunction={handleChangeCity}
+                value={city}
               />
               <Select
                 label="Moradia:"
@@ -415,14 +437,11 @@ export function PregnantRegister() {
                 inputFunction={handleChangeLastPregnancyDate}
               />
 
-              <RadioSelect
-                label="Nutrida:"
-                firstOption="Sim"
-                secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
-                radioFunction={handleChangeWellFed}
-                value={wellFed}
+              <Select
+                label="Nutrição:"
+                defaut="Selecione uma opcão"
+                list={malnutritionLevelsList}
+                selectFunc={handleChangeWellFed}
               />
 
               <RadioSelect
@@ -439,12 +458,14 @@ export function PregnantRegister() {
                 placeHolder="Digite o contatto..."
                 type="text"
                 inputFunction={handleChangeContact}
+                value={contact}
               />
               <Input
-                label={'contato de emergencia:'}
+                label={'Contato de emergencia:'}
                 placeHolder="Digite o contato de emergencia..."
                 type="text"
                 inputFunction={handleChangeEmergencyContact}
+                value={emergencyContact}
               />
             </div>
           </S.FormContainer>
@@ -457,30 +478,35 @@ export function PregnantRegister() {
                 placeHolder="0"
                 type="string"
                 inputFunction={handleChangeAbortions}
+                value={abortions}
               />
               <Input
                 label={'Filhos vivos:'}
                 placeHolder="0"
                 type="string"
                 inputFunction={handleChangeLiveChildren}
+                value={liveChildren}
               />
               <Input
                 label={'Gemelares:'}
                 placeHolder="0"
                 type="string"
                 inputFunction={handleChangeTwins}
+                value={twins}
               />
               <Input
                 label={'Nascidos vivos:'}
                 placeHolder="0"
                 type="string"
                 inputFunction={handleChangeLiveBirths}
+                value={liveBirths}
               />
               <Input
                 label={'Nascidos mortos:'}
                 placeHolder="0"
                 type="string"
                 inputFunction={handleChangeStillbirths}
+                value={stillbirths}
               />
             </div>
             <div>
@@ -489,18 +515,21 @@ export function PregnantRegister() {
                 placeHolder="0"
                 type="string"
                 inputFunction={handleChangeBirthWeight25004000}
+                value={birthWeight25004000}
               />
               <Input
                 label={'rn peso menor 2500:'}
                 placeHolder="0"
                 type="string"
                 inputFunction={handleChangeBirthWeightlt2500}
+                value={birthWeightlt2500}
               />
               <Input
                 label={'rn peso maior 4000:'}
                 placeHolder="0"
                 type="string"
                 inputFunction={handleChangeBirthWeightgt4000}
+                value={birthWeightgt4000}
               />
             </div>
             <div>
@@ -509,12 +538,14 @@ export function PregnantRegister() {
                 placeHolder="0"
                 type="string"
                 inputFunction={handleChangeDeathsFirstWeek}
+                value={deathsFirstWeek}
               />
               <Input
                 label={'Óbitos após primeira semana:'}
                 placeHolder="0"
                 type="string"
                 inputFunction={handleChangeDeathsAfterFirstWeek}
+                value={deathsAfterFirstWeek}
               />
               <RadioSelect
                 label="Diabetes:"
@@ -541,18 +572,21 @@ export function PregnantRegister() {
                 placeHolder="0"
                 type="string"
                 inputFunction={handleChangeDeliveries}
+                value={deliveries}
               />
               <Input
                 label={'Partos vaginais:'}
                 placeHolder="0"
                 type="string"
                 inputFunction={handleChangeVaginalDeliveries}
+                value={vaginalDeliveries}
               />
               <Input
                 label={'Partos cesarios:'}
                 placeHolder="0"
                 type="string"
                 inputFunction={handleChangeCesareanDeliveries}
+                value={cesareanDeliveries}
               />
             </div>
             <div>

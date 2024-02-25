@@ -18,6 +18,10 @@ export const InputArea = styled(Input)`
     border-color: var(--red-500);
     outline: none;
   }
+
+  &:hover {
+    border-color: var(--red-500);
+  }
 `;
 
 export const Label = styled.label`

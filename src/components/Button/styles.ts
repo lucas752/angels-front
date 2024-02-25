@@ -8,4 +8,9 @@ export const ButtonArea = styled(Button)`
   cursor: pointer;
   display: flex;
   align-items: center;
+  &:hover {
+    background: var(--red-500) !important;
+    border: none !important;
+    color: white !important;
+  }
 `;
