@@ -24,7 +24,9 @@ export const Label = styled.label`
 `;
 
 export const RadioArea = styled(Radio)`
-  .ant-radio {
-    color: var(--red-500);
+  .ant-radio-checked {
+    &::after {
+      background: var(--red-500) !important;
+    }
   }
 `;

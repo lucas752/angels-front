@@ -8,6 +8,11 @@ import { Button } from '../../components/Button';
 import { ArrowLeft, ArrowRight } from '@phosphor-icons/react';
 import { useState } from 'react';
 import { RadioChangeEvent } from 'antd';
+import {
+  pregnantSchemaPartOne,
+  pregnantSchemaPartTwo
+} from '../../services/types/PregnantType';
+import { ZodError } from 'zod';
 
 export function PregnantRegister() {
   const [progress, setProgress] = useState<boolean>(false);
@@ -311,8 +316,70 @@ export function PregnantRegister() {
     { value: 'desnutricao_grave', label: 'Desnutrição Grave' }
   ];
 
+  const pregnantFirstData = {
+    name: name,
+    birthDate: birthDate,
+    race: race,
+    gender: gender,
+    cpf: cpf,
+    headOfHousehold: headOfHousehold,
+    maritalStatus: maritalStatus,
+    educationLevel: educationLevel,
+    familyIncome: familyIncome,
+    city: city,
+    housing: housing,
+    electricity: electricity,
+    sewageNetwork: sewageNetwork,
+    treatedWater: treatedWater,
+    lastPregnancyDate: lastPregnancyDate,
+    wellFed: wellFed,
+    breastfeeding: breastfeeding,
+    contact: contact,
+    emergencyContact: emergencyContact
+  };
+  const pregnantSecondData = {
+    // Segunda parte
+    abortions: abortions,
+    liveChildren: liveChildren,
+    twins: twins,
+    liveBirths: liveBirths,
+    stillbirths: stillbirths,
+    birthWeight25004000: birthWeight25004000,
+    birthWeightlt2500: birthWeightlt2500,
+    birthWeightgt4000: birthWeightgt4000,
+    deathsFirstWeek: deathsFirstWeek,
+    deathsAfterFirstWeek: deathsAfterFirstWeek,
+    diabetes: diabetes,
+    pelvicSurgery: pelvicSurgery,
+    deliveries: deliveries,
+    vaginalDeliveries: vaginalDeliveries,
+    cesareanDeliveries: cesareanDeliveries,
+    urinaryInfection: urinaryInfection,
+    congenitalMalformation: congenitalMalformation,
+    hypertension: hypertension,
+    twinFamilyHistory: twinFamilyHistory
+  };
+
   const handleSetProgress = () => {
-    setProgress(!progress);
+    try {
+      pregnantSchemaPartOne.parse(pregnantFirstData);
+      setProgress(!progress);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        alert(error.errors[0].message);
+      }
+    }
+  };
+
+  const Register = () => {
+    try {
+      pregnantSchemaPartTwo.parse(pregnantSecondData);
+      alert('Cadastrado');
+    } catch (error) {
+      if (error instanceof ZodError) {
+        alert(error.errors[0].message);
+      }
+    }
   };
 
   return (
@@ -640,9 +707,9 @@ export function PregnantRegister() {
           )}
           <Button
             label={progress ? 'Cadastrar' : 'Próximo'}
-            icon={<ArrowRight size={18} weight="fill" />}
+            icon={!progress && <ArrowRight size={18} weight="fill" />}
             shape="round"
-            buttonFunction={handleSetProgress}
+            buttonFunction={progress ? Register : handleSetProgress}
           />
         </S.ButtonContainer>
       </S.Contente>
