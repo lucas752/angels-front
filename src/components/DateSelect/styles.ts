@@ -6,13 +6,15 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
+  width: 100%;
 `;
 
 export const DataArea = styled(DatePicker)`
   border-radius: 1rem !important;
   border: 2px var(--gray-100) solid;
+  width: 100%;
 
   &:focus {
     border-color: var(--red-500) !important;

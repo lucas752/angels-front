@@ -14,6 +14,11 @@ import {
 } from '../../services/types/PregnantType';
 import { ZodError } from 'zod';
 
+interface ErrorInterface {
+  errorShow: boolean;
+  errorMessage: string;
+}
+
 export function PregnantRegister() {
   const [progress, setProgress] = useState<boolean>(false);
 
@@ -61,9 +66,16 @@ export function PregnantRegister() {
   const [hypertension, setHypertension] = useState<number>();
   const [twinFamilyHistory, setTwinFamilyHistory] = useState<number>();
 
+  //error states
+  const [errorName, setErrorName] = useState<ErrorInterface>();
+
   const handleChangeName = (e: { target: { value: string } }) => {
     const { value } = e.target;
-    setName(value);
+    try {
+      setName(value);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleChangeBirthDate = (
@@ -390,16 +402,18 @@ export function PregnantRegister() {
         </S.TopContainer>
         {!progress && (
           <S.FormContainer>
-            <div>
+            <S.InputRow>
               <Input
                 label={'Nome:'}
                 placeHolder="Digite o nome..."
                 type="text"
                 inputFunction={handleChangeName}
                 value={name}
+                errorShow={errorName?.errorShow}
+                infoText={errorName?.errorMessage}
               />
-            </div>
-            <div>
+            </S.InputRow>
+            <S.InputRow>
               <DateSelect
                 label="Nascimento:"
                 placeHolder="Selecione uma data"
@@ -424,8 +438,8 @@ export function PregnantRegister() {
                 inputFunction={handleChangeCpf}
                 value={cpf}
               />
-            </div>
-            <div>
+            </S.InputRow>
+            <S.InputRow>
               <RadioSelect
                 label="Chefe de familia:"
                 firstOption="Sim"
@@ -454,8 +468,8 @@ export function PregnantRegister() {
                 inputFunction={handleChangeFamilyIncome}
                 value={familyIncome}
               />
-            </div>
-            <div>
+            </S.InputRow>
+            <S.InputRow>
               <Input
                 label={'Minicipio:'}
                 placeHolder="Digite municipio..."
@@ -496,8 +510,8 @@ export function PregnantRegister() {
                 radioFunction={handleChangeTreatedWater}
                 value={treatedWater}
               />
-            </div>
-            <div>
+            </S.InputRow>
+            <S.InputRow>
               <DateSelect
                 label="Última gestação:"
                 placeHolder="Selecione uma data"
@@ -534,12 +548,12 @@ export function PregnantRegister() {
                 inputFunction={handleChangeEmergencyContact}
                 value={emergencyContact}
               />
-            </div>
+            </S.InputRow>
           </S.FormContainer>
         )}
         {progress && (
           <S.FormContainer>
-            <div>
+            <S.InputRow>
               <Input
                 label={'Abortos:'}
                 placeHolder="0"
@@ -575,8 +589,8 @@ export function PregnantRegister() {
                 inputFunction={handleChangeStillbirths}
                 value={stillbirths}
               />
-            </div>
-            <div>
+            </S.InputRow>
+            <S.InputRow>
               <Input
                 label={'rn peso entre 2500 e 4000:'}
                 placeHolder="0"
@@ -598,8 +612,8 @@ export function PregnantRegister() {
                 inputFunction={handleChangeBirthWeightgt4000}
                 value={birthWeightgt4000}
               />
-            </div>
-            <div>
+            </S.InputRow>
+            <S.InputRow>
               <Input
                 label={'Óbitos na primeira semana:'}
                 placeHolder="0"
@@ -632,8 +646,8 @@ export function PregnantRegister() {
                 radioFunction={handleChangePelvicSurgery}
                 value={pelvicSurgery}
               />
-            </div>
-            <div>
+            </S.InputRow>
+            <S.InputRow>
               <Input
                 label={'Partos:'}
                 placeHolder="0"
@@ -655,8 +669,8 @@ export function PregnantRegister() {
                 inputFunction={handleChangeCesareanDeliveries}
                 value={cesareanDeliveries}
               />
-            </div>
-            <div>
+            </S.InputRow>
+            <S.InputRow>
               <RadioSelect
                 label="Infecção urinária:"
                 firstOption="Sim"
@@ -693,7 +707,7 @@ export function PregnantRegister() {
                 radioFunction={handleChangeTwinFamilyHistory}
                 value={twinFamilyHistory}
               />
-            </div>
+            </S.InputRow>
           </S.FormContainer>
         )}
         <S.ButtonContainer $progress={progress}>

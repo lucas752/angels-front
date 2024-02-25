@@ -14,6 +14,13 @@ export const Contente = styled.div`
   background: rgba(177, 72, 138, 0.2);
   align-self: center;
   justify-self: center;
+  overflow-y: scroll;
+  @media (min-width: 426px) and (max-width: 768px) {
+    overflow: scroll;
+  }
+  @media (min-width: 1024px) {
+    overflow-y: hidden;
+  }
 `;
 
 export const TopContainer = styled.section`
@@ -24,11 +31,22 @@ export const TopContainer = styled.section`
 `;
 
 export const FormContainer = styled.section`
-  div {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 100%;
+`;
+
+export const InputRow = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  @media (min-width: 426px) and (max-width: 768px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  @media (min-width: 1024px) {
+    flex-direction: row;
   }
 `;
 

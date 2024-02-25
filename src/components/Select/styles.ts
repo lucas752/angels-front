@@ -8,6 +8,7 @@ export const Container = styled.div`
   align-items: flex-start;
   gap: 12px;
   padding: 1rem;
+  width: 100%;
 `;
 
 export const Label = styled.label`
@@ -22,6 +23,7 @@ export const SelectArea = styled(Select)`
   background: #fff;
   border-radius: 1rem !important;
   border: 2px var(--gray-100) solid !important;
+  width: 100%;
 
   &:focus {
     border-color: var(--red-500) !important;

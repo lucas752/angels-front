@@ -1,10 +1,13 @@
 import { z } from 'zod';
 
 export const pregnantSchemaPartOne = z.object({
-  name: z.string({
-    required_error: 'Nome é obrigatório',
-    invalid_type_error: 'Nome precisa conter letras'
-  }),
+  name: z
+    .string({
+      required_error: 'Nome é obrigatório',
+      invalid_type_error: 'Nome precisa conter letras'
+    })
+    .min(2, { message: 'Necessário mais de 2 caracteres' })
+    .max(80, { message: 'Apenas 80 caracteres permitidos' }),
   birthDate: z.string({
     required_error: 'Data de nascimento é obrigatória'
   }),
