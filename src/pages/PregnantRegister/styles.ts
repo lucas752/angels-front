@@ -10,10 +10,10 @@ export const Container = styled.div`
 
 export const Contente = styled.div`
   width: 80%;
-  height: 90%;
   background: rgba(177, 72, 138, 0.2);
   align-self: center;
   justify-self: center;
+  border-radius: 26px;
   overflow-y: scroll;
   @media (min-width: 426px) and (max-width: 768px) {
     overflow-y: scroll;
@@ -30,9 +30,7 @@ export const TopContainer = styled.section`
   padding: 1rem;
 `;
 
-export const FormContainer = styled.section`
-  width: 100%;
-`;
+export const FormContainer = styled.section``;
 
 export const InputRow = styled.div`
   width: 100%;

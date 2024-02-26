@@ -10,7 +10,8 @@ export const pregnantSchemaPartOne = z.object({
     .max(80, { message: 'Apenas 80 caracteres permitidos' }),
   birthDate: z.coerce
     .date({
-      required_error: 'Data de nascimento é obrigatória'
+      required_error: 'Data de nascimento é obrigatória',
+      invalid_type_error: 'A data precisa ser válida'
     })
     .min(new Date('1900-01-01'), {
       message: 'Escolha um data depois de 1900-01-01'

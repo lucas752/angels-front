@@ -8,6 +8,7 @@ export const ButtonArea = styled(Button)`
   cursor: pointer;
   display: flex;
   align-items: center;
+  border: none !important;
   &:hover {
     background: var(--red-500) !important;
     border: none !important;

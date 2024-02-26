@@ -35,7 +35,7 @@ export const SelectArea = styled(Select)`
     outline: none;
   }
 
-  .ant-select-selection-item {
+  .ant-select-selection-search {
     color: var(--gray-100);
   }
 `;

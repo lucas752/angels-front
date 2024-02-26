@@ -744,7 +744,7 @@ export function PregnantRegister() {
                 selectFunc={handleChangeHousing}
               />
               <RadioSelect
-                label="Eletricidade:"
+                label="Eletricidade na moradia:"
                 firstOption="Sim"
                 secondOption="Nao"
                 firstValue={1}
@@ -762,7 +762,7 @@ export function PregnantRegister() {
                 value={sewageNetwork}
               />
               <RadioSelect
-                label="Agua tratada:"
+                label="Água tratada:"
                 firstOption="Sim"
                 secondOption="Nao"
                 firstValue={1}
@@ -780,14 +780,14 @@ export function PregnantRegister() {
               />
 
               <Select
-                label="Nutrição:"
+                label="Nível de nutrição:"
                 defaut="Selecione uma opcão"
                 list={malnutritionLevelsList}
                 selectFunc={handleChangeWellFed}
               />
 
               <RadioSelect
-                label="Amamentacao:"
+                label="Amamentação:"
                 firstOption="Sim"
                 secondOption="Nao"
                 firstValue={1}

@@ -25,9 +25,16 @@ export const Label = styled.label`
 `;
 
 export const RadioArea = styled(Radio)`
-  .ant-radio-checked {
-    &::after {
-      background: var(--red-500) !important;
-    }
+  .ant-radio-checked .ant-radio-inner {
+    border-color: var(--red-500) !important ;
+    background-color: var(--red-500) !important;
+  }
+
+  .ant-radio-checked .ant-radio-inner:after {
+    border-color: var(--red-500) !important ;
+  }
+
+  .ant-radio:hover .ant-radio-inner {
+    border-color: var(--red-500) !important;
   }
 `;
