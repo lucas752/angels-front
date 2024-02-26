@@ -13,6 +13,7 @@ import {
   pregnantSchemaPartTwo
 } from '../../services/types/PregnantType';
 import { ZodError } from 'zod';
+import { warningNotification } from '../../components/Notification';
 
 interface ErrorInterface {
   errorShow?: boolean;
@@ -73,11 +74,6 @@ export function PregnantRegister() {
   });
 
   const [errorBirthDate, setErrorBirthDate] = useState<ErrorInterface>({
-    errorType: '',
-    errorShow: false
-  });
-
-  const [errorRace, setErrorRace] = useState<ErrorInterface>({
     errorType: '',
     errorShow: false
   });
@@ -349,26 +345,56 @@ export function PregnantRegister() {
   //segunda parte
   const handleChangeAbortions = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    try {
+      pregnantSchemaPartTwo.shape.abortions.parse(value);
+      setErrorAbortions({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorAbortions({ errorType: 'error', errorShow: true });
+    }
     setAbortions(value);
   };
 
   const handleChangeLiveChildren = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    try {
+      pregnantSchemaPartTwo.shape.liveChildren.parse(value);
+      setErrorLiveChildren({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorLiveChildren({ errorType: 'error', errorShow: true });
+    }
     setLiveChildren(value);
   };
 
   const handleChangeTwins = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    try {
+      pregnantSchemaPartTwo.shape.twins.parse(value);
+      setErrorTwins({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorTwins({ errorType: 'error', errorShow: true });
+    }
     setTwins(value);
   };
 
   const handleChangeLiveBirths = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    try {
+      pregnantSchemaPartTwo.shape.liveBirths.parse(value);
+      setErrorLiveBirths({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorLiveBirths({ errorType: 'error', errorShow: true });
+    }
     setLiveBirths(value);
   };
 
   const handleChangeStillbirths = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    try {
+      pregnantSchemaPartTwo.shape.stillbirths.parse(value);
+      setErrorStillbirths({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorStillbirths({ errorType: 'error', errorShow: true });
+    }
     setStillbirths(value);
   };
 
@@ -376,21 +402,45 @@ export function PregnantRegister() {
     target: { value: string };
   }) => {
     const { value } = e.target;
+    try {
+      pregnantSchemaPartTwo.shape.birthWeight25004000.parse(value);
+      setErrorBirthWeight25004000({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorBirthWeight25004000({ errorType: 'error', errorShow: true });
+    }
     setBirthWeight25004000(value);
   };
 
   const handleChangeBirthWeightlt2500 = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    try {
+      pregnantSchemaPartTwo.shape.birthWeightlt2500.parse(value);
+      setErrorBirthWeightlt2500({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorBirthWeightlt2500({ errorType: 'error', errorShow: true });
+    }
     setBirthWeightlt2500(value);
   };
 
   const handleChangeBirthWeightgt4000 = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    try {
+      pregnantSchemaPartTwo.shape.birthWeightgt4000.parse(value);
+      setErrorBirthWeightgt4000({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorBirthWeightgt4000({ errorType: 'error', errorShow: true });
+    }
     setBirthWeightgt4000(value);
   };
 
   const handleChangeDeathsFirstWeek = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    try {
+      pregnantSchemaPartTwo.shape.deathsFirstWeek.parse(value);
+      setErrorDeathsFirstWeek({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorDeathsFirstWeek({ errorType: 'error', errorShow: true });
+    }
     setDeathsFirstWeek(value);
   };
 
@@ -398,6 +448,12 @@ export function PregnantRegister() {
     target: { value: string };
   }) => {
     const { value } = e.target;
+    try {
+      pregnantSchemaPartTwo.shape.deathsAfterFirstWeek.parse(value);
+      setErrorDeathsAfterFirstWeek({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorDeathsAfterFirstWeek({ errorType: 'error', errorShow: true });
+    }
     setDeathsAfterFirstWeek(value);
   };
 
@@ -411,16 +467,34 @@ export function PregnantRegister() {
 
   const handleChangeDeliveries = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    try {
+      pregnantSchemaPartTwo.shape.deliveries.parse(value);
+      setErrorDeliveries({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorDeliveries({ errorType: 'error', errorShow: true });
+    }
     setDeliveries(value);
   };
 
   const handleChangeVaginalDeliveries = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    try {
+      pregnantSchemaPartTwo.shape.vaginalDeliveries.parse(value);
+      setErrorVaginalDeliveries({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorVaginalDeliveries({ errorType: 'error', errorShow: true });
+    }
     setVaginalDeliveries(value);
   };
 
   const handleChangeCesareanDeliveries = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    try {
+      pregnantSchemaPartTwo.shape.cesareanDeliveries.parse(value);
+      setErrorCesareanDeliveries({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorCesareanDeliveries({ errorType: 'error', errorShow: true });
+    }
     setCesareanDeliveries(value);
   };
 
@@ -549,7 +623,7 @@ export function PregnantRegister() {
       setProgress(!progress);
     } catch (error) {
       if (error instanceof ZodError) {
-        alert(error.errors[0].message);
+        warningNotification(error.errors[0].message);
       }
     }
   };
@@ -560,7 +634,7 @@ export function PregnantRegister() {
       alert('Cadastrado');
     } catch (error) {
       if (error instanceof ZodError) {
-        alert(error.errors[0].message);
+        warningNotification(error.errors[0].message);
       }
     }
   };
@@ -598,7 +672,6 @@ export function PregnantRegister() {
                 defaut="Selecione uma opcão"
                 list={raceList}
                 selectFunc={handleChangeRace}
-                status={errorRace.errorType}
               />
               <Select
                 label="Sexo:"
@@ -756,6 +829,7 @@ export function PregnantRegister() {
                 type="string"
                 inputFunction={handleChangeAbortions}
                 value={abortions}
+                status={errorAbortions.errorType}
               />
               <Input
                 label={'Filhos vivos:'}
@@ -763,6 +837,7 @@ export function PregnantRegister() {
                 type="string"
                 inputFunction={handleChangeLiveChildren}
                 value={liveChildren}
+                status={errorLiveChildren.errorType}
               />
               <Input
                 label={'Gemelares:'}
@@ -770,6 +845,7 @@ export function PregnantRegister() {
                 type="string"
                 inputFunction={handleChangeTwins}
                 value={twins}
+                status={errorTwins.errorType}
               />
               <Input
                 label={'Nascidos vivos:'}
@@ -777,6 +853,7 @@ export function PregnantRegister() {
                 type="string"
                 inputFunction={handleChangeLiveBirths}
                 value={liveBirths}
+                status={errorLiveBirths.errorType}
               />
               <Input
                 label={'Nascidos mortos:'}
@@ -784,6 +861,7 @@ export function PregnantRegister() {
                 type="string"
                 inputFunction={handleChangeStillbirths}
                 value={stillbirths}
+                status={errorStillbirths.errorType}
               />
             </S.InputRow>
             <S.InputRow>
@@ -793,6 +871,7 @@ export function PregnantRegister() {
                 type="string"
                 inputFunction={handleChangeBirthWeight25004000}
                 value={birthWeight25004000}
+                status={errorBirthWeight25004000.errorType}
               />
               <Input
                 label={'rn peso menor 2500:'}
@@ -800,6 +879,7 @@ export function PregnantRegister() {
                 type="string"
                 inputFunction={handleChangeBirthWeightlt2500}
                 value={birthWeightlt2500}
+                status={errorBirthWeightlt2500.errorType}
               />
               <Input
                 label={'rn peso maior 4000:'}
@@ -807,6 +887,7 @@ export function PregnantRegister() {
                 type="string"
                 inputFunction={handleChangeBirthWeightgt4000}
                 value={birthWeightgt4000}
+                status={errorBirthWeightgt4000.errorType}
               />
             </S.InputRow>
             <S.InputRow>
@@ -816,6 +897,7 @@ export function PregnantRegister() {
                 type="string"
                 inputFunction={handleChangeDeathsFirstWeek}
                 value={deathsFirstWeek}
+                status={errorDeathsFirstWeek.errorType}
               />
               <Input
                 label={'Óbitos após primeira semana:'}
@@ -823,6 +905,7 @@ export function PregnantRegister() {
                 type="string"
                 inputFunction={handleChangeDeathsAfterFirstWeek}
                 value={deathsAfterFirstWeek}
+                status={errorDeathsAfterFirstWeek.errorType}
               />
               <RadioSelect
                 label="Diabetes:"
@@ -850,6 +933,7 @@ export function PregnantRegister() {
                 type="string"
                 inputFunction={handleChangeDeliveries}
                 value={deliveries}
+                status={errorDeliveries.errorType}
               />
               <Input
                 label={'Partos vaginais:'}
@@ -857,6 +941,7 @@ export function PregnantRegister() {
                 type="string"
                 inputFunction={handleChangeVaginalDeliveries}
                 value={vaginalDeliveries}
+                status={errorVaginalDeliveries.errorType}
               />
               <Input
                 label={'Partos cesarios:'}
@@ -864,6 +949,7 @@ export function PregnantRegister() {
                 type="string"
                 inputFunction={handleChangeCesareanDeliveries}
                 value={cesareanDeliveries}
+                status={errorCesareanDeliveries.errorType}
               />
             </S.InputRow>
             <S.InputRow>
