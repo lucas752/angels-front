@@ -30,6 +30,11 @@ export const SelectArea = styled(Select)`
     outline: none;
   }
 
+  &:hover {
+    border-color: var(--red-500) !important;
+    outline: none;
+  }
+
   .ant-select-selection-item {
     color: var(--gray-100);
   }

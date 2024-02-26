@@ -82,32 +82,10 @@ export function PregnantRegister() {
     errorShow: false
   });
 
-  const [errorGender, setErrorGender] = useState<ErrorInterface>({
-    errorType: '',
-    errorShow: false
-  });
-
   const [errorCpf, setErrorCpf] = useState<ErrorInterface>({
     errorType: '',
     errorShow: false
   });
-
-  const [errorHeadOfHousehold, setErrorHeadOfHousehold] =
-    useState<ErrorInterface>({
-      errorType: '',
-      errorShow: false
-    });
-
-  const [errorMaritalStatus, setErrorMaritalStatus] = useState<ErrorInterface>({
-    errorType: '',
-    errorShow: false
-  });
-
-  const [errorEducationLevel, setErrorEducationLevel] =
-    useState<ErrorInterface>({
-      errorType: '',
-      errorShow: false
-    });
 
   const [errorFamilyIncome, setErrorFamilyIncome] = useState<ErrorInterface>({
     errorType: '',
@@ -119,41 +97,11 @@ export function PregnantRegister() {
     errorShow: false
   });
 
-  const [errorHousing, setErrorHousing] = useState<ErrorInterface>({
-    errorType: '',
-    errorShow: false
-  });
-
-  const [errorElectricity, setErrorElectricity] = useState<ErrorInterface>({
-    errorType: '',
-    errorShow: false
-  });
-
-  const [errorSewageNetwork, setErrorSewageNetwork] = useState<ErrorInterface>({
-    errorType: '',
-    errorShow: false
-  });
-
-  const [errorTreatedWater, setErrorTreatedWater] = useState<ErrorInterface>({
-    errorType: '',
-    errorShow: false
-  });
-
   const [errorLastPregnancyDate, setErrorLastPregnancyDate] =
     useState<ErrorInterface>({
       errorType: '',
       errorShow: false
     });
-
-  const [errorWellFed, setErrorWellFed] = useState<ErrorInterface>({
-    errorType: '',
-    errorShow: false
-  });
-
-  const [errorBreastfeeding, setErrorBreastfeeding] = useState<ErrorInterface>({
-    errorType: '',
-    errorShow: false
-  });
 
   const [errorContact, setErrorContact] = useState<ErrorInterface>({
     errorType: '',
@@ -223,16 +171,6 @@ export function PregnantRegister() {
       errorShow: false
     });
 
-  const [errorDiabetes, setErrorDiabetes] = useState<ErrorInterface>({
-    errorType: '',
-    errorShow: false
-  });
-
-  const [errorPelvicSurgery, setErrorPelvicSurgery] = useState<ErrorInterface>({
-    errorType: '',
-    errorShow: false
-  });
-
   const [errorDeliveries, setErrorDeliveries] = useState<ErrorInterface>({
     errorType: '',
     errorShow: false
@@ -245,29 +183,6 @@ export function PregnantRegister() {
     });
 
   const [errorCesareanDeliveries, setErrorCesareanDeliveries] =
-    useState<ErrorInterface>({
-      errorType: '',
-      errorShow: false
-    });
-
-  const [errorUrinaryInfection, setErrorUrinaryInfection] =
-    useState<ErrorInterface>({
-      errorType: '',
-      errorShow: false
-    });
-
-  const [errorCongenitalMalformation, setErrorCongenitalMalformation] =
-    useState<ErrorInterface>({
-      errorType: '',
-      errorShow: false
-    });
-
-  const [errorHypertension, setErrorHypertension] = useState<ErrorInterface>({
-    errorType: '',
-    errorShow: false
-  });
-
-  const [errorTwinFamilyHistory, setErrorTwinFamilyHistory] =
     useState<ErrorInterface>({
       errorType: '',
       errorShow: false

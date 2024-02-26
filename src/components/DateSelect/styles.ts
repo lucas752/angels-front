@@ -16,7 +16,7 @@ export const DataArea = styled(DatePicker)`
   border: 2px var(--gray-100) solid;
   width: 100%;
 
-  &:focus {
+  &:hover {
     border-color: var(--red-500) !important;
     outline: none !important;
   }

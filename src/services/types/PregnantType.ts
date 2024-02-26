@@ -94,67 +94,124 @@ export const pregnantSchemaPartOne = z.object({
 
 export const pregnantSchemaPartTwo = z.object({
   // Segunda parte
-  abortions: z.string({
-    required_error: 'Abortos é obrigatório',
-    invalid_type_error: 'Abortos precisa conter números'
-  }),
-  liveChildren: z.string({
-    required_error: 'Filhos vivos é obrigatório',
-    invalid_type_error: 'Filhos vivos precisa conter números'
-  }),
-  twins: z.string({
-    required_error: 'Gêmeos é obrigatório',
-    invalid_type_error: 'Gêmeos precisa ser conter números'
-  }),
-  liveBirths: z.string({
-    required_error: 'Nascimentos vivos é obrigatório',
-    invalid_type_error: 'Nascimentos vivos precisa conter números'
-  }),
-  stillbirths: z.string({
-    required_error: 'Natimortos é obrigatório',
-    invalid_type_error: 'Natimortos precisa ser conter números'
-  }),
-  birthWeight25004000: z.string({
-    required_error: 'Peso de nascimento entre 2500 e 4000g é obrigatório',
-    invalid_type_error:
-      'Peso de nascimento entre 2500 e 4000g precisa conter números'
-  }),
-  birthWeightlt2500: z.string({
-    required_error: 'Peso de nascimento menor que 2500g é obrigatório',
-    invalid_type_error:
-      'Peso de nascimento menor que 2500g precisa conter números'
-  }),
-  birthWeightgt4000: z.string({
-    required_error: 'Peso de nascimento maior que 4000g é obrigatório',
-    invalid_type_error:
-      'Peso de nascimento maior que 4000g precisa conter números'
-  }),
-  deathsFirstWeek: z.string({
-    required_error: 'Mortes na primeira semana é obrigatório',
-    invalid_type_error: 'Mortes na primeira semana precisa conter números'
-  }),
-  deathsAfterFirstWeek: z.string({
-    required_error: 'Mortes após a primeira semana é obrigatório',
-    invalid_type_error: 'Mortes após a primeira semana precisa conter números'
-  }),
+  abortions: z
+    .string({
+      required_error: 'Abortos é obrigatório',
+      invalid_type_error: 'Abortos precisa conter números'
+    })
+    .regex(/^\d+$/, {
+      message: 'O Campo "Abortos" deve conter apenas dígitos numéricos'
+    }),
+  liveChildren: z
+    .string({
+      required_error: 'Filhos vivos é obrigatório',
+      invalid_type_error: 'Filhos vivos precisa conter números'
+    })
+    .regex(/^\d+$/, {
+      message: 'O Campo "Filhos vivos" deve conter apenas dígitos numéricos'
+    }),
+  twins: z
+    .string({
+      required_error: 'Gêmeos é obrigatório',
+      invalid_type_error: 'Gêmeos precisa ser conter números'
+    })
+    .regex(/^\d+$/, {
+      message: 'O Campo "Gemelares" deve conter apenas dígitos numéricos'
+    }),
+  liveBirths: z
+    .string({
+      required_error: 'Nascimentos vivos é obrigatório',
+      invalid_type_error: 'Nascimentos vivos precisa conter números'
+    })
+    .regex(/^\d+$/, {
+      message: 'O Campo "Nascidos vivos" deve conter apenas dígitos numéricos'
+    }),
+  stillbirths: z
+    .string({
+      required_error: 'Natimortos é obrigatório',
+      invalid_type_error: 'Natimortos precisa ser conter números'
+    })
+    .regex(/^\d+$/, {
+      message: 'O Campo "Nascidos mortos" deve conter apenas dígitos numéricos'
+    }),
+  birthWeight25004000: z
+    .string({
+      required_error: 'Peso de nascimento entre 2500 e 4000g é obrigatório',
+      invalid_type_error:
+        'Peso de nascimento entre 2500 e 4000g precisa conter números'
+    })
+    .regex(/^\d+$/, {
+      message:
+        'O Campo "Peso de nascimento entre 2500 e 4000g" deve conter apenas dígitos numéricos'
+    }),
+  birthWeightlt2500: z
+    .string({
+      required_error: 'Peso de nascimento menor que 2500g é obrigatório',
+      invalid_type_error:
+        'Peso de nascimento menor que 2500g precisa conter números'
+    })
+    .regex(/^\d+$/, {
+      message:
+        'O Campo "Peso de nascimento menor que 2500g" deve conter apenas dígitos numéricos'
+    }),
+  birthWeightgt4000: z
+    .string({
+      required_error: 'Peso de nascimento maior que 4000g é obrigatório',
+      invalid_type_error:
+        'Peso de nascimento maior que 4000g precisa conter números'
+    })
+    .regex(/^\d+$/, {
+      message:
+        'O Campo "Peso de nascimento maior que 4000g" deve conter apenas dígitos numéricos'
+    }),
+  deathsFirstWeek: z
+    .string({
+      required_error: 'Mortes na primeira semana é obrigatório',
+      invalid_type_error: 'Mortes na primeira semana precisa conter números'
+    })
+    .regex(/^\d+$/, {
+      message:
+        'O Campo "Óbitos na primeira semana" deve conter apenas dígitos numéricos'
+    }),
+  deathsAfterFirstWeek: z
+    .string({
+      required_error: 'Mortes após a primeira semana é obrigatório',
+      invalid_type_error: 'Mortes após a primeira semana precisa conter números'
+    })
+    .regex(/^\d+$/, {
+      message:
+        'O Campo "Óbitos após primeira semana" deve conter apenas dígitos numéricos'
+    }),
   diabetes: z.number({
     required_error: 'Diabetes é obrigatório'
   }),
   pelvicSurgery: z.number({
     required_error: 'Cirurgia pélvica é obrigatória'
   }),
-  deliveries: z.string({
-    required_error: 'Partos é obrigatório',
-    invalid_type_error: 'Partos precisa conter números'
-  }),
-  vaginalDeliveries: z.string({
-    required_error: 'Partos vaginais é obrigatório',
-    invalid_type_error: 'Partos vaginais precisa conter números'
-  }),
-  cesareanDeliveries: z.string({
-    required_error: 'Partos cesáreos é obrigatório',
-    invalid_type_error: 'Partos cesáreos precisa conter números'
-  }),
+  deliveries: z
+    .string({
+      required_error: 'Partos é obrigatório',
+      invalid_type_error: 'Partos precisa conter números'
+    })
+    .regex(/^\d+$/, {
+      message: 'O Campo "Partos" deve conter apenas dígitos numéricos'
+    }),
+  vaginalDeliveries: z
+    .string({
+      required_error: 'Partos vaginais é obrigatório',
+      invalid_type_error: 'Partos vaginais precisa conter números'
+    })
+    .regex(/^\d+$/, {
+      message: 'O Campo "Partos vaginais" deve conter apenas dígitos numéricos'
+    }),
+  cesareanDeliveries: z
+    .string({
+      required_error: 'Partos cesáreos é obrigatório',
+      invalid_type_error: 'Partos cesáreos precisa conter números'
+    })
+    .regex(/^\d+$/, {
+      message: 'O Campo "Partos cesáreos" deve conter apenas dígitos numéricos'
+    }),
   urinaryInfection: z.number({
     required_error: 'Infecção urinária é obrigatória'
   }),
