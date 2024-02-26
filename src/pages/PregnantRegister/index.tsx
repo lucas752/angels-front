@@ -290,13 +290,13 @@ export function PregnantRegister() {
   ) => {
     try {
       pregnantSchemaPartOne.shape.birthDate.parse(dateString);
-      setErrorBirthDate({ errorType: '' });
+      setErrorBirthDate({ errorType: '', errorShow: false });
       if (dateString == '') {
-        setErrorBirthDate({ errorType: 'error' });
+        setErrorBirthDate({ errorType: 'error', errorShow: true });
       }
     } catch (error) {
       console.log(error);
-      setErrorBirthDate({ errorType: 'error' });
+      setErrorBirthDate({ errorType: 'error', errorShow: true });
     }
     console.log(date);
     setBirthDate(dateString);
@@ -385,6 +385,16 @@ export function PregnantRegister() {
     date: unknown,
     dateString: string | string[]
   ) => {
+    try {
+      pregnantSchemaPartOne.shape.lastPregnancyDate.parse(dateString);
+      setErrorLastPregnancyDate({ errorType: '', errorShow: false });
+      if (dateString == '') {
+        setErrorLastPregnancyDate({ errorType: 'error', errorShow: true });
+      }
+    } catch (error) {
+      console.log(error);
+      setErrorLastPregnancyDate({ errorType: 'error', errorShow: true });
+    }
     console.log(date);
     setLastPregnancyDate(dateString);
   };
@@ -673,6 +683,7 @@ export function PregnantRegister() {
                 defaut="Selecione uma opcão"
                 list={raceList}
                 selectFunc={handleChangeRace}
+                status={errorRace.errorType}
               />
               <Select
                 label="Sexo:"
@@ -777,6 +788,7 @@ export function PregnantRegister() {
                 label="Última gestação:"
                 placeHolder="Selecione uma data"
                 inputFunction={handleChangeLastPregnancyDate}
+                status={errorLastPregnancyDate.errorType}
               />
 
               <Select

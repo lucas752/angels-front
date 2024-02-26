@@ -8,19 +8,27 @@ export const pregnantSchemaPartOne = z.object({
     })
     .min(2, { message: 'Necessário mais de 2 caracteres' })
     .max(80, { message: 'Apenas 80 caracteres permitidos' }),
-  birthDate: z.string({
-    required_error: 'Data de nascimento é obrigatória'
-  }),
+  birthDate: z.coerce
+    .date({
+      required_error: 'Data de nascimento é obrigatória'
+    })
+    .min(new Date('1900-01-01'), {
+      message: 'Escolha um data depois de 1900-01-01'
+    })
+    .max(new Date(), { message: 'Escolha um data existente' }),
   race: z.string({
     required_error: 'Raça é obrigatória'
   }),
   gender: z.string({
     required_error: 'Gênero é obrigatório'
   }),
-  cpf: z.string({
-    required_error: 'CPF é obrigatório',
-    invalid_type_error: 'CPF precisa ser uma string'
-  }),
+  cpf: z
+    .string({
+      required_error: 'CPF é obrigatório',
+      invalid_type_error: 'CPF precisa ser uma string'
+    })
+    .length(11, { message: 'O CPF deve ter exatamente 11 caracteres' })
+    .regex(/^\d+$/, { message: 'O CPF deve conter apenas dígitos numéricos' }),
   headOfHousehold: z.number({
     required_error: 'Chefe de família é obrigatório'
   }),
@@ -34,10 +42,13 @@ export const pregnantSchemaPartOne = z.object({
     required_error: 'Renda familiar é obrigatória',
     invalid_type_error: 'Renda familiar precisa ser válida'
   }),
-  city: z.string({
-    required_error: 'Cidade é obrigatória',
-    invalid_type_error: 'Cidade precisa conter letras9'
-  }),
+  city: z
+    .string({
+      required_error: 'Cidade é obrigatória',
+      invalid_type_error: 'Cidade precisa conter letras9'
+    })
+    .min(2, { message: 'Necessário mais de 2 caracteres' })
+    .max(30, { message: 'Apenas 30 caracteres permitidos' }),
   housing: z.string({
     required_error: 'Tipo de moradia é obrigatório'
   }),
@@ -59,14 +70,26 @@ export const pregnantSchemaPartOne = z.object({
   breastfeeding: z.number({
     required_error: 'Amamentação é obrigatória'
   }),
-  contact: z.string({
-    required_error: 'Contato é obrigatório',
-    invalid_type_error: 'Contato precisa ser válido'
-  }),
-  emergencyContact: z.string({
-    required_error: 'Contato de emergência é obrigatório',
-    invalid_type_error: 'Contato de emergência ser válido'
-  })
+  contact: z
+    .string({
+      required_error: 'Contato é obrigatório',
+      invalid_type_error: 'Contato precisa ser válido'
+    })
+    .length(11, { message: 'O contato deve ter exatamente 11 caracteres' })
+    .regex(/^\d+$/, {
+      message: 'O contato deve conter apenas dígitos numéricos'
+    }),
+  emergencyContact: z
+    .string({
+      required_error: 'Contato de emergência é obrigatório',
+      invalid_type_error: 'Contato de emergência ser válido'
+    })
+    .length(11, {
+      message: 'O contato de emergência deve ter exatamente 11 caracteres'
+    })
+    .regex(/^\d+$/, {
+      message: 'O contato de emergência deve conter apenas dígitos numéricos'
+    })
 });
 
 export const pregnantSchemaPartTwo = z.object({
