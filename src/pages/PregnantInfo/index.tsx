@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { InfoContainer } from './components/InfoContainer';
 import * as S from './styles';
+import { ArrowLeft, ArrowRight } from '@phosphor-icons/react';
 
 export default function PregnantInfo() {
   const [page, setPage] = useState(0);
@@ -204,9 +205,13 @@ export default function PregnantInfo() {
         )}
         <S.ButtonContainer>
           {page == 1 ? (
-            <S.ArrowButton onClick={() => setPage(0)}>{'<-'}</S.ArrowButton>
+            <S.ArrowButton onClick={() => setPage(0)}>
+              <ArrowLeft size={28} weight="bold" />
+            </S.ArrowButton>
           ) : (
-            <S.ArrowButton onClick={() => setPage(1)}>{'->'}</S.ArrowButton>
+            <S.ArrowButton onClick={() => setPage(1)}>
+              <ArrowRight size={28} weight="bold" />
+            </S.ArrowButton>
           )}
         </S.ButtonContainer>
       </S.ContentContainer>
