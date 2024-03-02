@@ -14,6 +14,7 @@ import {
 } from '../../services/types/PregnantType';
 import { ZodError } from 'zod';
 import { warningNotification } from '../../components/Notification';
+import { InputMask } from '../../features/PregnantRegister/InputMask';
 
 interface ErrorInterface {
   errorShow?: boolean;
@@ -227,8 +228,11 @@ export function PregnantRegister() {
 
   const handleChangeCpf = (e: { target: { value: string } }) => {
     const { value } = e.target;
+
+    const inputValue = value.replace(/\D/g, '');
+
     try {
-      pregnantSchemaPartOne.shape.cpf.parse(value);
+      pregnantSchemaPartOne.shape.cpf.parse(inputValue);
       setErrorCpf({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorCpf({ errorType: 'error', errorShow: true });
@@ -322,8 +326,9 @@ export function PregnantRegister() {
 
   const handleChangeContact = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    const inputValue = value.replace(/\D/g, '');
     try {
-      pregnantSchemaPartOne.shape.contact.parse(value);
+      pregnantSchemaPartOne.shape.contact.parse(inputValue);
       setErrorContact({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorContact({ errorType: 'error', errorShow: true });
@@ -333,8 +338,9 @@ export function PregnantRegister() {
 
   const handleChangeEmergencyContact = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    const inputValue = value.replace(/\D/g, '');
     try {
-      pregnantSchemaPartOne.shape.emergencyContact.parse(value);
+      pregnantSchemaPartOne.shape.emergencyContact.parse(inputValue);
       setErrorEmergencyContact({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorEmergencyContact({ errorType: 'error', errorShow: true });
@@ -679,7 +685,8 @@ export function PregnantRegister() {
                 list={genderList}
                 selectFunc={handleChangeGender}
               />
-              <Input
+              <InputMask
+                mask={'999.999.999-99'}
                 label={'Cpf:'}
                 placeHolder="xxx.xxx.xxx-xx"
                 type="text"
@@ -795,7 +802,7 @@ export function PregnantRegister() {
                 radioFunction={handleChangeBreastfeeding}
                 value={breastfeeding}
               />
-              <Input
+              <InputMask
                 label={'Contato:'}
                 placeHolder="Digite o contatto..."
                 type="text"
@@ -805,8 +812,9 @@ export function PregnantRegister() {
                 status={errorContact?.errorType}
                 infoText="O contato precisa ser válido Brasil"
                 color="#b1488a"
+                mask={'(99) 9 9999-9999'}
               />
-              <Input
+              <InputMask
                 label={'Contato de emergencia:'}
                 placeHolder="Digite o contato de emergencia..."
                 type="text"
@@ -816,6 +824,7 @@ export function PregnantRegister() {
                 status={errorEmergencyContact?.errorType}
                 infoText="O contato precisa ser válido no Brasil"
                 color="#b1488a"
+                mask={'(99) 9 9999-9999'}
               />
             </S.InputRow>
           </S.FormContainer>
