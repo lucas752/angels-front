@@ -1,3 +1,4 @@
+import { Progress } from 'antd';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -26,10 +27,24 @@ export const Contente = styled.div`
 `;
 
 export const TopContainer = styled.section`
+  width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 1rem;
+`;
+
+export const ProgressBar = styled(Progress)`
+  width: 100%;
+  top: -24px;
+  .ant-progress-inner {
+    width: 100%;
+  }
+
+  .ant-progress-bg {
+    background-color: var(--red-500);
+  }
 `;
 
 export const FormContainer = styled.section``;

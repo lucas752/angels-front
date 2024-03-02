@@ -227,3 +227,35 @@ export const pregnantSchemaPartTwo = z.object({
     required_error: 'Histórico familiar de gêmeos é obrigatório'
   })
 });
+
+export const pregnantSchemaPartTwoFirstPregnant = z.object({
+  // Segunda parte
+
+  abortions: z
+    .string({
+      required_error: 'Abortos é obrigatório',
+      invalid_type_error: 'Abortos precisa conter números'
+    })
+    .regex(/^\d+$/, {
+      message: 'O Campo "Abortos" deve conter apenas dígitos numéricos'
+    }),
+  diabetes: z.number({
+    required_error: 'Diabetes é obrigatório'
+  }),
+  pelvicSurgery: z.number({
+    required_error: 'Cirurgia pélvica é obrigatória'
+  }),
+
+  urinaryInfection: z.number({
+    required_error: 'Infecção urinária é obrigatória'
+  }),
+  congenitalMalformation: z.number({
+    required_error: 'Malformação congênita é obrigatória'
+  }),
+  hypertension: z.number({
+    required_error: 'Hipertensão é obrigatória'
+  }),
+  twinFamilyHistory: z.number({
+    required_error: 'Histórico familiar de gêmeos é obrigatório'
+  })
+});

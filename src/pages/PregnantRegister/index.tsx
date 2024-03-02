@@ -7,10 +7,11 @@ import { RadioSelect } from '../../components/RadioSelect';
 import { Button } from '../../components/Button';
 import { ArrowLeft, ArrowRight } from '@phosphor-icons/react';
 import { useState } from 'react';
-import { RadioChangeEvent } from 'antd';
+import { Progress, RadioChangeEvent } from 'antd';
 import {
   pregnantSchemaPartOne,
-  pregnantSchemaPartTwo
+  pregnantSchemaPartTwo,
+  pregnantSchemaPartTwoFirstPregnant
 } from '../../services/types/PregnantType';
 import { ZodError } from 'zod';
 import { warningNotification } from '../../components/Notification';
@@ -31,6 +32,7 @@ interface ErrorInterface {
 
 export function PregnantRegister() {
   const [progress, setProgress] = useState<boolean>(false);
+  const [progressBar, setProgressBar] = useState<number>(0);
 
   const [name, setName] = useState<string>();
   const [birthDate, setBirthDate] = useState<string | string[]>();
@@ -555,7 +557,7 @@ export function PregnantRegister() {
   };
   const pregnantSecondData = {
     // Segunda parte
-    lastPregnancyDate: lastPregnancyDate,
+    lastPregnancyDate: lastPregnancyDate || '',
     abortions: abortions,
     liveChildren: liveChildren,
     twins: twins,
@@ -581,6 +583,11 @@ export function PregnantRegister() {
     try {
       pregnantSchemaPartOne.parse(pregnantFirstData);
       setProgress(!progress);
+      if (firstPregnant == 1) {
+        setProgressBar(72);
+      } else {
+        setProgressBar(38.5);
+      }
     } catch (error) {
       if (error instanceof ZodError) {
         warningNotification(error.errors[0].message);
@@ -590,7 +597,12 @@ export function PregnantRegister() {
 
   const Register = () => {
     try {
-      pregnantSchemaPartTwo.parse(pregnantSecondData);
+      if (firstPregnant == 2) {
+        pregnantSchemaPartTwo.parse(pregnantSecondData);
+      } else {
+        pregnantSchemaPartTwoFirstPregnant.parse(pregnantSecondData);
+      }
+      setProgressBar(100);
       alert('Cadastrado');
     } catch (error) {
       if (error instanceof ZodError) {
@@ -603,6 +615,7 @@ export function PregnantRegister() {
     <S.Container>
       <S.Contente>
         <S.TopContainer>
+          <S.ProgressBar percent={progressBar} showInfo={false} />
           <img src={Logo} alt="angels logo" />
         </S.TopContainer>
         {!progress && (
