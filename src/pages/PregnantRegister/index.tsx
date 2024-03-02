@@ -7,7 +7,7 @@ import { RadioSelect } from '../../components/RadioSelect';
 import { Button } from '../../components/Button';
 import { ArrowLeft, ArrowRight } from '@phosphor-icons/react';
 import { useState } from 'react';
-import { Progress, RadioChangeEvent } from 'antd';
+import { RadioChangeEvent } from 'antd';
 import {
   pregnantSchemaPartOne,
   pregnantSchemaPartTwo,
