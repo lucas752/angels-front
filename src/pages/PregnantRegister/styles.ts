@@ -10,6 +10,7 @@ export const Container = styled.div`
 
 export const Contente = styled.div`
   width: 80%;
+  height: 80%;
   background: rgba(177, 72, 138, 0.2);
   align-self: center;
   justify-self: center;
@@ -20,6 +21,7 @@ export const Contente = styled.div`
   }
   @media (min-width: 1024px) {
     overflow-y: hidden;
+    height: auto;
   }
 `;
 

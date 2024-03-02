@@ -46,6 +46,7 @@ export function PregnantRegister() {
   const [electricity, setElectricity] = useState<number>();
   const [sewageNetwork, setSewageNetwork] = useState<number>();
   const [treatedWater, setTreatedWater] = useState<number>();
+  const [firstPregnant, setFirstPregnant] = useState<number>();
   const [lastPregnancyDate, setLastPregnancyDate] = useState<
     string | string[]
   >();
@@ -238,14 +239,14 @@ export function PregnantRegister() {
     const { value } = e.target;
 
     const inputValue = value.replace(/\D/g, '');
-
+    console.log(inputValue.length);
     try {
       pregnantSchemaPartOne.shape.cpf.parse(inputValue);
       setErrorCpf({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorCpf({ errorType: 'error', errorShow: true });
     }
-    setCpf(value);
+    setCpf(inputValue);
   };
 
   const handleChangeHeadOfHousehold = (e: RadioChangeEvent) => {
@@ -304,12 +305,16 @@ export function PregnantRegister() {
     setTreatedWater(e.target.value);
   };
 
+  const handleChangeFirstPregnant = (e: RadioChangeEvent) => {
+    setFirstPregnant(e.target.value);
+  };
+
   const handleChangeLastPregnancyDate = (
     date: unknown,
     dateString: string | string[]
   ) => {
     try {
-      pregnantSchemaPartOne.shape.lastPregnancyDate.parse(dateString);
+      pregnantSchemaPartTwo.shape.lastPregnancyDate.parse(dateString);
       setErrorLastPregnancyDate({ errorType: '', errorShow: false });
       if (dateString == '') {
         setErrorLastPregnancyDate({ errorType: 'error', errorShow: true });
@@ -341,7 +346,7 @@ export function PregnantRegister() {
     } catch (error) {
       setErrorContact({ errorType: 'error', errorShow: true });
     }
-    setContact(value);
+    setContact(inputValue);
   };
 
   const handleChangeEmergencyContact = (e: { target: { value: string } }) => {
@@ -353,7 +358,7 @@ export function PregnantRegister() {
     } catch (error) {
       setErrorEmergencyContact({ errorType: 'error', errorShow: true });
     }
-    setEmergencyContact(value);
+    setEmergencyContact(inputValue);
   };
 
   //segunda parte
@@ -543,7 +548,6 @@ export function PregnantRegister() {
     electricity: electricity,
     sewageNetwork: sewageNetwork,
     treatedWater: treatedWater,
-    lastPregnancyDate: lastPregnancyDate,
     wellFed: wellFed,
     breastfeeding: breastfeeding,
     contact: contact,
@@ -551,6 +555,7 @@ export function PregnantRegister() {
   };
   const pregnantSecondData = {
     // Segunda parte
+    lastPregnancyDate: lastPregnancyDate,
     abortions: abortions,
     liveChildren: liveChildren,
     twins: twins,
@@ -728,13 +733,15 @@ export function PregnantRegister() {
               />
             </S.InputRow>
             <S.InputRow>
-              <DateSelect
-                label="Última gestação:"
-                placeHolder="Selecione uma data"
-                inputFunction={handleChangeLastPregnancyDate}
-                status={errorLastPregnancyDate.errorType}
+              <RadioSelect
+                label="Primeira gestação:"
+                firstOption="Sim"
+                secondOption="Nao"
+                firstValue={1}
+                secondValue={2}
+                radioFunction={handleChangeFirstPregnant}
+                value={firstPregnant}
               />
-
               <Select
                 label="Nível de nutrição:"
                 defaut="Selecione uma opcão"
@@ -780,136 +787,179 @@ export function PregnantRegister() {
         )}
         {progress && (
           <S.FormContainer>
-            <S.InputRow>
-              <Input
-                label={'Abortos:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeAbortions}
-                value={abortions}
-                status={errorAbortions.errorType}
-              />
-              <Input
-                label={'Filhos vivos:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeLiveChildren}
-                value={liveChildren}
-                status={errorLiveChildren.errorType}
-              />
-              <Input
-                label={'Gemelares:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeTwins}
-                value={twins}
-                status={errorTwins.errorType}
-              />
-              <Input
-                label={'Nascidos vivos:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeLiveBirths}
-                value={liveBirths}
-                status={errorLiveBirths.errorType}
-              />
-              <Input
-                label={'Nascidos mortos:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeStillbirths}
-                value={stillbirths}
-                status={errorStillbirths.errorType}
-              />
-            </S.InputRow>
-            <S.InputRow>
-              <Input
-                label={'rn peso entre 2500 e 4000:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeBirthWeight25004000}
-                value={birthWeight25004000}
-                status={errorBirthWeight25004000.errorType}
-              />
-              <Input
-                label={'rn peso menor 2500:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeBirthWeightlt2500}
-                value={birthWeightlt2500}
-                status={errorBirthWeightlt2500.errorType}
-              />
-              <Input
-                label={'rn peso maior 4000:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeBirthWeightgt4000}
-                value={birthWeightgt4000}
-                status={errorBirthWeightgt4000.errorType}
-              />
-            </S.InputRow>
-            <S.InputRow>
-              <Input
-                label={'Óbitos na primeira semana:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeDeathsFirstWeek}
-                value={deathsFirstWeek}
-                status={errorDeathsFirstWeek.errorType}
-              />
-              <Input
-                label={'Óbitos após primeira semana:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeDeathsAfterFirstWeek}
-                value={deathsAfterFirstWeek}
-                status={errorDeathsAfterFirstWeek.errorType}
-              />
-              <RadioSelect
-                label="Diabetes:"
-                firstOption="Sim"
-                secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
-                radioFunction={handleChangeDiabetes}
-                value={diabetes}
-              />
-              <RadioSelect
-                label="Cirugia pélvica:"
-                firstOption="Sim"
-                secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
-                radioFunction={handleChangePelvicSurgery}
-                value={pelvicSurgery}
-              />
-            </S.InputRow>
-            <S.InputRow>
-              <Input
-                label={'Partos:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeDeliveries}
-                value={deliveries}
-                status={errorDeliveries.errorType}
-              />
-              <Input
-                label={'Partos vaginais:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeVaginalDeliveries}
-                value={vaginalDeliveries}
-                status={errorVaginalDeliveries.errorType}
-              />
-              <Input
-                label={'Partos cesarios:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeCesareanDeliveries}
-                value={cesareanDeliveries}
-                status={errorCesareanDeliveries.errorType}
-              />
-            </S.InputRow>
+            {firstPregnant == 2 ? (
+              <>
+                <S.InputRow>
+                  <DateSelect
+                    label="Última gestação:"
+                    placeHolder="Selecione uma data"
+                    inputFunction={handleChangeLastPregnancyDate}
+                    status={errorLastPregnancyDate.errorType}
+                  />
+                  <Input
+                    label={'Abortos:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeAbortions}
+                    value={abortions}
+                    status={errorAbortions.errorType}
+                  />
+
+                  <Input
+                    label={'Filhos vivos:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeLiveChildren}
+                    value={liveChildren}
+                    status={errorLiveChildren.errorType}
+                  />
+                  <Input
+                    label={'Gemelares:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeTwins}
+                    value={twins}
+                    status={errorTwins.errorType}
+                  />
+                  <Input
+                    label={'Nascidos vivos:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeLiveBirths}
+                    value={liveBirths}
+                    status={errorLiveBirths.errorType}
+                  />
+                  <Input
+                    label={'Nascidos mortos:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeStillbirths}
+                    value={stillbirths}
+                    status={errorStillbirths.errorType}
+                  />
+                </S.InputRow>
+                <S.InputRow>
+                  <Input
+                    label={'rn peso entre 2500 e 4000:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeBirthWeight25004000}
+                    value={birthWeight25004000}
+                    status={errorBirthWeight25004000.errorType}
+                  />
+                  <Input
+                    label={'rn peso menor 2500:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeBirthWeightlt2500}
+                    value={birthWeightlt2500}
+                    status={errorBirthWeightlt2500.errorType}
+                  />
+                  <Input
+                    label={'rn peso maior 4000:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeBirthWeightgt4000}
+                    value={birthWeightgt4000}
+                    status={errorBirthWeightgt4000.errorType}
+                  />
+                </S.InputRow>
+                <S.InputRow>
+                  <Input
+                    label={'Óbitos na primeira semana:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeDeathsFirstWeek}
+                    value={deathsFirstWeek}
+                    status={errorDeathsFirstWeek.errorType}
+                  />
+                  <Input
+                    label={'Óbitos após primeira semana:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeDeathsAfterFirstWeek}
+                    value={deathsAfterFirstWeek}
+                    status={errorDeathsAfterFirstWeek.errorType}
+                  />
+
+                  <RadioSelect
+                    label="Diabetes:"
+                    firstOption="Sim"
+                    secondOption="Nao"
+                    firstValue={1}
+                    secondValue={2}
+                    radioFunction={handleChangeDiabetes}
+                    value={diabetes}
+                  />
+                  <RadioSelect
+                    label="Cirugia pélvica:"
+                    firstOption="Sim"
+                    secondOption="Nao"
+                    firstValue={1}
+                    secondValue={2}
+                    radioFunction={handleChangePelvicSurgery}
+                    value={pelvicSurgery}
+                  />
+                </S.InputRow>
+                <S.InputRow>
+                  <Input
+                    label={'Partos:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeDeliveries}
+                    value={deliveries}
+                    status={errorDeliveries.errorType}
+                  />
+                  <Input
+                    label={'Partos vaginais:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeVaginalDeliveries}
+                    value={vaginalDeliveries}
+                    status={errorVaginalDeliveries.errorType}
+                  />
+                  <Input
+                    label={'Partos cesarios:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeCesareanDeliveries}
+                    value={cesareanDeliveries}
+                    status={errorCesareanDeliveries.errorType}
+                  />
+                </S.InputRow>
+              </>
+            ) : (
+              <>
+                <S.InputRow>
+                  <Input
+                    label={'Abortos:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeAbortions}
+                    value={abortions}
+                    status={errorAbortions.errorType}
+                  />
+                  <RadioSelect
+                    label="Diabetes:"
+                    firstOption="Sim"
+                    secondOption="Nao"
+                    firstValue={1}
+                    secondValue={2}
+                    radioFunction={handleChangeDiabetes}
+                    value={diabetes}
+                  />
+                  <RadioSelect
+                    label="Cirugia pélvica:"
+                    firstOption="Sim"
+                    secondOption="Nao"
+                    firstValue={1}
+                    secondValue={2}
+                    radioFunction={handleChangePelvicSurgery}
+                    value={pelvicSurgery}
+                  />
+                </S.InputRow>
+              </>
+            )}
             <S.InputRow>
               <RadioSelect
                 label="Infecção urinária:"

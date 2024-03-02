@@ -62,9 +62,7 @@ export const pregnantSchemaPartOne = z.object({
   treatedWater: z.number({
     required_error: 'Água tratada é obrigatória'
   }),
-  lastPregnancyDate: z.string({
-    required_error: 'Data da última gravidez é obrigatória'
-  }),
+
   wellFed: z.string({
     required_error: 'Alimentação adequada é obrigatória'
   }),
@@ -95,6 +93,9 @@ export const pregnantSchemaPartOne = z.object({
 
 export const pregnantSchemaPartTwo = z.object({
   // Segunda parte
+  lastPregnancyDate: z.string({
+    required_error: 'Data da última gravidez é obrigatória'
+  }),
   abortions: z
     .string({
       required_error: 'Abortos é obrigatório',
