@@ -4,9 +4,9 @@ import Logo from '../../../assets/whiteLogoSVG.svg';
 export const PregnantCard = () => {
   return (
     <S.Container>
-      <div>
+      <S.LogoContainer>
         <img src={Logo} alt="" />
-      </div>
+      </S.LogoContainer>
       <div>
         <div>Nome da gestante:</div>
         <div>Semana de gestação:</div>
