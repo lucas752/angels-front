@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 30%;
+  width: 28%;
   background: rgba(177, 72, 138, 0.2);
   border-radius: 1rem;
   display: flex;
@@ -19,4 +19,20 @@ export const LogoContainer = styled.div`
   img {
     width: 16%;
   }
+`;
+
+export const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  div {
+    display: flex;
+    gap: 4px;
+  }
+`;
+
+export const Text = styled.label<{ $primary?: boolean }>`
+  color: ${(props) => (props.$primary ? 'var(--red-500)' : '#000')};
+  font-weight: ${(props) => (props.$primary ? '600' : '400')};
 `;

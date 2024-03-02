@@ -7,11 +7,20 @@ export const PregnantCard = () => {
       <S.LogoContainer>
         <img src={Logo} alt="" />
       </S.LogoContainer>
-      <div>
-        <div>Nome da gestante:</div>
-        <div>Semana de gestação:</div>
-        <div>Status:</div>
-      </div>
+      <S.InfoContainer>
+        <div>
+          <S.Text $primary>Nome da gestante:</S.Text>
+          <S.Text>Maria Joana Ferreira</S.Text>
+        </div>
+        <div>
+          <S.Text $primary>Semana de gestação:</S.Text>
+          <S.Text>14 semanas</S.Text>
+        </div>
+        <div>
+          <S.Text $primary>Status:</S.Text>
+          <S.Text>Tranquila</S.Text>
+        </div>
+      </S.InfoContainer>
     </S.Container>
   );
 };
