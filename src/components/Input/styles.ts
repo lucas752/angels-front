@@ -6,8 +6,9 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
+  width: 100%;
 `;
 
 export const InputArea = styled(Input)`
@@ -18,9 +19,14 @@ export const InputArea = styled(Input)`
     border-color: var(--red-500);
     outline: none;
   }
+
+  &:hover {
+    border-color: var(--red-500);
+  }
 `;
 
 export const Label = styled.label`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-self: start;
