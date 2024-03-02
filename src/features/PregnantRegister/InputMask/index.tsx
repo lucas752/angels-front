@@ -24,13 +24,10 @@ export const InputMask: React.FC<InputProps> = ({
   placeHolder,
   value,
   disabled,
-  rightAdd,
-  leftAdd,
   inputFunction,
   infoText,
   errorShow,
   color,
-  status,
   mask
 }) => {
   return (
