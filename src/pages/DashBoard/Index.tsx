@@ -3,23 +3,30 @@ import { Button } from '../../components/Button/index.tsx';
 import { Input } from '../../components/Input/index.tsx';
 import * as S from './styles.ts';
 import { PregnantCard } from '../../features/DashBoard/PregnantCard/index.tsx';
+import { Divider } from 'antd';
 
 export function Dashboard() {
   return (
     <S.Container>
-      <S.NavBarContainer>naavbars</S.NavBarContainer>
+      <S.HeaderContent>
+        <h1>ANGELS - Acompanhamento gestacional</h1>
+        <Input
+          placeHolder="Digite o nome da gestante..."
+          rightAdd={<MagnifyingGlass size={20} color="#b1488a" />}
+        />
+        <Button
+          label="NOVA GESTAÇÃO"
+          shape="round"
+          icon={<PlusCircle size={20} color="#fff" />}
+        />
+      </S.HeaderContent>
+      {/* <S.Line>
+        <Divider />
+      </S.Line> */}
       <S.Content>
-        <S.HeaderContent>
-          <Input
-            placeHolder="Digite o nome da gestante..."
-            rightAdd={<MagnifyingGlass size={20} color="#b1488a" />}
-          />
-          <Button
-            label="NOVA GESTAÇÃO"
-            shape="round"
-            icon={<PlusCircle size={20} color="#fff" />}
-          />
-        </S.HeaderContent>
+        <S.NavBarContainer>
+          <div></div>
+        </S.NavBarContainer>
         <S.CardsContainer>
           <PregnantCard />
           <PregnantCard />
