@@ -6,12 +6,13 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
+  width: 100%;
   div {
-    align-self: flex-start;
-    justify-self: start;
-    width: max-content;
+    align-self: flex-start !important;
+    justify-self: start !important;
+    width: max-content !important;
   }
 `;
 
@@ -24,7 +25,16 @@ export const Label = styled.label`
 `;
 
 export const RadioArea = styled(Radio)`
-  .ant-radio {
-    color: var(--red-500);
+  .ant-radio-checked .ant-radio-inner {
+    border-color: var(--red-500) !important ;
+    background-color: var(--red-500) !important;
+  }
+
+  .ant-radio-checked .ant-radio-inner:after {
+    border-color: var(--red-500) !important ;
+  }
+
+  .ant-radio:hover .ant-radio-inner {
+    border-color: var(--red-500) !important;
   }
 `;
