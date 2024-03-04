@@ -17,6 +17,7 @@ interface SelectProps {
   infoText?: string;
   status?: '' | 'warning' | 'error' | undefined;
   errorShow?: boolean;
+  optional?: boolean;
   color?: string;
 }
 
@@ -33,13 +34,15 @@ export const Select: React.FC<SelectProps> = ({
   infoText,
   errorShow,
   color,
-  status
+  status,
+  optional
 }) => {
   return (
     <S.Container>
       {label && (
         <S.Label>
           {label}
+          {!optional && <p>*</p>}
           {infoText &&
             (errorShow === true ? (
               <Tooltip title={infoText} color={'red'} open={errorShow}>

@@ -13,6 +13,7 @@ interface DateProps {
   infoText?: string;
   status?: '' | 'warning' | 'error' | undefined;
   errorShow?: boolean;
+  optional?: boolean;
   color?: string;
 }
 export const DateSelect: React.FC<DateProps> = ({
@@ -22,13 +23,15 @@ export const DateSelect: React.FC<DateProps> = ({
   infoText,
   errorShow,
   color,
-  status
+  status,
+  optional
 }) => {
   return (
     <S.Container>
       {label && (
         <S.Label>
           {label}
+          {!optional && <p>*</p>}
           {infoText &&
             (errorShow === true ? (
               <Tooltip title={infoText} color={'red'} open={errorShow}>

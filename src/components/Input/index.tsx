@@ -9,6 +9,7 @@ interface InputProps {
   placeHolder?: string;
   value?: string;
   disabled?: boolean;
+  optional?: boolean;
   rightAdd?: React.ReactNode;
   leftAdd?: React.ReactNode;
   color?: string;
@@ -29,13 +30,15 @@ export const Input: React.FC<InputProps> = ({
   infoText,
   errorShow,
   color,
-  status
+  status,
+  optional
 }) => {
   return (
     <S.Container>
       {label && (
         <S.Label>
           {label}
+          {!optional && <p>*</p>}
           {infoText &&
             (errorShow === true ? (
               <Tooltip title={infoText} color={'red'} open={errorShow}>

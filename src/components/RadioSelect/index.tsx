@@ -6,6 +6,7 @@ interface RadioProps {
   infoText?: string;
   status?: '' | 'warning' | 'error' | undefined;
   errorShow?: boolean;
+  optional?: boolean;
   color?: string;
   firstOption?: string;
   secondOption?: string;
@@ -25,13 +26,15 @@ export const RadioSelect: React.FC<RadioProps> = ({
   value,
   radioFunction,
   firstOption,
-  secondOption
+  secondOption,
+  optional
 }) => {
   return (
     <S.Container>
       {label && (
         <S.Label>
           {label}
+          {!optional && <p>*</p>}
           {infoText &&
             (errorShow === true ? (
               <Tooltip title={infoText} color={'red'} open={errorShow}>
