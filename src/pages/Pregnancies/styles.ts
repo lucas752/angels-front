@@ -7,18 +7,35 @@ export const Container = styled.div`
   padding-right: 190px;
   padding-top: 50px;
   gap: 28px;
+
+  @media (max-width: 1000px) {
+    padding-right: 0;
+  }
 `;
 
 export const Header = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
 `;
 
 export const PregnantInfoContainer = styled.section`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
 `;
 
 export const PregnanciesText = styled.span`
@@ -47,4 +64,9 @@ export const CardsContainer = styled.section`
   flex-direction: row;
   justify-content: space-between;
   gap: 20px;
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 `;
