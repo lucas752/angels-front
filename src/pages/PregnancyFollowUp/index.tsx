@@ -9,7 +9,7 @@ import { InputNumber, RadioChangeEvent, message } from 'antd';
 import { PregnancyRegisterType } from '../../services/types/PregnancyRegister';
 import { ZodError } from 'zod';
 
-export function PregnancyRegister() {
+export function PregnancyFollowUp() {
   const [weight, setWeight] = useState<string>();
   const [weeks, setWeeks] = useState<string>();
   const [pressureS, setPressureS] = useState<number>();
