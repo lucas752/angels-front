@@ -10,10 +10,20 @@ import { useState } from 'react';
 import { RadioChangeEvent } from 'antd';
 import {
   pregnantSchemaPartOne,
-  pregnantSchemaPartTwo
+  pregnantSchemaPartTwo,
+  pregnantSchemaPartTwoFirstPregnant
 } from '../../services/types/PregnantType';
 import { ZodError } from 'zod';
 import { warningNotification } from '../../components/Notification';
+import { InputMask } from '../../features/PregnantRegister/InputMask';
+import {
+  educationLevelsList,
+  genderList,
+  housingTypesList,
+  malnutritionLevelsList,
+  maritalStatusList,
+  raceList
+} from '../../features/PregnantRegister/SelectOptions';
 
 interface ErrorInterface {
   errorShow?: boolean;
@@ -22,6 +32,7 @@ interface ErrorInterface {
 
 export function PregnantRegister() {
   const [progress, setProgress] = useState<boolean>(false);
+  const [progressBar, setProgressBar] = useState<number>(0);
 
   const [name, setName] = useState<string>();
   const [birthDate, setBirthDate] = useState<string | string[]>();
@@ -37,6 +48,7 @@ export function PregnantRegister() {
   const [electricity, setElectricity] = useState<number>();
   const [sewageNetwork, setSewageNetwork] = useState<number>();
   const [treatedWater, setTreatedWater] = useState<number>();
+  const [firstPregnant, setFirstPregnant] = useState<number>();
   const [lastPregnancyDate, setLastPregnancyDate] = useState<
     string | string[]
   >();
@@ -227,13 +239,16 @@ export function PregnantRegister() {
 
   const handleChangeCpf = (e: { target: { value: string } }) => {
     const { value } = e.target;
+
+    const inputValue = value.replace(/\D/g, '');
+    console.log(inputValue.length);
     try {
-      pregnantSchemaPartOne.shape.cpf.parse(value);
+      pregnantSchemaPartOne.shape.cpf.parse(inputValue);
       setErrorCpf({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorCpf({ errorType: 'error', errorShow: true });
     }
-    setCpf(value);
+    setCpf(inputValue);
   };
 
   const handleChangeHeadOfHousehold = (e: RadioChangeEvent) => {
@@ -292,12 +307,16 @@ export function PregnantRegister() {
     setTreatedWater(e.target.value);
   };
 
+  const handleChangeFirstPregnant = (e: RadioChangeEvent) => {
+    setFirstPregnant(e.target.value);
+  };
+
   const handleChangeLastPregnancyDate = (
     date: unknown,
     dateString: string | string[]
   ) => {
     try {
-      pregnantSchemaPartOne.shape.lastPregnancyDate.parse(dateString);
+      pregnantSchemaPartTwo.shape.lastPregnancyDate.parse(dateString);
       setErrorLastPregnancyDate({ errorType: '', errorShow: false });
       if (dateString == '') {
         setErrorLastPregnancyDate({ errorType: 'error', errorShow: true });
@@ -322,24 +341,26 @@ export function PregnantRegister() {
 
   const handleChangeContact = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    const inputValue = value.replace(/\D/g, '');
     try {
-      pregnantSchemaPartOne.shape.contact.parse(value);
+      pregnantSchemaPartOne.shape.contact.parse(inputValue);
       setErrorContact({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorContact({ errorType: 'error', errorShow: true });
     }
-    setContact(value);
+    setContact(inputValue);
   };
 
   const handleChangeEmergencyContact = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    const inputValue = value.replace(/\D/g, '');
     try {
-      pregnantSchemaPartOne.shape.emergencyContact.parse(value);
+      pregnantSchemaPartOne.shape.emergencyContact.parse(inputValue);
       setErrorEmergencyContact({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorEmergencyContact({ errorType: 'error', errorShow: true });
     }
-    setEmergencyContact(value);
+    setEmergencyContact(inputValue);
   };
 
   //segunda parte
@@ -514,65 +535,6 @@ export function PregnantRegister() {
     setTwinFamilyHistory(e.target.value);
   };
 
-  //select objetos
-  const raceList = [
-    { value: 'indígena', label: 'Indígena' },
-    { value: 'branco', label: 'Branco' },
-    { value: 'negro', label: 'Negro' },
-    { value: 'pardo', label: 'Pardo' },
-    { value: 'asiático', label: 'Asiático' },
-    { value: 'árabe', label: 'Árabe' },
-    { value: 'judeu', label: 'Judeu' },
-    { value: 'europeu_oriental', label: 'Europeu Oriental' },
-    { value: 'latino_americano', label: 'Latino Americano' },
-    { value: 'africana_não_negra', label: 'Africana Não Negra' }
-  ];
-
-  const genderList = [
-    { value: 'masculino', label: 'Masculino' },
-    { value: 'feminino', label: 'Feminino' },
-    { value: 'não_binário', label: 'Não Binário' },
-    { value: 'agênero', label: 'Agênero' },
-    { value: 'outro', label: 'Outro' }
-  ];
-
-  const maritalStatusList = [
-    { value: 'solteira', label: 'Solteira' },
-    { value: 'casada', label: 'Casada' },
-    { value: 'viuva', label: 'Viúva' },
-    { value: 'separada_judicialmente', label: 'Separada Judicialmente' },
-    { value: 'divorciada', label: 'Divorciada' },
-    { value: 'outro', label: 'Outro' }
-  ];
-
-  const housingTypesList = [
-    { value: 'palha', label: 'Palha' },
-    { value: 'madeira', label: 'Madeira' },
-    { value: 'barro', label: 'Barro' },
-    { value: 'gesso', label: 'Gesso' },
-    { value: 'tijolo', label: 'Tijolo' },
-    { value: 'outros', label: 'Outros' }
-  ];
-
-  const educationLevelsList = [
-    { value: 'nao_alfabetizado', label: 'Não alfabetizado' },
-    { value: 'fundamental_i_completo', label: 'Fundamental I completo' },
-    { value: 'fundamental_i_incompleto', label: 'Fundamental I incompleto' },
-    { value: 'fundamental_ii_completo', label: 'Fundamental II completo' },
-    { value: 'fundamental_ii_incompleto', label: 'Fundamental II incompleto' },
-    { value: 'medio_completo', label: 'Médio completo' },
-    { value: 'medio_incompleto', label: 'Médio incompleto' },
-    { value: 'superior_completo', label: 'Superior completo' },
-    { value: 'superior_incompleto', label: 'Superior incompleto' }
-  ];
-
-  const malnutritionLevelsList = [
-    { value: 'sem_diagnostico', label: 'Sem Diagnóstico de Desnutrição' },
-    { value: 'desnutricao_leve', label: 'Desnutrição Leve' },
-    { value: 'desnutricao_moderada', label: 'Desnutrição Moderada' },
-    { value: 'desnutricao_grave', label: 'Desnutrição Grave' }
-  ];
-
   const pregnantFirstData = {
     name: name,
     birthDate: birthDate,
@@ -588,7 +550,6 @@ export function PregnantRegister() {
     electricity: electricity,
     sewageNetwork: sewageNetwork,
     treatedWater: treatedWater,
-    lastPregnancyDate: lastPregnancyDate,
     wellFed: wellFed,
     breastfeeding: breastfeeding,
     contact: contact,
@@ -596,6 +557,7 @@ export function PregnantRegister() {
   };
   const pregnantSecondData = {
     // Segunda parte
+    lastPregnancyDate: lastPregnancyDate || '',
     abortions: abortions,
     liveChildren: liveChildren,
     twins: twins,
@@ -621,6 +583,11 @@ export function PregnantRegister() {
     try {
       pregnantSchemaPartOne.parse(pregnantFirstData);
       setProgress(!progress);
+      if (firstPregnant == 1) {
+        setProgressBar(72);
+      } else {
+        setProgressBar(38.5);
+      }
     } catch (error) {
       if (error instanceof ZodError) {
         warningNotification(error.errors[0].message);
@@ -630,7 +597,12 @@ export function PregnantRegister() {
 
   const Register = () => {
     try {
-      pregnantSchemaPartTwo.parse(pregnantSecondData);
+      if (firstPregnant == 2) {
+        pregnantSchemaPartTwo.parse(pregnantSecondData);
+      } else {
+        pregnantSchemaPartTwoFirstPregnant.parse(pregnantSecondData);
+      }
+      setProgressBar(100);
       alert('Cadastrado');
     } catch (error) {
       if (error instanceof ZodError) {
@@ -643,6 +615,7 @@ export function PregnantRegister() {
     <S.Container>
       <S.Contente>
         <S.TopContainer>
+          <S.ProgressBar percent={progressBar} showInfo={false} />
           <img src={Logo} alt="angels logo" />
         </S.TopContainer>
         {!progress && (
@@ -679,7 +652,8 @@ export function PregnantRegister() {
                 list={genderList}
                 selectFunc={handleChangeGender}
               />
-              <Input
+              <InputMask
+                mask={'999.999.999-99'}
                 label={'Cpf:'}
                 placeHolder="xxx.xxx.xxx-xx"
                 type="text"
@@ -744,7 +718,7 @@ export function PregnantRegister() {
                 selectFunc={handleChangeHousing}
               />
               <RadioSelect
-                label="Eletricidade:"
+                label="Eletricidade na moradia:"
                 firstOption="Sim"
                 secondOption="Nao"
                 firstValue={1}
@@ -762,7 +736,7 @@ export function PregnantRegister() {
                 value={sewageNetwork}
               />
               <RadioSelect
-                label="Agua tratada:"
+                label="Água tratada:"
                 firstOption="Sim"
                 secondOption="Nao"
                 firstValue={1}
@@ -772,22 +746,24 @@ export function PregnantRegister() {
               />
             </S.InputRow>
             <S.InputRow>
-              <DateSelect
-                label="Última gestação:"
-                placeHolder="Selecione uma data"
-                inputFunction={handleChangeLastPregnancyDate}
-                status={errorLastPregnancyDate.errorType}
+              <RadioSelect
+                label="Primeira gestação:"
+                firstOption="Sim"
+                secondOption="Nao"
+                firstValue={1}
+                secondValue={2}
+                radioFunction={handleChangeFirstPregnant}
+                value={firstPregnant}
               />
-
               <Select
-                label="Nutrição:"
+                label="Nível de nutrição:"
                 defaut="Selecione uma opcão"
                 list={malnutritionLevelsList}
                 selectFunc={handleChangeWellFed}
               />
 
               <RadioSelect
-                label="Amamentacao:"
+                label="Amamentação:"
                 firstOption="Sim"
                 secondOption="Nao"
                 firstValue={1}
@@ -795,7 +771,7 @@ export function PregnantRegister() {
                 radioFunction={handleChangeBreastfeeding}
                 value={breastfeeding}
               />
-              <Input
+              <InputMask
                 label={'Contato:'}
                 placeHolder="Digite o contatto..."
                 type="text"
@@ -805,8 +781,9 @@ export function PregnantRegister() {
                 status={errorContact?.errorType}
                 infoText="O contato precisa ser válido Brasil"
                 color="#b1488a"
+                mask={'(99) 9 9999-9999'}
               />
-              <Input
+              <InputMask
                 label={'Contato de emergencia:'}
                 placeHolder="Digite o contato de emergencia..."
                 type="text"
@@ -816,142 +793,186 @@ export function PregnantRegister() {
                 status={errorEmergencyContact?.errorType}
                 infoText="O contato precisa ser válido no Brasil"
                 color="#b1488a"
+                mask={'(99) 9 9999-9999'}
               />
             </S.InputRow>
           </S.FormContainer>
         )}
         {progress && (
           <S.FormContainer>
-            <S.InputRow>
-              <Input
-                label={'Abortos:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeAbortions}
-                value={abortions}
-                status={errorAbortions.errorType}
-              />
-              <Input
-                label={'Filhos vivos:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeLiveChildren}
-                value={liveChildren}
-                status={errorLiveChildren.errorType}
-              />
-              <Input
-                label={'Gemelares:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeTwins}
-                value={twins}
-                status={errorTwins.errorType}
-              />
-              <Input
-                label={'Nascidos vivos:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeLiveBirths}
-                value={liveBirths}
-                status={errorLiveBirths.errorType}
-              />
-              <Input
-                label={'Nascidos mortos:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeStillbirths}
-                value={stillbirths}
-                status={errorStillbirths.errorType}
-              />
-            </S.InputRow>
-            <S.InputRow>
-              <Input
-                label={'rn peso entre 2500 e 4000:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeBirthWeight25004000}
-                value={birthWeight25004000}
-                status={errorBirthWeight25004000.errorType}
-              />
-              <Input
-                label={'rn peso menor 2500:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeBirthWeightlt2500}
-                value={birthWeightlt2500}
-                status={errorBirthWeightlt2500.errorType}
-              />
-              <Input
-                label={'rn peso maior 4000:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeBirthWeightgt4000}
-                value={birthWeightgt4000}
-                status={errorBirthWeightgt4000.errorType}
-              />
-            </S.InputRow>
-            <S.InputRow>
-              <Input
-                label={'Óbitos na primeira semana:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeDeathsFirstWeek}
-                value={deathsFirstWeek}
-                status={errorDeathsFirstWeek.errorType}
-              />
-              <Input
-                label={'Óbitos após primeira semana:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeDeathsAfterFirstWeek}
-                value={deathsAfterFirstWeek}
-                status={errorDeathsAfterFirstWeek.errorType}
-              />
-              <RadioSelect
-                label="Diabetes:"
-                firstOption="Sim"
-                secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
-                radioFunction={handleChangeDiabetes}
-                value={diabetes}
-              />
-              <RadioSelect
-                label="Cirugia pélvica:"
-                firstOption="Sim"
-                secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
-                radioFunction={handleChangePelvicSurgery}
-                value={pelvicSurgery}
-              />
-            </S.InputRow>
-            <S.InputRow>
-              <Input
-                label={'Partos:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeDeliveries}
-                value={deliveries}
-                status={errorDeliveries.errorType}
-              />
-              <Input
-                label={'Partos vaginais:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeVaginalDeliveries}
-                value={vaginalDeliveries}
-                status={errorVaginalDeliveries.errorType}
-              />
-              <Input
-                label={'Partos cesarios:'}
-                placeHolder="0"
-                type="string"
-                inputFunction={handleChangeCesareanDeliveries}
-                value={cesareanDeliveries}
-                status={errorCesareanDeliveries.errorType}
-              />
-            </S.InputRow>
+            {firstPregnant == 2 ? (
+              <>
+                <S.InputRow>
+                  <DateSelect
+                    label="Última gestação:"
+                    placeHolder="Selecione uma data"
+                    inputFunction={handleChangeLastPregnancyDate}
+                    status={errorLastPregnancyDate.errorType}
+                  />
+                  <Input
+                    label={'Abortos:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeAbortions}
+                    value={abortions}
+                    status={errorAbortions.errorType}
+                  />
+
+                  <Input
+                    label={'Filhos vivos:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeLiveChildren}
+                    value={liveChildren}
+                    status={errorLiveChildren.errorType}
+                  />
+                  <Input
+                    label={'Gemelares:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeTwins}
+                    value={twins}
+                    status={errorTwins.errorType}
+                  />
+                  <Input
+                    label={'Nascidos vivos:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeLiveBirths}
+                    value={liveBirths}
+                    status={errorLiveBirths.errorType}
+                  />
+                  <Input
+                    label={'Nascidos mortos:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeStillbirths}
+                    value={stillbirths}
+                    status={errorStillbirths.errorType}
+                  />
+                </S.InputRow>
+                <S.InputRow>
+                  <Input
+                    label={'rn peso entre 2500 e 4000:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeBirthWeight25004000}
+                    value={birthWeight25004000}
+                    status={errorBirthWeight25004000.errorType}
+                  />
+                  <Input
+                    label={'rn peso menor 2500:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeBirthWeightlt2500}
+                    value={birthWeightlt2500}
+                    status={errorBirthWeightlt2500.errorType}
+                  />
+                  <Input
+                    label={'rn peso maior 4000:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeBirthWeightgt4000}
+                    value={birthWeightgt4000}
+                    status={errorBirthWeightgt4000.errorType}
+                  />
+                </S.InputRow>
+                <S.InputRow>
+                  <Input
+                    label={'Óbitos na primeira semana:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeDeathsFirstWeek}
+                    value={deathsFirstWeek}
+                    status={errorDeathsFirstWeek.errorType}
+                  />
+                  <Input
+                    label={'Óbitos após primeira semana:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeDeathsAfterFirstWeek}
+                    value={deathsAfterFirstWeek}
+                    status={errorDeathsAfterFirstWeek.errorType}
+                  />
+
+                  <RadioSelect
+                    label="Diabetes:"
+                    firstOption="Sim"
+                    secondOption="Nao"
+                    firstValue={1}
+                    secondValue={2}
+                    radioFunction={handleChangeDiabetes}
+                    value={diabetes}
+                  />
+                  <RadioSelect
+                    label="Cirugia pélvica:"
+                    firstOption="Sim"
+                    secondOption="Nao"
+                    firstValue={1}
+                    secondValue={2}
+                    radioFunction={handleChangePelvicSurgery}
+                    value={pelvicSurgery}
+                  />
+                </S.InputRow>
+                <S.InputRow>
+                  <Input
+                    label={'Partos:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeDeliveries}
+                    value={deliveries}
+                    status={errorDeliveries.errorType}
+                  />
+                  <Input
+                    label={'Partos vaginais:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeVaginalDeliveries}
+                    value={vaginalDeliveries}
+                    status={errorVaginalDeliveries.errorType}
+                  />
+                  <Input
+                    label={'Partos cesarios:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeCesareanDeliveries}
+                    value={cesareanDeliveries}
+                    status={errorCesareanDeliveries.errorType}
+                  />
+                </S.InputRow>
+              </>
+            ) : (
+              <>
+                <S.InputRow>
+                  <Input
+                    label={'Abortos:'}
+                    placeHolder="0"
+                    type="string"
+                    inputFunction={handleChangeAbortions}
+                    value={abortions}
+                    status={errorAbortions.errorType}
+                  />
+                  <RadioSelect
+                    label="Diabetes:"
+                    firstOption="Sim"
+                    secondOption="Nao"
+                    firstValue={1}
+                    secondValue={2}
+                    radioFunction={handleChangeDiabetes}
+                    value={diabetes}
+                  />
+                  <RadioSelect
+                    label="Cirugia pélvica:"
+                    firstOption="Sim"
+                    secondOption="Nao"
+                    firstValue={1}
+                    secondValue={2}
+                    radioFunction={handleChangePelvicSurgery}
+                    value={pelvicSurgery}
+                  />
+                </S.InputRow>
+              </>
+            )}
             <S.InputRow>
               <RadioSelect
                 label="Infecção urinária:"
