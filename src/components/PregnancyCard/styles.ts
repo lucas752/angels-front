@@ -13,6 +13,11 @@ export const PregnancyCardContainer = styled.div`
   border-radius: 36px;
   gap: 10px;
   padding: 0px 1.5% 1.5% 1.5%;
+
+  @media (max-width: 1000px) {
+    width: 17rem;
+    height: 20rem;
+  }
 `;
 
 export const RiskLine = styled.div`
