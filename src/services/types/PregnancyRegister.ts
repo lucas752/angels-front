@@ -13,9 +13,7 @@ export const PregnancyRegisterType = z.object({
     .min(1, 'Informe a idade gestacional'),
   pressureD: z.number({ required_error: 'Informe a pressão arterial' }),
   pressureS: z.number({ required_error: 'Informe a pressão arterial' }),
-  height: z
-    .string({ required_error: 'Informe a altura uterina' })
-    .min(1, 'Informe a altura uterina'),
+  height: z.string().optional(),
   heartbeat: z.number().optional(),
   type: z.enum(['pré-natal de rotina', 'ocorrência', 'volta'], {
     required_error: 'Selecione um tipo'
