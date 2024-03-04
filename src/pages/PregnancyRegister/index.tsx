@@ -11,14 +11,28 @@ import { ZodError } from 'zod';
 
 export function PregnancyRegister() {
   const [weight, setWeight] = useState<string>();
-  const [age, setAge] = useState<string>();
+  const [weeks, setWeeks] = useState<string>();
   const [pressureS, setPressureS] = useState<number>();
   const [pressureD, setPressureD] = useState<number>();
-  const [height, setHeigth] = useState<string>();
+  const [height, setHeight] = useState<string>();
   const [heartBeat, setHeartBeat] = useState<string>();
   const [radio, setRadio] = useState<number>();
   const [type, setType] = useState<string>();
   const [date, setDate] = useState<string | string[]>();
+
+  interface ErrorInterface {
+    errorShow?: boolean;
+    errorType?: '' | 'error' | 'warning' | undefined;
+  }
+
+  const [heightError, setHeightError] = useState<ErrorInterface>({
+    errorShow: false,
+    errorType: ''
+  });
+  const [weeksError, setWeeksError] = useState<ErrorInterface>({
+    errorShow: false,
+    errorType: ''
+  });
 
   const selectList = [
     {
@@ -60,11 +74,42 @@ export function PregnancyRegister() {
     }
   };
 
+  const handleChangeWeight = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+    setWeight(value);
+  };
+
+  const handleChangeWeeks = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+    try {
+      PregnancyRegisterType.shape.weeks.parse(value);
+      setWeeksError({ errorType: '', errorShow: false });
+    } catch (error) {
+      setWeeksError({ errorType: 'error', errorShow: true });
+    }
+    setWeeks(value);
+  };
+  const handleChangeHeartBeat = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+    setHeartBeat(value);
+  };
+
+  const handleChangeHeight = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+    try {
+      PregnancyRegisterType.shape.height.parse(value);
+      setHeightError({ errorType: '', errorShow: false });
+    } catch (error) {
+      setHeightError({ errorType: 'error', errorShow: true });
+    }
+    setHeight(value);
+  };
+
   const handlePregnancyRegister = () => {
     try {
       const data = {
         weight,
-        age,
+        weeks,
         pressureD,
         pressureS,
         heartBeat,
@@ -100,17 +145,14 @@ export function PregnancyRegister() {
               label="Peso atual"
               rightAdd="Kg"
               value={weight}
-              inputFunction={(e) => {
-                setWeight(e.target.value);
-              }}
+              inputFunction={handleChangeWeight}
             ></Input>
             <Input
               type="number"
               label="Idade gestacional"
-              value={age}
-              inputFunction={(e) => {
-                setAge(e.target.value);
-              }}
+              infoText="Insira o número de semanas"
+              value={weeks}
+              inputFunction={handleChangeWeeks}
             ></Input>
           </S.FirstRow>
           <S.FirstRow>
@@ -118,13 +160,12 @@ export function PregnancyRegister() {
               type="number"
               label="Batimento cardíaco do feto"
               value={heartBeat}
+              optional={true}
               rightAdd="bpm"
-              inputFunction={(e) => {
-                setHeartBeat(e.target.value);
-              }}
+              inputFunction={handleChangeHeartBeat}
             ></Input>
             <S.PressureDiv>
-              <label htmlFor="">Pressão Arterial</label>
+              <label htmlFor="">Pressão Arterial*</label>
               <S.InputAreaP>
                 <InputNumber
                   type="number"
@@ -145,10 +186,9 @@ export function PregnancyRegister() {
               type="number"
               label="Altura uterina"
               value={height}
+              errorShow={heightError.errorShow}
               rightAdd="cm"
-              inputFunction={(e) => {
-                setHeigth(e.target.value);
-              }}
+              inputFunction={handleChangeHeight}
             ></Input>
           </S.FirstRow>
           <S.FirstRow>

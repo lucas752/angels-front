@@ -13,8 +13,16 @@ export const Content = styled.div`
   height: 80%;
   display: flex;
   background-color: rgba(177, 72, 138, 0.2);
+  border-radius: 10px;
   align-items: center;
   flex-direction: column;
+  overflow-y: scroll;
+  @media (min-width: 426px) and (max-width: 768px) {
+    overflow-y: scroll;
+  }
+  @media (min-width: 1024px) {
+    overflow-y: hidden;
+  }
 `;
 
 export const LogoContainer = styled.div`
@@ -25,7 +33,10 @@ export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   align-items: end;
+  width: 100%;
 `;
 
 export const FirstRow = styled.div`
@@ -33,6 +44,15 @@ export const FirstRow = styled.div`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: nowrap;
+
+  @media (min-width: 426px) and (max-width: 768px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
 `;
 
 export const btn = styled(Button)`
@@ -40,6 +60,9 @@ export const btn = styled(Button)`
   width: 20%;
   background-color: #b1488a;
   color: #ffffff;
+  @media (min-width: 426px) and (max-width: 768px) {
+    width: auto;
+  }
 `;
 
 export const PressureDiv = styled.div`
