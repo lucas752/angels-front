@@ -1,6 +1,6 @@
 import { PlusCircle } from '@phosphor-icons/react';
-import { PregnancyCard } from './components/PregnancyCard';
-import { PregnantPersonalInfo } from './components/PregnantPersonalInfo';
+import { PregnancyCard } from '../../components/PregnancyCard';
+import { PregnantPersonalInfo } from '../../features/Pregnancies/PregnantPersonalInfo';
 import * as S from './styles';
 
 export default function Pregnancies() {
@@ -11,20 +11,30 @@ export default function Pregnancies() {
       {
         id: '15',
         weeks: '30',
-        gestacionalRisk: 'Habitual',
-        pregnancyStatus: 'Em andamento'
+        gestacionalRisk: false,
+        pregnancyStatus: 'Em andamento',
+        pregnantName: 'Júlia da Silva Santos'
       },
       {
         id: '8',
         weeks: '39',
-        gestacionalRisk: 'Não informado',
-        pregnancyStatus: 'Finalizada com sucesso'
+        gestacionalRisk: false,
+        pregnancyStatus: 'Finalizada com sucesso',
+        pregnantName: 'Júlia da Silva Santos'
       },
       {
         id: '5',
         weeks: '39',
-        gestacionalRisk: 'Alto',
-        pregnancyStatus: 'Finalizada com sucesso'
+        gestacionalRisk: true,
+        pregnancyStatus: 'Finalizada com sucesso',
+        pregnantName: 'Júlia da Silva Santos'
+      },
+      {
+        id: '9',
+        weeks: '39',
+        gestacionalRisk: false,
+        pregnancyStatus: 'Finalizada com sucesso',
+        pregnantName: 'Júlia da Silva Santos'
       }
     ]
   };

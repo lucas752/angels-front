@@ -1,34 +1,46 @@
 import { DotsThree, Plus } from '@phosphor-icons/react';
-import WhiteLogo from '../../../../assets/angelsWhiteLogo.svg';
+import WhiteLogo from '../../assets/angelsWhiteLogo.svg';
 import * as S from './styles';
 
 interface InfoProps {
   id: string;
   weeks: string;
-  gestationalRisk: string;
+  pregnantName?: string;
+  gestationalRisk: boolean;
   pregnancyStatus: string;
 }
 
 export const PregnancyCard: React.FC<InfoProps> = ({
   id,
   weeks,
-  gestationalRisk,
-  pregnancyStatus
+  pregnantName,
+  pregnancyStatus,
+  gestationalRisk
 }) => {
   return (
     <S.PregnancyCardContainer>
-      <S.ImageContainer>
-        <img src={WhiteLogo} />
-      </S.ImageContainer>
       <S.PregnancyInfoContainer>
-        <S.PregnancyInfoTitle>Gestação {id}</S.PregnancyInfoTitle>
+        <S.LineContainer>
+          {gestationalRisk ? <S.RedRiskLine /> : <S.RiskLine />}
+        </S.LineContainer>
+        <S.ImageContainer>
+          <img src={WhiteLogo} />
+        </S.ImageContainer>
+        {pregnantName ? (
+          <S.PregnancyInfoTextContainer>
+            <S.PregnancyInfoTitle>Nome da gestante:</S.PregnancyInfoTitle>
+            <S.PregnancyInfoContent>{pregnantName}</S.PregnancyInfoContent>
+          </S.PregnancyInfoTextContainer>
+        ) : (
+          <S.PregnancyInfoTitle>Gestação {id}</S.PregnancyInfoTitle>
+        )}
         <S.PregnancyInfoTextContainer>
           <S.PregnancyInfoTitle>Semanas:</S.PregnancyInfoTitle>
           <S.PregnancyInfoContent>{weeks} semanas</S.PregnancyInfoContent>
         </S.PregnancyInfoTextContainer>
         <S.PregnancyInfoTextContainer>
-          <S.PregnancyInfoTitle>Risco gestacional:</S.PregnancyInfoTitle>
-          <S.PregnancyInfoContent>{gestationalRisk}</S.PregnancyInfoContent>
+          <S.PregnancyInfoTitle>Acompanhamentos:</S.PregnancyInfoTitle>
+          <S.PregnancyInfoContent>5</S.PregnancyInfoContent>
         </S.PregnancyInfoTextContainer>
         <S.PregnancyInfoTextContainer>
           <S.PregnancyInfoTitle>Status da gestação:</S.PregnancyInfoTitle>

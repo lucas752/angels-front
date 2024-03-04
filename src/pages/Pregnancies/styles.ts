@@ -14,6 +14,7 @@ export const Header = styled.section`
   justify-content: space-between;
   align-items: center;
 `;
+
 export const PregnantInfoContainer = styled.section`
   display: flex;
   justify-content: space-between;
@@ -44,5 +45,6 @@ export const NewPregnancyButton = styled.button`
 export const CardsContainer = styled.section`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   gap: 20px;
 `;
