@@ -10,9 +10,10 @@ export const NavBarContainer = styled.section`
   width: 8%;
   display: flex;
   justify-content: center;
+  align-items: center;
   div {
     width: 100%;
-    height: 100%;
+    height: 90%;
     border: 3px solid var(--red-700);
     border-radius: 2rem;
     background-color: #fff;
@@ -22,6 +23,8 @@ export const NavBarContainer = styled.section`
 export const Content = styled.section`
   padding: 0 1rem;
   display: flex;
+  height: 100%;
+  background: var(--red-500);
 `;
 
 export const HeaderContent = styled.div`
@@ -42,8 +45,26 @@ export const Line = styled.div`
 export const CardsContainer = styled.div`
   width: 92%;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 1rem;
   justify-content: center;
   align-items: center;
+  section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+export const Pagination = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  label {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
 `;
