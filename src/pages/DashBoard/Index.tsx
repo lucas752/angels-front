@@ -10,8 +10,10 @@ import { Input } from '../../components/Input/index.tsx';
 import * as S from './styles.ts';
 import { PregnantCard } from '../../features/DashBoard/PregnantCard/index.tsx';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function Dashboard() {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
   const cardData = [
@@ -133,6 +135,10 @@ export function Dashboard() {
     }
   };
 
+  const pregnancyregisterScreen = () => {
+    navigate('/pregnancyRegister');
+  };
+
   return (
     <S.Container>
       <S.HeaderContent>
@@ -145,6 +151,7 @@ export function Dashboard() {
           label="NOVA GESTAÇÃO"
           shape="round"
           icon={<PlusCircle size={20} color="#fff" />}
+          buttonFunction={pregnancyregisterScreen}
         />
       </S.HeaderContent>
       {/* <S.Line>
