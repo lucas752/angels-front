@@ -3,6 +3,7 @@ import Home from '../pages/Home';
 import { PregnantRegister } from '../pages/PregnantRegister';
 import { PregnancyRegister } from '../pages/PregnancyRegister';
 import PregnantInfo from '../pages/PregnantInfo';
+import Pregnancies from '../pages/Pregnancies';
 
 export const AppRoutes = () => {
   return (
@@ -12,6 +13,7 @@ export const AppRoutes = () => {
         <Route path="/pregnantRegister" element={<PregnantRegister />} />
         <Route path="/pregnancyRegister" element={<PregnancyRegister />} />
         <Route path="/pregnantInfo" element={<PregnantInfo />} />
+        <Route path="/pregnancies" element={<Pregnancies />} />
       </Routes>
     </BrowserRouter>
   );
