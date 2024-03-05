@@ -6,7 +6,7 @@ import { DateSelect } from '../../components/DateSelect';
 import { Select } from '../../components/Select';
 import { RadioSelect } from '../../components/RadioSelect';
 import { InputNumber, RadioChangeEvent, message } from 'antd';
-import { PregnancyRegisterType } from '../../services/types/PregnancyRegister';
+import { PregnancyFollowUpType } from '../../services/types/PregnancyFollowUpType';
 import { ZodError } from 'zod';
 
 export function PregnancyFollowUp() {
@@ -82,7 +82,7 @@ export function PregnancyFollowUp() {
   const handleChangeWeeks = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      PregnancyRegisterType.shape.weeks.parse(value);
+      PregnancyFollowUpType.shape.weeks.parse(value);
       setWeeksError({ errorType: '', errorShow: false });
     } catch (error) {
       setWeeksError({ errorType: 'error', errorShow: true });
@@ -97,7 +97,7 @@ export function PregnancyFollowUp() {
   const handleChangeHeight = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      PregnancyRegisterType.shape.height.parse(value);
+      PregnancyFollowUpType.shape.height.parse(value);
       setHeightError({ errorType: '', errorShow: false });
     } catch (error) {
       setHeightError({ errorType: 'error', errorShow: true });
@@ -105,7 +105,7 @@ export function PregnancyFollowUp() {
     setHeight(value);
   };
 
-  const handlePregnancyRegister = () => {
+  const handlePregnancyFollowUp = () => {
     try {
       const data = {
         weight,
@@ -119,7 +119,7 @@ export function PregnancyFollowUp() {
         radio
       };
       console.log(data);
-      PregnancyRegisterType.parse(data);
+      PregnancyFollowUpType.parse(data);
     } catch (error) {
       if (error instanceof ZodError) {
         console.log(error);
@@ -208,7 +208,7 @@ export function PregnancyFollowUp() {
               radioFunction={radioOnChange}
             ></RadioSelect>
           </S.FirstRow>
-          <S.btn onClick={handlePregnancyRegister}>Cadastrar</S.btn>
+          <S.btn onClick={handlePregnancyFollowUp}>Cadastrar</S.btn>
         </S.FormContainer>
       </S.Content>
     </S.Container>
