@@ -4,6 +4,7 @@ import { PregnantRegister } from '../pages/PregnantRegister';
 import { PregnancyFollowUp } from '../pages/PregnancyFollowUp';
 import PregnantInfo from '../pages/PregnantInfo';
 import PregnancyRegister from '../pages/PregnancyRegister';
+import Pregnancies from '../pages/Pregnancies';
 
 export const AppRoutes = () => {
   return (
@@ -14,6 +15,7 @@ export const AppRoutes = () => {
         <Route path="/pregnancyFollowUp" element={<PregnancyFollowUp />} />
         <Route path="/pregnancyRegister" element={<PregnancyRegister />} />
         <Route path="/pregnantInfo" element={<PregnantInfo />} />
+        <Route path="/pregnancies" element={<Pregnancies />} />
       </Routes>
     </BrowserRouter>
   );
