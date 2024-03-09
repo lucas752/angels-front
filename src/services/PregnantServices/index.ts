@@ -9,3 +9,5 @@ export const GetPregnantByCpf = async (cpf: string) => {
     errorNotification('Erro ao buscar gestante pelo cpf, tente novamente.');
   }
 };
+
+export const PostPregnant = async () => {};
