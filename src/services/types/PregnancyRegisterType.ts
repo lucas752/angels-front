@@ -10,7 +10,7 @@ export const PregnancyRegisterSchema = z.object({
       message: 'Insira uma data válida'
     })
     .max(new Date(), { message: 'Insira uma data válida' }),
-  begining: z.coerce
+  beginning: z.coerce
     .date({
       required_error: 'Insira uma data',
       invalid_type_error: 'Insira uma data'

@@ -12,7 +12,7 @@ import { errorNotification } from '../../components/Notification/index.ts';
 
 export default function PregnancyRegister() {
   const [period, setPeriod] = useState<string | string[]>();
-  const [begining, setBegining] = useState<string | string[]>();
+  const [beginning, setBeginning] = useState<string | string[]>();
   const [weight, setWeight] = useState<string>();
   const [situation, setSituation] = useState<string>();
   const [risc, setRisc] = useState<string>();
@@ -25,6 +25,25 @@ export default function PregnancyRegister() {
   const [planned, setPlanned] = useState<number>();
   const [alcoholFrequency, setAlcoholFrequency] = useState<string>();
   const [numberCigarettes, setNumberCigarettes] = useState<string>();
+
+  interface ErrorInterface {
+    errorShow?: boolean;
+    errorType?: '' | 'error' | 'warning' | undefined;
+  }
+
+  const [errorPeriod, setErrorPeriod] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const [errorBeginning, setErrorBeginning] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+  const [errorWeight, setErrorWeight] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
 
   const alcoolFreq = [
     {
@@ -98,17 +117,41 @@ export default function PregnancyRegister() {
     date: unknown,
     dateString: string | string[]
   ) => {
+    try {
+      PregnancyRegisterSchema.shape.period.parse(dateString);
+      setErrorPeriod({ errorType: '', errorShow: false });
+      if (dateString == '') {
+        setErrorPeriod({ errorType: 'error', errorShow: true });
+      }
+    } catch (error) {
+      setErrorPeriod({ errorType: 'error', errorShow: true });
+    }
     setPeriod(dateString);
   };
 
-  const handleChangeDateBegining = (
+  const handleChangeDateBeginning = (
     date: unknown,
     dateString: string | string[]
   ) => {
-    setBegining(dateString);
+    try {
+      PregnancyRegisterSchema.shape.beginning.parse(dateString);
+      setErrorBeginning({ errorType: '', errorShow: false });
+      if (dateString == '') {
+        setErrorBeginning({ errorType: 'error', errorShow: true });
+      }
+    } catch (error) {
+      setErrorBeginning({ errorType: 'error', errorShow: true });
+    }
+    setBeginning(dateString);
   };
   const handleChangeWeight = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    try {
+      PregnancyRegisterSchema.shape.weight.parse(value);
+      setErrorWeight({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorWeight({ errorType: 'error', errorShow: true });
+    }
     setWeight(value);
   };
 
@@ -163,7 +206,7 @@ export default function PregnancyRegister() {
     try {
       const data = {
         period,
-        begining,
+        beginning,
         weight,
         situation,
         risc,
@@ -198,10 +241,12 @@ export default function PregnancyRegister() {
             <DateSelect
               label="Data da última menstruação"
               inputFunction={handleChangeDatePeriod}
+              status={errorPeriod.errorType}
             ></DateSelect>
             <DateSelect
               label="Data de início da gestação"
-              inputFunction={handleChangeDateBegining}
+              inputFunction={handleChangeDateBeginning}
+              status={errorBeginning.errorType}
             ></DateSelect>
             <Input
               label="Peso anterior a gestação"
@@ -209,6 +254,8 @@ export default function PregnancyRegister() {
               inputFunction={handleChangeWeight}
               rightAdd="Kg"
               type="number"
+              errorShow={errorWeight.errorShow}
+              status={errorWeight.errorType}
             ></Input>
           </S.FirstRow>
           <S.FirstRow>
