@@ -82,22 +82,23 @@ export const CardsContainer = styled.div`
   gap: 1rem;
   justify-content: center;
   align-items: center;
-  section {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    gap: 1rem;
-    justify-content: center;
-    align-items: center;
+`;
 
-    @media (min-width: 426px) and (max-width: 768px) {
-      flex-wrap: nowrap;
-      flex-direction: column;
-    }
-    @media (min-width: 1024px) {
-      flex-wrap: wrap;
-      flex-direction: row;
-    }
+export const Cards = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  justify-content: center;
+
+  @media (min-width: 426px) and (max-width: 768px) {
+    flex-wrap: nowrap;
+    flex-direction: column;
+  }
+  @media (min-width: 1024px) {
+    flex-wrap: nowrap;
+    flex-direction: row;
   }
 `;
 

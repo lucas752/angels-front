@@ -4,6 +4,7 @@ import { PregnantRegister } from '../pages/PregnantRegister';
 import { PregnancyRegister } from '../pages/PregnancyRegister';
 import PregnantInfo from '../pages/PregnantInfo';
 import { Dashboard } from '../pages/DashBoard/Index';
+import Pregnancies from '../pages/Pregnancies';
 
 export const AppRoutes = () => {
   return (
@@ -14,6 +15,7 @@ export const AppRoutes = () => {
         <Route path="/pregnancyRegister" element={<PregnancyRegister />} />
         <Route path="/pregnantInfo" element={<PregnantInfo />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/pregnancies" element={<Pregnancies />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,48 +1,106 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { CpfModal } from './styles';
+import { UserCircle } from '@phosphor-icons/react';
+
 import { SidebarContainer, SidebarItem, TextItem } from './styles';
-import {
-  House,
-  Info,
-  UserCircle,
-  ClipboardText,
-  IdentificationBadge
-} from '@phosphor-icons/react';
+import { SignOut, IdentificationBadge } from '@phosphor-icons/react';
 
 // importando a logo
 import Logo from '../../assets/angelsLogo.svg';
+import { Input } from '../Input';
+import { useNavigate } from 'react-router-dom';
+import { GetPregnantByCpf } from '../../services/PregnantServices';
+import { pregnantSchemaPartOne } from '../../services/types/PregnantType';
+interface ErrorInterface {
+  errorShow?: boolean;
+  errorType?: '' | 'error' | 'warning' | undefined;
+}
 
 const SideBar: React.FC = () => {
+  const navigate = useNavigate();
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const [cpf, setCpf] = useState<string>('');
+  const [errorCpf, setErrorCpf] = useState<ErrorInterface>({
+    errorType: '',
+    errorShow: false
+  });
+
+  const handleChangeCpf = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+
+    const inputValue = value.replace(/\D/g, '');
+    try {
+      pregnantSchemaPartOne.shape.cpf.parse(inputValue);
+      setErrorCpf({ errorType: '', errorShow: false });
+    } catch (error) {
+      setErrorCpf({ errorType: 'error', errorShow: true });
+    }
+    setCpf(inputValue);
+  };
+
+  const getPregnantByCpf = async (cpf: string) => {
+    const response = await GetPregnantByCpf(cpf);
+    console.log(response);
+  };
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    getPregnantByCpf(cpf);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const homeScreen = () => {
+    navigate('/');
+  };
+
   return (
     <SidebarContainer>
-      <SidebarItem>
-        <img src={Logo} alt="Logo Angels" />
+      <SidebarItem onClick={showModal}>
+        <img src={Logo} alt="Logo Angels" width={80} height={80} />
+      </SidebarItem>
 
+      <SidebarItem onClick={showModal}>
+        <UserCircle size={40} color="#B1488A" />
+        <TextItem>Nova Gestação</TextItem>
       </SidebarItem>
 
       <SidebarItem>
-        <House size={37} color="#B1488A" />
-        <TextItem>Home</TextItem>
+        <IdentificationBadge size={40} color="#B1488A" />
+        <TextItem>Cadastro Profissional</TextItem>
       </SidebarItem>
 
-      <SidebarItem>
-        <Info size={37} color="#B1488A" />
-        <TextItem>Sobre</TextItem>
+      <SidebarItem onClick={homeScreen}>
+        <SignOut size={40} color="#B1488A" />
+        <TextItem>Sair</TextItem>
       </SidebarItem>
 
-      <SidebarItem>
-        <ClipboardText size={37} color="#B1488A" />
-        <TextItem>Dashboard</TextItem>
-      </SidebarItem>
-
-      <SidebarItem>
-        <IdentificationBadge size={37} color="#B1488A" />
-        <TextItem>Cadastro de Profissional</TextItem>
-      </SidebarItem>
-
-      <SidebarItem>
-        <UserCircle size={37} color="#B1488A" />
-        <TextItem>Cadastro de Gestante</TextItem>
-      </SidebarItem>
+      <CpfModal
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        okText="Verificar"
+      >
+        <label>Verifique se a gestante já está cadastrada no sistema</label>
+        <Input
+          label="Cpf"
+          placeHolder="Digite o cpf da gestante"
+          inputFunction={handleChangeCpf}
+          type="text"
+          value={cpf}
+          errorShow={errorCpf?.errorShow}
+          status={errorCpf?.errorType}
+          infoText="O cpf precisa ser válido"
+          color="#b1488a"
+        />
+      </CpfModal>
     </SidebarContainer>
   );
 };

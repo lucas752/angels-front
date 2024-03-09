@@ -1,17 +1,14 @@
 import {
   CaretCircleLeft,
   CaretCircleRight,
-  DotsThreeOutline,
-  MagnifyingGlass,
-  PlusCircle
+  DotsThreeOutline
 } from '@phosphor-icons/react';
-import { Button } from '../../components/Button/index.tsx';
-import { Input } from '../../components/Input/index.tsx';
+
 import * as S from './styles.ts';
-import { PregnantCard } from '../../features/DashBoard/PregnantCard/index.tsx';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SideBar from '../../components/SideBar/index.tsx';
+import { PregnancyCard } from '../../components/PregnancyCard/index.tsx';
 
 export function Dashboard() {
   const navigate = useNavigate();
@@ -112,63 +109,45 @@ export function Dashboard() {
 
   const renderCards = () => {
     return cardData
-      .slice(currentPage, currentPage + 9)
-      .map((item) => (
-        <PregnantCard
-          name={item.name}
+      .slice(currentPage, currentPage + 3)
+      .map((item, index) => (
+        <PregnancyCard
+          key={index}
+          id={'1'}
+          pregnantName={item.name}
           weeks={item.weeks}
-          status={item.status}
+          gestationalRisk={true}
+          pregnancyStatus={item.weeks}
         />
       ));
   };
 
   const previous = () => {
-    if (currentPage - 9 >= 0) {
-      setCurrentPage(currentPage - 9);
+    if (currentPage - 3 >= 0) {
+      setCurrentPage(currentPage - 3);
       setPage((prev) => prev - 1);
     }
   };
 
   const next = () => {
-    if (currentPage + 9 < cardData.length) {
-      setCurrentPage(currentPage + 9);
+    if (currentPage + 3 < cardData.length) {
+      setCurrentPage(currentPage + 3);
       setPage((prev) => prev + 1);
     }
   };
-
-  const pregnancyregisterScreen = () => {
-    navigate('/pregnancyRegister');
-  };
-
   return (
     <S.Container>
-      {/* <S.HeaderContent>
-        <h1>ANGELS - Acompanhamento gestacional</h1>
-        <Input
-          placeHolder="Digite o nome da gestante..."
-          rightAdd={<MagnifyingGlass size={20} color="#b1488a" />}
-        />
-        <Button
-          label="NOVA GESTAÇÃO"
-          shape="round"
-          icon={<PlusCircle size={20} color="#fff" />}
-          buttonFunction={pregnancyregisterScreen}
-        />
-      </S.HeaderContent> */}
-      {/* <S.Line>
-        <Divider />
-      </S.Line> */}
       <S.Content>
         <S.NavBarContainer>
           <SideBar />
         </S.NavBarContainer>
         <S.CardsContainer>
-          <section>{renderCards()}</section>
+          <S.Cards>{renderCards()}</S.Cards>
           <S.Pagination>
             <CaretCircleLeft size={32} color="#b1488a" onClick={previous} />
             <label>{page}</label>
             <DotsThreeOutline size={32} color="#b1488a" />
-            <label>{cardData.length / 9}</label>
+            <label>{cardData.length / 3}</label>
             <CaretCircleRight size={32} color="#b1488a" onClick={next} />
           </S.Pagination>
         </S.CardsContainer>

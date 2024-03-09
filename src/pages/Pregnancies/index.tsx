@@ -64,8 +64,9 @@ export default function Pregnancies() {
   const renderCards = () => {
     return pregnantInfo.pregnancies
       .slice(currentPage, currentPage + 4)
-      .map((item) => (
+      .map((item, index) => (
         <PregnancyCard
+          key={index}
           id={item.id}
           gestationalRisk={item.gestacionalRisk}
           pregnancyStatus={item.pregnancyStatus}
