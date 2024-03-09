@@ -1,5 +1,5 @@
-import { Input } from 'antd';
 import styled from 'styled-components';
+import InputMask from 'react-input-mask';
 
 export const Container = styled.div`
   padding: 1rem;
@@ -11,9 +11,15 @@ export const Container = styled.div`
   width: 100%;
 `;
 
-export const InputArea = styled(Input)`
+export const InputArea = styled(InputMask)`
+  width: 100%;
   border-radius: 1rem !important;
   border: 2px var(--gray-100) solid;
+  padding: 0.45rem;
+
+  &::placeholder {
+    color: var(--gray-100);
+  }
 
   &:focus {
     border-color: var(--red-500);
