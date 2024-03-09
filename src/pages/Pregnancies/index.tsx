@@ -114,12 +114,6 @@ export default function Pregnancies() {
               cursor={'Pointer'}
             />
           )}
-          {/* // <CaretCircleDoubleLeft
-          //   size={40}
-          //   color="#B1488A"
-          //   onClick={previous}
-          //   cursor={'Pointer'}
-          // /> */}
           <CaretCircleDoubleRight
             size={40}
             color="#B1488A"
