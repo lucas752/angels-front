@@ -14,24 +14,9 @@ export const Container = styled.div`
 `;
 
 export const NavBarContainer = styled.section`
-  width: 8%;
   display: none;
   justify-content: center;
   align-items: center;
-  div {
-    display: none;
-    width: 100%;
-    height: 90%;
-    border: 3px solid var(--red-700);
-    border-radius: 2rem;
-    background-color: #fff;
-    @media (min-width: 426px) and (max-width: 768px) {
-      display: none;
-    }
-    @media (min-width: 1024px) {
-      display: flex;
-    }
-  }
 
   @media (min-width: 426px) and (max-width: 768px) {
     display: flex;
@@ -47,7 +32,7 @@ export const Content = styled.section`
   flex-direction: column;
   height: 100%;
   align-items: center;
-  background: var(--red-500);
+  /* background: var(--red-500); */
   @media (min-width: 426px) and (max-width: 768px) {
     padding: 1rem;
     flex-direction: column;
@@ -66,9 +51,10 @@ export const HeaderContent = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: var(--red-500);
   h1 {
     width: 100%;
-    color: var(--red-500);
+    color: #fff;
     font-size: 0.875rem;
     @media (min-width: 426px) and (max-width: 768px) {
       font-size: 1.5rem;
@@ -120,7 +106,7 @@ export const Pagination = styled.div`
   align-items: center;
   gap: 1rem;
   label {
-    color: #fff;
+    color: #b1488a;
     font-weight: bold;
     font-size: 1.5rem;
   }

@@ -11,6 +11,7 @@ import * as S from './styles.ts';
 import { PregnantCard } from '../../features/DashBoard/PregnantCard/index.tsx';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import SideBar from '../../components/SideBar/index.tsx';
 
 export function Dashboard() {
   const navigate = useNavigate();
@@ -141,7 +142,7 @@ export function Dashboard() {
 
   return (
     <S.Container>
-      <S.HeaderContent>
+      {/* <S.HeaderContent>
         <h1>ANGELS - Acompanhamento gestacional</h1>
         <Input
           placeHolder="Digite o nome da gestante..."
@@ -153,22 +154,22 @@ export function Dashboard() {
           icon={<PlusCircle size={20} color="#fff" />}
           buttonFunction={pregnancyregisterScreen}
         />
-      </S.HeaderContent>
+      </S.HeaderContent> */}
       {/* <S.Line>
         <Divider />
       </S.Line> */}
       <S.Content>
         <S.NavBarContainer>
-          <div></div>
+          <SideBar />
         </S.NavBarContainer>
         <S.CardsContainer>
           <section>{renderCards()}</section>
           <S.Pagination>
-            <CaretCircleLeft size={32} color="#fff" onClick={previous} />
+            <CaretCircleLeft size={32} color="#b1488a" onClick={previous} />
             <label>{page}</label>
-            <DotsThreeOutline size={32} color="#fff" />
+            <DotsThreeOutline size={32} color="#b1488a" />
             <label>{cardData.length / 9}</label>
-            <CaretCircleRight size={32} color="#fff" onClick={next} />
+            <CaretCircleRight size={32} color="#b1488a" onClick={next} />
           </S.Pagination>
         </S.CardsContainer>
       </S.Content>
