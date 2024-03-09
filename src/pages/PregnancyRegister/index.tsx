@@ -155,10 +155,9 @@ export default function PregnancyRegister() {
       setAlcoholFrequency(value);
     }
   };
-  const handleCigarettes = (value: unknown) => {
-    if (typeof value === 'string') {
-      setNumberCigarettes(value);
-    }
+  const handleCigarettes = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+    setNumberCigarettes(value);
   };
   const handlePregnancyRegister = () => {
     try {
@@ -278,8 +277,6 @@ export default function PregnancyRegister() {
               radioFunction={handleChangeSmoke}
               value={smoke}
             ></RadioSelect>
-          </S.FirstRow>
-          <S.FirstRow>
             <RadioSelect
               label="Consumo de álcool"
               firstOption="sim"
@@ -289,13 +286,15 @@ export default function PregnancyRegister() {
               radioFunction={handleChangeAlcohol}
               value={alcohol}
             ></RadioSelect>
+          </S.FirstRow>
+          <S.FirstRow>
             {smoke == 1 && (
               <Input
                 label="Quantidade de cigarro por dia"
                 type="number"
                 optional={true}
                 value={numberCigarettes}
-                inputFunction={handleAlcoholFreq}
+                inputFunction={handleCigarettes}
               ></Input>
             )}
             {alcohol == 1 && (
@@ -304,7 +303,7 @@ export default function PregnancyRegister() {
                 label="Frequência do uso de álcool"
                 defaut="Selecione a frequencia de uso"
                 optional={true}
-                selectFunc={handleCigarettes}
+                selectFunc={handleAlcoholFreq}
               ></Select>
             )}
           </S.FirstRow>

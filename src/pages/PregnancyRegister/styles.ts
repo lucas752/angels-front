@@ -10,11 +10,18 @@ export const Container = styled.main`
 
 export const Content = styled.div`
   display: flex;
-  width: 60%;
+  width: 80%;
+  height: 90%;
   background-color: rgba(177, 72, 138, 0.2);
   border-radius: 10px;
   align-items: center;
   flex-direction: column;
+  @media (min-width: 426px) and (max-width: 960px) {
+    overflow-y: scroll;
+  }
+  @media (min-width: 1024px) {
+    overflow-y: hidden;
+  }
 `;
 
 export const LogoContainer = styled.div`
@@ -36,10 +43,10 @@ export const FirstRow = styled.div`
   width: 100%;
   flex-direction: row;
   /* justify-content: space-evenly; */
-  /* align-items: center; */
-  /* flex-wrap: nowrap; */
+  align-items: center;
+  flex-wrap: nowrap;
 
-  @media (min-width: 426px) and (max-width: 768px) {
+  @media (min-width: 426px) and (max-width: 960px) {
     flex-direction: row;
     flex-wrap: wrap;
   }

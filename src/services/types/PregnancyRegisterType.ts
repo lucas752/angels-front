@@ -3,14 +3,18 @@ import { z } from 'zod';
 export const PregnancyRegisterSchema = z.object({
   period: z.coerce
     .date({
-      required_error: 'Insira uma data'
+      required_error: 'Insira uma data',
+      invalid_type_error: 'Insira uma data'
     })
     .min(new Date('1900-01-01'), {
       message: 'Insira uma data válida'
     })
     .max(new Date(), { message: 'Insira uma data válida' }),
   begining: z.coerce
-    .date({ required_error: 'Insira uma data' })
+    .date({
+      required_error: 'Insira uma data',
+      invalid_type_error: 'Insira uma data'
+    })
     .min(new Date('1900-01-01'), {
       message: 'Insira uma data válida'
     })
