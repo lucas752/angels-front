@@ -28,23 +28,23 @@ export interface EvolutionDataInterface {
   tratamentoAgua: boolean;
   amamentacao: boolean;
   chefeFamilia: string;
-  dataUltimaGestacao: string;
-  emRisco: boolean;
+  dataUltimaGestacao?: string;
+  emRisco?: boolean;
   estadoCivil: number;
   quantidadeAbortos: number;
-  quantidadeFilhosVivos: number;
-  quantidadeGemelares: number;
-  quantidadeGestacao: number;
-  quantidadeNascidosMortos: number;
-  quantidadeNascidosVivos: number;
-  quantidadeObitosSemana1: number;
-  quantidadeObitosAposSemana1: number;
-  quantidadePartos: number;
-  quantidadePartosCesarios: number;
-  quantidadePartosVaginais: number;
-  quantidadeRnPeso2500_4000: number;
-  quantidadeRnPesoMaior4000: number;
-  quantidadeRnPesoMenor2500: number;
+  quantidadeFilhosVivos?: number;
+  quantidadeGemelares?: number;
+  quantidadeGestacao?: number;
+  quantidadeNascidosMortos?: number;
+  quantidadeNascidosVivos?: number;
+  quantidadeObitosSemana1?: number;
+  quantidadeObitosAposSemana1?: number;
+  quantidadePartos?: number;
+  quantidadePartosCesarios?: number;
+  quantidadePartosVaginais?: number;
+  quantidadeRnPeso2500_4000?: number;
+  quantidadeRnPesoMaior4000?: number;
+  quantidadeRnPesoMenor2500?: number;
   hipertensao: boolean;
   diabetes: boolean;
   cirurgiaPelvica: boolean;
@@ -108,20 +108,20 @@ export const pregnantSchemaPartOne = z.object({
   housing: z.string({
     required_error: 'Tipo de moradia é obrigatório'
   }),
-  electricity: z.number({
+  electricity: z.boolean({
     required_error: 'Presença de eletricidade é obrigatória'
   }),
-  sewageNetwork: z.number({
+  sewageNetwork: z.boolean({
     required_error: 'Rede de esgoto é obrigatória'
   }),
-  treatedWater: z.number({
+  treatedWater: z.boolean({
     required_error: 'Água tratada é obrigatória'
   }),
 
   wellFed: z.string({
     required_error: 'Alimentação adequada é obrigatória'
   }),
-  breastfeeding: z.number({
+  breastfeeding: z.boolean({
     required_error: 'Amamentação é obrigatória'
   }),
   contact: z
@@ -239,10 +239,10 @@ export const pregnantSchemaPartTwo = z.object({
       message:
         'O Campo "Óbitos após primeira semana" deve conter apenas dígitos numéricos'
     }),
-  diabetes: z.number({
+  diabetes: z.boolean({
     required_error: 'Diabetes é obrigatório'
   }),
-  pelvicSurgery: z.number({
+  pelvicSurgery: z.boolean({
     required_error: 'Cirurgia pélvica é obrigatória'
   }),
   deliveries: z
@@ -269,16 +269,16 @@ export const pregnantSchemaPartTwo = z.object({
     .regex(/^\d+$/, {
       message: 'O Campo "Partos cesáreos" deve conter apenas dígitos numéricos'
     }),
-  urinaryInfection: z.number({
+  urinaryInfection: z.boolean({
     required_error: 'Infecção urinária é obrigatória'
   }),
-  congenitalMalformation: z.number({
+  congenitalMalformation: z.boolean({
     required_error: 'Malformação congênita é obrigatória'
   }),
-  hypertension: z.number({
+  hypertension: z.boolean({
     required_error: 'Hipertensão é obrigatória'
   }),
-  twinFamilyHistory: z.number({
+  twinFamilyHistory: z.boolean({
     required_error: 'Histórico familiar de gêmeos é obrigatório'
   })
 });
@@ -294,23 +294,23 @@ export const pregnantSchemaPartTwoFirstPregnant = z.object({
     .regex(/^\d+$/, {
       message: 'O Campo "Abortos" deve conter apenas dígitos numéricos'
     }),
-  diabetes: z.number({
+  diabetes: z.boolean({
     required_error: 'Diabetes é obrigatório'
   }),
-  pelvicSurgery: z.number({
+  pelvicSurgery: z.boolean({
     required_error: 'Cirurgia pélvica é obrigatória'
   }),
 
-  urinaryInfection: z.number({
+  urinaryInfection: z.boolean({
     required_error: 'Infecção urinária é obrigatória'
   }),
-  congenitalMalformation: z.number({
+  congenitalMalformation: z.boolean({
     required_error: 'Malformação congênita é obrigatória'
   }),
-  hypertension: z.number({
+  hypertension: z.boolean({
     required_error: 'Hipertensão é obrigatória'
   }),
-  twinFamilyHistory: z.number({
+  twinFamilyHistory: z.boolean({
     required_error: 'Histórico familiar de gêmeos é obrigatório'
   })
 });

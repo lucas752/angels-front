@@ -45,15 +45,15 @@ export function PregnantRegister() {
   const [familyIncome, setFamilyIncome] = useState<string>();
   const [city, setCity] = useState<string>();
   const [housing, setHousing] = useState<string>();
-  const [electricity, setElectricity] = useState<number>();
-  const [sewageNetwork, setSewageNetwork] = useState<number>();
-  const [treatedWater, setTreatedWater] = useState<number>();
+  const [electricity, setElectricity] = useState<boolean>();
+  const [sewageNetwork, setSewageNetwork] = useState<boolean>();
+  const [treatedWater, setTreatedWater] = useState<boolean>();
   const [firstPregnant, setFirstPregnant] = useState<number>();
   const [lastPregnancyDate, setLastPregnancyDate] = useState<
     string | string[]
   >();
   const [wellFed, setWellFed] = useState<string>();
-  const [breastfeeding, setBreastfeeding] = useState<number>();
+  const [breastfeeding, setBreastfeeding] = useState<boolean>();
   const [contact, setContact] = useState<string>();
   const [emergencyContact, setEmergencyContact] = useState<string>();
 
@@ -68,16 +68,16 @@ export function PregnantRegister() {
   const [birthWeightgt4000, setBirthWeightgt4000] = useState<string>();
   const [deathsFirstWeek, setDeathsFirstWeek] = useState<string>();
   const [deathsAfterFirstWeek, setDeathsAfterFirstWeek] = useState<string>();
-  const [diabetes, setDiabetes] = useState<number>();
-  const [pelvicSurgery, setPelvicSurgery] = useState<number>();
+  const [diabetes, setDiabetes] = useState<boolean>();
+  const [pelvicSurgery, setPelvicSurgery] = useState<boolean>();
   const [deliveries, setDeliveries] = useState<string>();
   const [vaginalDeliveries, setVaginalDeliveries] = useState<string>();
   const [cesareanDeliveries, setCesareanDeliveries] = useState<string>();
-  const [urinaryInfection, setUrinaryInfection] = useState<number>();
+  const [urinaryInfection, setUrinaryInfection] = useState<boolean>();
   const [congenitalMalformation, setCongenitalMalformation] =
-    useState<number>();
-  const [hypertension, setHypertension] = useState<number>();
-  const [twinFamilyHistory, setTwinFamilyHistory] = useState<number>();
+    useState<boolean>();
+  const [hypertension, setHypertension] = useState<boolean>();
+  const [twinFamilyHistory, setTwinFamilyHistory] = useState<boolean>();
 
   //error states
   const [errorName, setErrorName] = useState<ErrorInterface>({
@@ -603,7 +603,6 @@ export function PregnantRegister() {
         pregnantSchemaPartTwoFirstPregnant.parse(pregnantSecondData);
       }
       setProgressBar(100);
-      alert('Cadastrado');
     } catch (error) {
       if (error instanceof ZodError) {
         warningNotification(error.errors[0].message);
@@ -721,8 +720,8 @@ export function PregnantRegister() {
                 label="Eletricidade na moradia:"
                 firstOption="Sim"
                 secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
+                firstValue={true}
+                secondValue={false}
                 radioFunction={handleChangeElectricity}
                 value={electricity}
               />
@@ -730,8 +729,8 @@ export function PregnantRegister() {
                 label="Rede de esgoto:"
                 firstOption="Sim"
                 secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
+                firstValue={true}
+                secondValue={false}
                 radioFunction={handleChangeSewageNetwork}
                 value={sewageNetwork}
               />
@@ -739,8 +738,8 @@ export function PregnantRegister() {
                 label="Água tratada:"
                 firstOption="Sim"
                 secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
+                firstValue={true}
+                secondValue={false}
                 radioFunction={handleChangeTreatedWater}
                 value={treatedWater}
               />
@@ -766,8 +765,8 @@ export function PregnantRegister() {
                 label="Amamentação:"
                 firstOption="Sim"
                 secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
+                firstValue={true}
+                secondValue={false}
                 radioFunction={handleChangeBreastfeeding}
                 value={breastfeeding}
               />
@@ -899,8 +898,8 @@ export function PregnantRegister() {
                     label="Diabetes:"
                     firstOption="Sim"
                     secondOption="Nao"
-                    firstValue={1}
-                    secondValue={2}
+                    firstValue={true}
+                    secondValue={false}
                     radioFunction={handleChangeDiabetes}
                     value={diabetes}
                   />
@@ -908,8 +907,8 @@ export function PregnantRegister() {
                     label="Cirugia pélvica:"
                     firstOption="Sim"
                     secondOption="Nao"
-                    firstValue={1}
-                    secondValue={2}
+                    firstValue={true}
+                    secondValue={false}
                     radioFunction={handleChangePelvicSurgery}
                     value={pelvicSurgery}
                   />
@@ -956,8 +955,8 @@ export function PregnantRegister() {
                     label="Diabetes:"
                     firstOption="Sim"
                     secondOption="Nao"
-                    firstValue={1}
-                    secondValue={2}
+                    firstValue={true}
+                    secondValue={false}
                     radioFunction={handleChangeDiabetes}
                     value={diabetes}
                   />
@@ -965,8 +964,8 @@ export function PregnantRegister() {
                     label="Cirugia pélvica:"
                     firstOption="Sim"
                     secondOption="Nao"
-                    firstValue={1}
-                    secondValue={2}
+                    firstValue={true}
+                    secondValue={false}
                     radioFunction={handleChangePelvicSurgery}
                     value={pelvicSurgery}
                   />
@@ -978,8 +977,8 @@ export function PregnantRegister() {
                 label="Infecção urinária:"
                 firstOption="Sim"
                 secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
+                firstValue={true}
+                secondValue={false}
                 radioFunction={handleChangeUrinaryInfection}
                 value={urinaryInfection}
               />
@@ -987,8 +986,8 @@ export function PregnantRegister() {
                 label="Má formação congênica:"
                 firstOption="Sim"
                 secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
+                firstValue={true}
+                secondValue={false}
                 radioFunction={handleChangeCongenitalMalformation}
                 value={congenitalMalformation}
               />
@@ -996,8 +995,8 @@ export function PregnantRegister() {
                 label="Hipertensão:"
                 firstOption="Sim"
                 secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
+                firstValue={true}
+                secondValue={false}
                 radioFunction={handleChangeHypertension}
                 value={hypertension}
               />
@@ -1005,8 +1004,8 @@ export function PregnantRegister() {
                 label="Familiar gêmeos:"
                 firstOption="Sim"
                 secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
+                firstValue={true}
+                secondValue={false}
                 radioFunction={handleChangeTwinFamilyHistory}
                 value={twinFamilyHistory}
               />
