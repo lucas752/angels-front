@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const PregnancyCardContainer = styled.div`
-  width: 23vw;
-  min-height: 47vh;
+  min-width: 24%;
+  min-height: 23rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -11,7 +11,6 @@ export const PregnancyCardContainer = styled.div`
     0 4px 4px rgba(0, 0, 0, 0.11), 0 6px 8px rgba(0, 0, 0, 0.11),
     0 8px 16px rgba(0, 0, 0, 0.11);
   border-radius: 36px;
-  gap: 10px;
   padding: 0px 1.5% 1.5% 1.5%;
 
   @media (max-width: 1000px) {
