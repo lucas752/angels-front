@@ -9,13 +9,15 @@ export const Container = styled.main`
 `;
 
 export const Content = styled.div`
+  width: 60%;
+  height: 80%;
   display: flex;
-  width: 80%;
   background-color: rgba(177, 72, 138, 0.2);
   border-radius: 10px;
   align-items: center;
   flex-direction: column;
-  @media (min-width: 426px) and (max-width: 960px) {
+  overflow-y: scroll;
+  @media (min-width: 426px) and (max-width: 768px) {
     overflow-y: scroll;
   }
   @media (min-width: 1024px) {
@@ -30,10 +32,10 @@ export const LogoContainer = styled.div`
 export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
   align-items: end;
-  justify-content: center;
   width: 100%;
 `;
 
@@ -41,11 +43,10 @@ export const FirstRow = styled.div`
   display: flex;
   width: 100%;
   flex-direction: row;
-  /* justify-content: space-evenly; */
-  align-items: center;
+  justify-content: space-between;
   flex-wrap: nowrap;
 
-  @media (min-width: 426px) and (max-width: 960px) {
+  @media (min-width: 426px) and (max-width: 768px) {
     flex-direction: row;
     flex-wrap: wrap;
   }
@@ -59,8 +60,40 @@ export const btn = styled(Button)`
   width: 20%;
   background-color: #b1488a;
   color: #ffffff;
-  margin: 1rem;
   @media (min-width: 426px) and (max-width: 768px) {
     width: auto;
+  }
+`;
+
+export const PressureDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding: 1rem;
+
+  label {
+    color: var(--red-500);
+    font-weight: 600;
+    justify-content: space-between;
+  }
+`;
+
+export const InputAreaP = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .ant-input-number {
+    border-radius: 1rem !important;
+    border: 2px var(--gray-100) solid;
+  }
+
+  p {
+    font-size: 30px;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+    color: var(--red-500);
   }
 `;
