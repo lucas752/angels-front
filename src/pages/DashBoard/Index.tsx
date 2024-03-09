@@ -115,6 +115,7 @@ export function Dashboard() {
       .slice(currentPage, currentPage + 9)
       .map((item) => (
         <PregnantCard
+          key={item.weeks}
           name={item.name}
           weeks={item.weeks}
           status={item.status}
