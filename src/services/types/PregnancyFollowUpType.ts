@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const PregnancyRegisterType = z.object({
+export const PregnancyFollowUpType = z.object({
   date: z.coerce
     .date({ required_error: 'Informe a data' })
     .min(new Date('1900-01-01'), { message: 'Escolha uma data válida' })
