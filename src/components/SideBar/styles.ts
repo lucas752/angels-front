@@ -22,9 +22,9 @@ export const SidebarItem = styled.div`
 `;
 
 export const TextItem = styled.p`
-  font-size: 13px;
+  font-size: 14px;
   color: #b1488a;
-  font-weight: 700;
+  font-weight: bold;
   margin-top: 10px;
   margin-bottom: 20px;
   text-align: center;

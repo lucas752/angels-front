@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { CpfModal, SidebarContainer, SidebarItem, TextItem } from './styles';
-import { UserCircle, Power } from '@phosphor-icons/react';
+import { CpfModal } from './styles';
+import { UserCircle } from '@phosphor-icons/react';
+
+import { SidebarContainer, SidebarItem, TextItem } from './styles';
+import { SignOut, IdentificationBadge } from '@phosphor-icons/react';
 
 // importando a logo
 import Logo from '../../assets/angelsLogo.svg';
@@ -38,7 +41,6 @@ const SideBar: React.FC = () => {
   };
 
   const getPregnantByCpf = async (cpf: string) => {
-    console.log(cpf);
     const response = await GetPregnantByCpf(cpf);
     console.log(response);
   };
@@ -61,17 +63,22 @@ const SideBar: React.FC = () => {
 
   return (
     <SidebarContainer>
-      <SidebarItem>
-        <img src={Logo} alt="Logo Angels" />
+      <SidebarItem onClick={showModal}>
+        <img src={Logo} alt="Logo Angels" width={80} height={80} />
       </SidebarItem>
 
       <SidebarItem onClick={showModal}>
-        <UserCircle size={37} color="#B1488A" />
-        <TextItem>Nova gestação</TextItem>
+        <UserCircle size={40} color="#B1488A" />
+        <TextItem>Nova Gestação</TextItem>
+      </SidebarItem>
+
+      <SidebarItem>
+        <IdentificationBadge size={40} color="#B1488A" />
+        <TextItem>Cadastro Profissional</TextItem>
       </SidebarItem>
 
       <SidebarItem onClick={homeScreen}>
-        <Power size={37} color="#B1488A" />
+        <SignOut size={40} color="#B1488A" />
         <TextItem>Sair</TextItem>
       </SidebarItem>
 
