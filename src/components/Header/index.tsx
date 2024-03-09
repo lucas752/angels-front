@@ -1,6 +1,6 @@
 import * as S from './styles';
 import logo from '../../assets/angelsLogo.svg';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react'; 
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../Button';
 
@@ -8,7 +8,7 @@ interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = () => {
   const navigate = useNavigate();
-  const [activeLink, setActiveLink] = useState('');
+  const [activeLink, setActiveLink] = useState('HOME');
 
   const handleClick = (link: string) => {
     setActiveLink(link);
@@ -17,6 +17,11 @@ export const Header: React.FC<HeaderProps> = () => {
   const dashboardScreen = () => {
     navigate('/dashboard');
   };
+
+  useEffect(() => {
+    
+    setActiveLink('HOME');
+  }, []);
 
   return (
     <S.Container>
@@ -46,10 +51,28 @@ export const Header: React.FC<HeaderProps> = () => {
               <S.Li>
                 <Link
                   to="#"
-                  onClick={() => handleClick('CONTATOS')}
-                  className={activeLink === 'CONTATOS' ? 'active' : ''}
+                  onClick={() => handleClick('DADOS')}
+                  className={activeLink === 'DADOS' ? 'active' : ''}
+                >
+                  DADOS
+                </Link>
+              </S.Li>
+              <S.Li>
+                <Link
+                  to="#"
+                  onClick={() => handleClick('EQUIPE')}
+                  className={activeLink === 'EQUIPE' ? 'active' : ''}
                 >
                   EQUIPE
+                </Link>
+              </S.Li>
+              <S.Li>
+                <Link
+                  to="#"
+                  onClick={() => handleClick('PARCEIROS')}
+                  className={activeLink === 'PARCEIROS' ? 'active' : ''}
+                >
+                  PARCEIROS
                 </Link>
               </S.Li>
               <S.Li>
@@ -62,7 +85,7 @@ export const Header: React.FC<HeaderProps> = () => {
                 </Link>
               </S.Li>
             </S.Ul>
-            <Button label="ENTRAR" buttonFunction={dashboardScreen} />
+            <Button label="ENTRAR" buttonFunction={dashboardScreen} size='large'/>
           </S.Nav>
         </S.Navigation>
       </div>

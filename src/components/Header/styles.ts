@@ -63,8 +63,8 @@ export const Nav = styled.nav`
 
 export const Ul = styled.ul`
   display: flex;
-  padding: 3rem 0;
-  width: 50%;
+  padding: 2rem 0;
+  width: 70%;
   justify-content: space-between;
   list-style: none;
 `;
