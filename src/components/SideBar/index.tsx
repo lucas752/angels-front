@@ -1,10 +1,8 @@
 import React from 'react';
 import { SidebarContainer, SidebarItem, TextItem } from './styles';
 import {
-  House,
-  Info,
   UserCircle,
-  ClipboardText,
+  SignOut,
   IdentificationBadge
 } from '@phosphor-icons/react';
 
@@ -15,33 +13,22 @@ const SideBar: React.FC = () => {
   return (
     <SidebarContainer>
       <SidebarItem>
-        <img src={Logo} alt="Logo Angels" />
-
+        <img src={Logo} alt="Logo Angels" width={80} height={80} />
       </SidebarItem>
 
       <SidebarItem>
-        <House size={37} color="#B1488A" />
-        <TextItem>Home</TextItem>
+        <UserCircle size={40} color="#B1488A" />
+        <TextItem>Nova Gestação</TextItem>
       </SidebarItem>
 
       <SidebarItem>
-        <Info size={37} color="#B1488A" />
-        <TextItem>Sobre</TextItem>
+        <IdentificationBadge size={40} color="#B1488A" />
+        <TextItem>Cadastro Profissional</TextItem>
       </SidebarItem>
 
       <SidebarItem>
-        <ClipboardText size={37} color="#B1488A" />
-        <TextItem>Dashboard</TextItem>
-      </SidebarItem>
-
-      <SidebarItem>
-        <IdentificationBadge size={37} color="#B1488A" />
-        <TextItem>Cadastro de Profissional</TextItem>
-      </SidebarItem>
-
-      <SidebarItem>
-        <UserCircle size={37} color="#B1488A" />
-        <TextItem>Cadastro de Gestante</TextItem>
+        <SignOut size={40} color="#B1488A" />
+        <TextItem>Sair</TextItem>
       </SidebarItem>
     </SidebarContainer>
   );

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const SidebarContainer = styled.div`
-  height: 813px;
+  height: 613px;
   width: 138px;
   background-color: #ffffff;
   border-radius: 36px;
@@ -21,9 +21,9 @@ export const SidebarItem = styled.div`
 `;
 
 export const TextItem = styled.p`
-  font-size: 13px;
+  font-size: 14px;
   color: #B1488A;
-  font-weight: 700;
+  font-weight: bold;
   margin-top: 10px;
   margin-bottom: 20px;
   text-align: center;
