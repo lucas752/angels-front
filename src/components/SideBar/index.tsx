@@ -67,7 +67,7 @@ const SideBar: React.FC = () => {
 
   return (
     <SidebarContainer>
-      <SidebarItem onClick={showModal}>
+      <SidebarItem>
         <img src={Logo} alt="Logo Angels" width={80} height={80} />
       </SidebarItem>
 
