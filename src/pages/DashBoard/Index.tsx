@@ -136,22 +136,6 @@ export function Dashboard() {
   };
   return (
     <S.Container>
-      {/* <S.HeaderContent>
-        <h1>ANGELS - Acompanhamento gestacional</h1>
-        <Input
-          placeHolder="Digite o nome da gestante..."
-          rightAdd={<MagnifyingGlass size={20} color="#b1488a" />}
-        />
-        <Button
-          label="NOVA GESTAÇÃO"
-          shape="round"
-          icon={<PlusCircle size={20} color="#fff" />}
-          buttonFunction={pregnancyregisterScreen}
-        />
-      </S.HeaderContent> */}
-      {/* <S.Line>
-        <Divider />
-      </S.Line> */}
       <S.Content>
         <S.NavBarContainer>
           <SideBar />

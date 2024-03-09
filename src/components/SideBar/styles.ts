@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export const SidebarContainer = styled.div`
   height: 80%;
+  padding: 1rem;
   background-color: #ffffff;
   border-radius: 36px;
   border: 3px solid #7c3a66;
@@ -29,4 +30,19 @@ export const TextItem = styled.p`
   text-align: center;
 `;
 
-export const CpfModal = styled(Modal)``;
+export const CpfModal = styled(Modal)`
+  label {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .ant-btn-primary {
+    background-color: var(--red-500) !important;
+    border-radius: 20px;
+  }
+
+  .ant-btn-default {
+    border-color: var(--red-500) !important;
+    border-radius: 20px;
+  }
+`;
