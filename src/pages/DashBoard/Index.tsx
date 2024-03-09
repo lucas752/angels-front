@@ -5,7 +5,6 @@ import {
 } from '@phosphor-icons/react';
 
 import * as S from './styles.ts';
-import { PregnantCard } from '../../features/DashBoard/PregnantCard/index.tsx';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SideBar from '../../components/SideBar/index.tsx';
@@ -163,7 +162,7 @@ export function Dashboard() {
             <CaretCircleLeft size={32} color="#b1488a" onClick={previous} />
             <label>{page}</label>
             <DotsThreeOutline size={32} color="#b1488a" />
-            <label>{cardData.length / 9}</label>
+            <label>{cardData.length / 3}</label>
             <CaretCircleRight size={32} color="#b1488a" onClick={next} />
           </S.Pagination>
         </S.CardsContainer>

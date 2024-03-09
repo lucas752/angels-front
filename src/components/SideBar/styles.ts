@@ -1,8 +1,8 @@
+import { Modal } from 'antd';
 import styled from 'styled-components';
 
 export const SidebarContainer = styled.div`
-  height: 813px;
-  width: 138px;
+  height: 80%;
   background-color: #ffffff;
   border-radius: 36px;
   border: 3px solid #7c3a66;
@@ -22,9 +22,11 @@ export const SidebarItem = styled.div`
 
 export const TextItem = styled.p`
   font-size: 13px;
-  color: #B1488A;
+  color: #b1488a;
   font-weight: 700;
   margin-top: 10px;
   margin-bottom: 20px;
   text-align: center;
 `;
+
+export const CpfModal = styled(Modal)``;
