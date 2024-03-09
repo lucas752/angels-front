@@ -6,7 +6,7 @@ import { DateSelect } from '../../components/DateSelect';
 import { Select } from '../../components/Select';
 import { RadioSelect } from '../../components/RadioSelect';
 import { InputNumber, RadioChangeEvent, message } from 'antd';
-import { PregnancyFollowUpType } from '../../services/types/PregnancyFollowUpType';
+import { PregnancyFollowUpSchema } from '../../services/types/PregnancyFollowUpType';
 import { ZodError } from 'zod';
 
 export function PregnancyFollowUp() {
@@ -25,11 +25,15 @@ export function PregnancyFollowUp() {
     errorType?: '' | 'error' | 'warning' | undefined;
   }
 
-  const [heightError, setHeightError] = useState<ErrorInterface>({
+  const [weightError, setWeightError] = useState<ErrorInterface>({
     errorShow: false,
     errorType: ''
   });
   const [weeksError, setWeeksError] = useState<ErrorInterface>({
+    errorShow: false,
+    errorType: ''
+  });
+  const [dateError, setDateError] = useState<ErrorInterface>({
     errorShow: false,
     errorType: ''
   });
@@ -50,6 +54,15 @@ export function PregnancyFollowUp() {
   ];
 
   const handleChangeDate = (date: unknown, dateString: string | string[]) => {
+    try {
+      PregnancyFollowUpSchema.shape.date.parse(dateString);
+      setDateError({ errorType: '', errorShow: false });
+      if (dateString == '') {
+        setDateError({ errorType: 'error', errorShow: true });
+      }
+    } catch (error) {
+      setDateError({ errorType: 'error', errorShow: true });
+    }
     setDate(dateString);
   };
 
@@ -76,13 +89,19 @@ export function PregnancyFollowUp() {
 
   const handleChangeWeight = (e: { target: { value: string } }) => {
     const { value } = e.target;
+    try {
+      PregnancyFollowUpSchema.shape.weight.parse(value);
+      setWeightError({ errorType: '', errorShow: false });
+    } catch (error) {
+      setWeightError({ errorType: 'error', errorShow: true });
+    }
     setWeight(value);
   };
 
   const handleChangeWeeks = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      PregnancyFollowUpType.shape.weeks.parse(value);
+      PregnancyFollowUpSchema.shape.weeks.parse(value);
       setWeeksError({ errorType: '', errorShow: false });
     } catch (error) {
       setWeeksError({ errorType: 'error', errorShow: true });
@@ -96,12 +115,6 @@ export function PregnancyFollowUp() {
 
   const handleChangeHeight = (e: { target: { value: string } }) => {
     const { value } = e.target;
-    try {
-      PregnancyFollowUpType.shape.height.parse(value);
-      setHeightError({ errorType: '', errorShow: false });
-    } catch (error) {
-      setHeightError({ errorType: 'error', errorShow: true });
-    }
     setHeight(value);
   };
 
@@ -119,7 +132,7 @@ export function PregnancyFollowUp() {
         radio
       };
       console.log(data);
-      PregnancyFollowUpType.parse(data);
+      PregnancyFollowUpSchema.parse(data);
     } catch (error) {
       if (error instanceof ZodError) {
         console.log(error);
@@ -139,6 +152,7 @@ export function PregnancyFollowUp() {
             <DateSelect
               label="Data do acompanhamento"
               inputFunction={handleChangeDate}
+              status={dateError.errorType}
             ></DateSelect>
             <Input
               type="number"
@@ -146,6 +160,8 @@ export function PregnancyFollowUp() {
               rightAdd="Kg"
               value={weight}
               inputFunction={handleChangeWeight}
+              status={weightError.errorType}
+              errorShow={weightError.errorShow}
             ></Input>
             <Input
               type="number"
@@ -153,6 +169,8 @@ export function PregnancyFollowUp() {
               infoText="Insira o número de semanas"
               value={weeks}
               inputFunction={handleChangeWeeks}
+              status={weeksError.errorType}
+              errorShow={weeksError.errorShow}
             ></Input>
           </S.FirstRow>
           <S.FirstRow>
@@ -186,7 +204,7 @@ export function PregnancyFollowUp() {
               type="number"
               label="Altura uterina"
               value={height}
-              errorShow={heightError.errorShow}
+              optional={true}
               rightAdd="cm"
               inputFunction={handleChangeHeight}
             ></Input>
