@@ -1,16 +1,21 @@
 import * as S from './styles';
-import logo  from '../../assets/angelsLogo.svg'
+import logo from '../../assets/angelsLogo.svg';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../Button';
 
 interface HeaderProps {}
 
 export const Header: React.FC<HeaderProps> = () => {
+  const navigate = useNavigate();
   const [activeLink, setActiveLink] = useState('');
 
   const handleClick = (link: string) => {
     setActiveLink(link);
+  };
+
+  const dashboardScreen = () => {
+    navigate('/dashboard');
   };
 
   return (
@@ -57,7 +62,7 @@ export const Header: React.FC<HeaderProps> = () => {
                 </Link>
               </S.Li>
             </S.Ul>
-            <Button label="ENTRAR" />
+            <Button label="ENTRAR" buttonFunction={dashboardScreen} />
           </S.Nav>
         </S.Navigation>
       </div>

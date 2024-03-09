@@ -8,6 +8,7 @@ interface ButtonProps {
   loading?: boolean | { delay?: number };
   shape?: 'circle' | 'default' | 'round';
   buttonFunction?: () => void;
+  size?: 'large' | 'middle' | 'small';
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -16,6 +17,7 @@ export const Button: React.FC<ButtonProps> = ({
   icon,
   loading,
   shape,
+  size,
   buttonFunction
 }) => {
   return (
@@ -25,6 +27,7 @@ export const Button: React.FC<ButtonProps> = ({
       loading={loading}
       shape={shape}
       onClick={buttonFunction}
+      size={size}
     >
       {label}
     </S.ButtonArea>
