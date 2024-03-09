@@ -59,11 +59,17 @@ export const NewPregnancyButton = styled.button`
   font-weight: 700;
 `;
 
+export const ArrowsContainer = styled.section`
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+`;
+
 export const CardsContainer = styled.section`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  gap: 20px;
+  justify-content: center;
+  gap: 15px;
 
   @media (max-width: 1000px) {
     flex-direction: column;
