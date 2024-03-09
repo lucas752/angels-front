@@ -110,8 +110,9 @@ export function Dashboard() {
   const renderCards = () => {
     return cardData
       .slice(currentPage, currentPage + 3)
-      .map((item) => (
+      .map((item, index) => (
         <PregnancyCard
+          key={index}
           id={'1'}
           pregnantName={item.name}
           weeks={item.weeks}
@@ -141,7 +142,7 @@ export function Dashboard() {
           <SideBar />
         </S.NavBarContainer>
         <S.CardsContainer>
-          <section>{renderCards()}</section>
+          <S.Cards>{renderCards()}</S.Cards>
           <S.Pagination>
             <CaretCircleLeft size={32} color="#b1488a" onClick={previous} />
             <label>{page}</label>
