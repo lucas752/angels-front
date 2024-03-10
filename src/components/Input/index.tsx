@@ -37,8 +37,7 @@ export const Input: React.FC<InputProps> = ({
     <S.Container>
       {label && (
         <S.Label>
-          {label}
-          {!optional && <p>*</p>}
+          {!optional ? <p>{label}*</p> : label}
           {infoText &&
             (errorShow === true ? (
               <Tooltip title={infoText} color={'red'} open={errorShow}>
