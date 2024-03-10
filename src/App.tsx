@@ -1,11 +1,19 @@
+import styled from 'styled-components';
 import './App.css';
-import Home from './pages/Home';
+import { AppRoutes } from './routes';
+
+const Main = styled.main`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
 
 function App() {
   return (
-    <>
-      <Home />
-    </>
+    <Main>
+      <AppRoutes />
+    </Main>
   );
 }
 
