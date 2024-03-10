@@ -13,6 +13,7 @@ import { GetPregnancies } from '../../services/PregnancyServices';
 import { PregnancyInterface } from '../../services/PregnancyServices/interfaces';
 import { PregnantInfo } from '../../features/Pregnancies/PregnantInfo';
 import { GetPregnantInfo } from '../../services/PregnantServices';
+import moment from 'moment';
 
 export default function Pregnancies() {
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -28,7 +29,7 @@ export default function Pregnancies() {
   useEffect(() => {
     const pregnanciesRequest = async () => {
       const requestResponse = await GetPregnancies();
-      if (requestResponse.status == 200) {
+      if (requestResponse?.status == 200) {
         setPregnanciesData(requestResponse.data);
       }
     };
@@ -46,6 +47,7 @@ export default function Pregnancies() {
   }, []);
 
   const renderCards = () => {
+    const currentDate = moment();
     return pregnanciesData
       .filter((item) => item.gestante.id === userId)
       .slice(currentPage, currentPage + 4)
@@ -55,7 +57,7 @@ export default function Pregnancies() {
           id={item.id}
           gestationalRisk={true}
           pregnancyStatus={item.situacaoGestacional}
-          weeks={new Date(item.dataInicioGestacao).toLocaleDateString()}
+          weeks={currentDate.diff(item.dataInicioGestacao, 'weeks').toString()}
         />
       ));
   };

@@ -7,6 +7,5 @@ export const GetPregnancies = async () => {
     return response;
   } catch (error) {
     errorNotification('Erro ao buscar gestantantes');
-    throw error; // Re-throw the error to propagate it
   }
 };
