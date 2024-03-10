@@ -6,6 +6,7 @@ import PregnantInfo from '../pages/PregnantInfo';
 import { Dashboard } from '../pages/DashBoard/Index';
 import PregnancyRegister from '../pages/PregnancyRegister';
 import Pregnancies from '../pages/Pregnancies';
+import PregnancyInfo from '../pages/PregnancyInfo';
 
 export const AppRoutes = () => {
   return (
@@ -18,6 +19,7 @@ export const AppRoutes = () => {
         <Route path="/pregnantInfo" element={<PregnantInfo />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/pregnancies" element={<Pregnancies />} />
+        <Route path="/pregnancyInfo" element={<PregnancyInfo />} />
       </Routes>
     </BrowserRouter>
   );
