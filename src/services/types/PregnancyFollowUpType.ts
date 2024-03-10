@@ -1,22 +1,23 @@
 import { z } from 'zod';
 
 export const PregnancyFollowUpSchema = z.object({
-  date: z.coerce
+  dataAcompanhamento: z.coerce
     .date({ required_error: 'Informe a data' })
     .min(new Date('1900-01-01'), { message: 'Escolha uma data válida' })
     .max(new Date(), { message: 'Escolha uma data válida' }),
-  weight: z
+  pesoAtual: z
     .string({ required_error: 'Informe o peso' })
     .min(1, 'Informe o peso'),
-  weeks: z
+  idadeGestacional: z
     .string({ required_error: 'Informe a idade gestacional' })
     .min(1, 'Informe a idade gestacional'),
-  pressureD: z.number({ required_error: 'Informe a pressão arterial' }),
-  pressureS: z.number({ required_error: 'Informe a pressão arterial' }),
-  height: z.string().optional(),
-  heartbeat: z.number().optional(),
-  type: z.enum(['pré-natal de rotina', 'ocorrência', 'volta'], {
+  pressaoArterial: z
+    .string({ required_error: 'Informe a pressão arterial' })
+    .min(2, 'Informe a pressão arterial'),
+  alturaUterina: z.string().optional(),
+  batimentosCardiacosFeto: z.number().optional(),
+  tipo: z.enum(['pré-natal de rotina', 'ocorrência', 'volta'], {
     required_error: 'Selecione um tipo'
   }),
-  radio: z.number({ required_error: 'Selecione uma opção' })
+  realizadoPor: z.string({ required_error: 'Selecione uma opção' })
 });

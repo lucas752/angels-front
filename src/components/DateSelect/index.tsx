@@ -32,8 +32,7 @@ export const DateSelect: React.FC<DateProps> = ({
     <S.Container>
       {label && (
         <S.Label>
-          {label}
-          {!optional && <p>*</p>}
+          {!optional ? <p>{label}*</p> : label}
           {infoText &&
             (errorShow === true ? (
               <Tooltip title={infoText} color={'red'} open={errorShow}>

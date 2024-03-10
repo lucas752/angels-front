@@ -44,7 +44,8 @@ export function PregnantRegister() {
   const [race, setRace] = useState<string>('');
   const [gender, setGender] = useState<string>('');
   const [cpf, setCpf] = useState<string>('');
-  const [headOfHousehold, setHeadOfHousehold] = useState<number>();
+  const [headOfHousehold, setHeadOfHousehold] = useState<boolean>();
+  const [risc, setRisc] = useState<boolean>();
   const [maritalStatus, setMaritalStatus] = useState<string>('');
   const [educationLevel, setEducationLevel] = useState<string>('');
   const [familyIncome, setFamilyIncome] = useState<string>('');
@@ -256,6 +257,10 @@ export function PregnantRegister() {
 
   const handleChangeHeadOfHousehold = (e: RadioChangeEvent) => {
     setHeadOfHousehold(e.target.value);
+  };
+
+  const handleChangeRisc = (e: RadioChangeEvent) => {
+    setRisc(e.target.value);
   };
 
   const handleChangeMaritalStatus = (value: unknown) => {
@@ -545,6 +550,7 @@ export function PregnantRegister() {
     sexo: gender,
     cpf: cpf,
     chefeFamilia: headOfHousehold,
+    emRisco: risc,
     estadoCivil: maritalStatus,
     escolaridade: educationLevel,
     rendaFamiliar: familyIncome,
@@ -600,10 +606,11 @@ export function PregnantRegister() {
         sexo: gender,
         cpf: cpf
       },
-      chefeFamilia: headOfHousehold?.toString() || '',
+      chefeFamilia: headOfHousehold,
       estadoCivil: parseInt(maritalStatus),
       escolaridade: parseInt(educationLevel),
       rendaFamiliar: parseInt(familyIncome),
+      emRisco: risc,
       municipio: city,
       tipoMoradia: parseInt(housing),
       energiaEletricaDomicilio: electricity,
@@ -735,10 +742,19 @@ export function PregnantRegister() {
                 label="Chefe de familia:"
                 firstOption="Sim"
                 secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
+                firstValue={true}
+                secondValue={false}
                 radioFunction={handleChangeHeadOfHousehold}
                 value={headOfHousehold}
+              />
+              <RadioSelect
+                label="Em risco:"
+                firstOption="Sim"
+                secondOption="Nao"
+                firstValue={true}
+                secondValue={false}
+                radioFunction={handleChangeRisc}
+                value={risc}
               />
               <Select
                 label="Estado civil:"

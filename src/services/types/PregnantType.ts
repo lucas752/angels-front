@@ -27,7 +27,7 @@ export interface EvolutionDataInterface {
   rendaFamiliar?: number;
   tratamentoAgua?: boolean;
   amamentacao?: boolean;
-  chefeFamilia?: string;
+  chefeFamilia?: boolean;
   dataUltimaGestacao?: string;
   emRisco?: boolean;
   estadoCivil?: number;
@@ -85,8 +85,11 @@ export const pregnantSchemaPartOne = z.object({
     })
     .length(11, { message: 'O CPF deve ter exatamente 11 caracteres' })
     .regex(/^\d+$/, { message: 'O CPF deve conter apenas dígitos numéricos' }),
-  chefeFamilia: z.number({
+  chefeFamilia: z.boolean({
     required_error: 'Chefe de família é obrigatório'
+  }),
+  emRisco: z.boolean({
+    required_error: 'Risco é obrigatório'
   }),
   estadoCivil: z.string({
     required_error: 'Estado civil é obrigatório'
