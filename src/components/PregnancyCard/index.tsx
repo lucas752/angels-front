@@ -3,11 +3,11 @@ import WhiteLogo from '../../assets/angelsWhiteLogo.svg';
 import * as S from './styles';
 
 interface InfoProps {
-  id: string;
+  id: number;
   weeks: string;
   pregnantName?: string;
   gestationalRisk: boolean;
-  pregnancyStatus: string;
+  pregnancyStatus: number;
 }
 
 export const PregnancyCard: React.FC<InfoProps> = ({
@@ -17,6 +17,12 @@ export const PregnancyCard: React.FC<InfoProps> = ({
   pregnancyStatus,
   gestationalRisk
 }) => {
+  const pregnancyStatusDescription =
+    pregnancyStatus == 0
+      ? 'Em andamento'
+      : pregnancyStatus == 1
+      ? 'Finalizada com sucesso'
+      : 'Finalizada com desfecho negativo';
   return (
     <S.PregnancyCardContainer>
       <S.PregnancyInfoContainer>
@@ -44,11 +50,13 @@ export const PregnancyCard: React.FC<InfoProps> = ({
         </S.PregnancyInfoTextContainer>
         <S.PregnancyInfoTextContainer>
           <S.PregnancyInfoTitle>Status da gestação:</S.PregnancyInfoTitle>
-          <S.PregnancyInfoContent>{pregnancyStatus}</S.PregnancyInfoContent>
+          <S.PregnancyInfoContent>
+            {pregnancyStatusDescription}
+          </S.PregnancyInfoContent>
         </S.PregnancyInfoTextContainer>
       </S.PregnancyInfoContainer>
       <S.PregnancyButtonsContainer>
-        {pregnancyStatus == 'Em andamento' ? (
+        {pregnancyStatus == 0 ? (
           <S.PregnancyCardButton>
             <Plus weight="bold" size={28} color="#B1488A" />
           </S.PregnancyCardButton>

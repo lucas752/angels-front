@@ -6,71 +6,40 @@ import {
 import { PregnancyCard } from '../../components/PregnancyCard';
 import { PregnantPersonalInfo } from '../../features/Pregnancies/PregnantPersonalInfo';
 import * as S from './styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { GetPregnancies } from '../../services/PregnancyServices';
+import { PregnancyInterface } from '../../services/PregnancyServices/interfaces';
 
 export default function Pregnancies() {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
+  const [pregnanciesData, setPregnanciesData] = useState<PregnancyInterface[]>(
+    []
+  );
+  const userId = 1;
 
-  let pregnantInfo = {
-    name: 'Júlia da Silva Santos',
-    cpf: '123.456.789-09',
-    pregnancies: [
-      {
-        id: '15',
-        weeks: '30',
-        gestacionalRisk: false,
-        pregnancyStatus: 'Em andamento',
-        pregnantName: 'Júlia da Silva Santos'
-      },
-      {
-        id: '8',
-        weeks: '39',
-        gestacionalRisk: false,
-        pregnancyStatus: 'Finalizada com sucesso',
-        pregnantName: 'Júlia da Silva Santos'
-      },
-      {
-        id: '5',
-        weeks: '39',
-        gestacionalRisk: true,
-        pregnancyStatus: 'Finalizada com sucesso',
-        pregnantName: 'Júlia da Silva Santos'
-      },
-      {
-        id: '9',
-        weeks: '39',
-        gestacionalRisk: false,
-        pregnancyStatus: 'Finalizada com sucesso',
-        pregnantName: 'Júlia da Silva Santos'
-      },
-      {
-        id: '32',
-        weeks: '39',
-        gestacionalRisk: false,
-        pregnancyStatus: 'Finalizada com sucesso',
-        pregnantName: 'Júlia da Silva Santos'
-      },
-      {
-        id: '32',
-        weeks: '39',
-        gestacionalRisk: false,
-        pregnancyStatus: 'Finalizada com sucesso',
-        pregnantName: 'Júlia da Silva Santos'
+  useEffect(() => {
+    const pregnanciesRequest = async () => {
+      const requestResponse = await GetPregnancies();
+      if (requestResponse.status == 200) {
+        setPregnanciesData(requestResponse.data);
       }
-    ]
-  };
+    };
+
+    pregnanciesRequest();
+  }, []);
 
   const renderCards = () => {
-    return pregnantInfo.pregnancies
+    return pregnanciesData
+      .filter((item) => item.gestante.id === userId)
       .slice(currentPage, currentPage + 4)
       .map((item, index) => (
         <PregnancyCard
           key={index}
           id={item.id}
-          gestationalRisk={item.gestacionalRisk}
-          pregnancyStatus={item.pregnancyStatus}
-          weeks={item.weeks}
+          gestationalRisk={true}
+          pregnancyStatus={item.situacaoGestacional}
+          weeks={new Date(item.dataInicioGestacao).toLocaleDateString()}
         />
       ));
   };
@@ -83,7 +52,7 @@ export default function Pregnancies() {
   };
 
   const next = () => {
-    if (currentPage + 4 < pregnantInfo.pregnancies.length) {
+    if (currentPage + 4 < pregnanciesData.length) {
       setCurrentPage(currentPage + 4);
       setPage((prev) => prev + 1);
     }
@@ -99,11 +68,21 @@ export default function Pregnancies() {
         </S.NewPregnancyButton>
       </S.Header>
       <S.PregnantInfoContainer>
-        <PregnantPersonalInfo name="Nome" value={pregnantInfo.name} />
-        <PregnantPersonalInfo name="CPF" value={pregnantInfo.cpf} />
+        <PregnantPersonalInfo
+          name="Nome"
+          value={
+            pregnanciesData.length > 0 ? pregnanciesData[0].gestante.nome : ''
+          }
+        />
+        <PregnantPersonalInfo
+          name="CPF"
+          value={
+            pregnanciesData.length > 0 ? pregnanciesData[0].gestante.cpf : ''
+          }
+        />
       </S.PregnantInfoContainer>
       <S.CardsContainer>{renderCards()}</S.CardsContainer>
-      {pregnantInfo.pregnancies.length > 4 ? (
+      {pregnanciesData.length > 4 ? (
         <S.ArrowsContainer>
           {page == 1 ? (
             <></>
