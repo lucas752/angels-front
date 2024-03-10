@@ -4,6 +4,7 @@ import { GetPregnancies } from '../../services/PregnanciesServices';
 
 interface DataContextType {
   pregnanciesList: Array<PregnancyInterface>;
+  reloadPag: () => void;
 }
 
 interface DataProviderProps {
@@ -15,8 +16,10 @@ export const DataContext = createContext<DataContextType | undefined>(
 );
 
 export function DataProvider({ children }: DataProviderProps) {
-  const [pregnanciesList, setPregnantList] =
-    useState<Array<PregnancyInterface>>();
+  const [pregnanciesList, setPregnantList] = useState<
+    Array<PregnancyInterface>
+  >([]);
+  const [reload, setReload] = useState<number>(0);
 
   useEffect(() => {
     const getAllPregnancies = async () => {
@@ -27,10 +30,14 @@ export function DataProvider({ children }: DataProviderProps) {
     };
 
     getAllPregnancies();
-  }, []);
+  }, [reload]);
+
+  function reloadPag() {
+    setReload((prev) => prev + 1);
+  }
 
   return (
-    <DataContext.Provider value={{ pregnanciesList }}>
+    <DataContext.Provider value={{ pregnanciesList, reloadPag }}>
       {children}
     </DataContext.Provider>
   );

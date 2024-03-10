@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import './App.css';
 import { AppRoutes } from './routes';
+import { DataProvider } from './config/Data/DataProvider';
 
 const Main = styled.main`
   height: 100%;
@@ -12,7 +13,9 @@ const Main = styled.main`
 function App() {
   return (
     <Main>
-      <AppRoutes />
+      <DataProvider>
+        <AppRoutes />
+      </DataProvider>
     </Main>
   );
 }
