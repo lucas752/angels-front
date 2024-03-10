@@ -1,3 +1,4 @@
+import { Modal } from 'antd';
 import styled from 'styled-components';
 
 export const Title = styled.h1`
@@ -46,6 +47,7 @@ export const ButtonContainer = styled.div`
 export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 25px;
 `;
 
@@ -63,3 +65,20 @@ export const ArrowButton = styled.div`
   border-radius: 25px;
   margin-top: 20px;
 `;
+
+export const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  svg {
+    cursor: pointer;
+  }
+
+  section {
+    display: flex;
+    gap: 8px;
+  }
+`;
+
+export const UpdateModal = styled(Modal)``;
