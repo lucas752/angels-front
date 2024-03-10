@@ -15,7 +15,7 @@ export const AboutWrapper = styled.div`
 export const AboutHeader = styled.div`
 
 h2 {
-  font-size: 3.2rem;
+  font-size: 3rem;
   color: #b1488a;
   margin-bottom: 2rem;
 }
@@ -28,8 +28,4 @@ p {
 `;
 
 export const AboutContentWrapper = styled.div`
-    h2 {
-        font-size: 3.2rem;
-        font-weight: 300;
-    }
 `;

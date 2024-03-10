@@ -6,7 +6,7 @@ export const About = () => {
         <S.AboutWrapper>
             <S.AboutContainer>
                 <S.AboutHeader>
-                    <h2>SOBRE:</h2>
+                    <h2>Sobre:</h2>
                     <p>Bem-vindo ao Angels,</p>
                     <p>
                         O Angels é uma plataforma singular, inteligente e acessível, 
