@@ -11,19 +11,18 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  margin-top: 5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  gap: 2rem;
+  // margin-bottom: 5rem;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+  // text-align: center;
+  // gap: 2rem;
   color: #fff;
   font-family: 'Inter', sans-serif;
 
   h1 {
-    font-weight: 700;
-    font-size: 5.6rem;
+    font-size: 3.6rem;
     margin-bottom: 10px;
 
     @media (max-width: 768px) {
@@ -34,9 +33,8 @@ export const Content = styled.div`
   }
 
   p {
-    font-size: 1.5rem;
-    text-align: center;
-    width: 70%;
+    font-size: 1.6rem;
+    margin-right: 20px;
 
     @media (max-width: 768px) {
       width: 90%;

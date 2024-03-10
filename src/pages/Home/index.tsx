@@ -1,5 +1,7 @@
 
 import { Header } from '../../components/Header';
+import { About } from '../../features/Home/About';
+import { Angels } from '../../features/Home/Angels';
 import * as S from './styles';
 
 export default function Home() {
@@ -8,11 +10,8 @@ export default function Home() {
       <S.Container>
         <Header />
         <S.Content>
-          <h1>angels</h1>
-          <p>O sistema Angels é uma solução tecnológica que simplifica 
-            o processo de acompanhamento pré-natal e oferece uma 
-            plataforma centralizada para  o registro detalhado de dados
-             e o acompanhamento adequado de cada etapa da gestação.</p>
+          <Angels/>
+          <About/>
         </S.Content>
       </S.Container>
     </div>
