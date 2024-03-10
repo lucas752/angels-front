@@ -9,12 +9,16 @@ import { ArrowLeft, ArrowRight } from '@phosphor-icons/react';
 import { useState } from 'react';
 import { RadioChangeEvent } from 'antd';
 import {
+  PregnantInterface,
   pregnantSchemaPartOne,
   pregnantSchemaPartTwo,
   pregnantSchemaPartTwoFirstPregnant
 } from '../../services/types/PregnantType';
 import { ZodError } from 'zod';
-import { warningNotification } from '../../components/Notification';
+import {
+  successNotification,
+  warningNotification
+} from '../../components/Notification';
 import { InputMask } from '../../features/PregnantRegister/InputMask';
 import {
   educationLevelsList,
@@ -24,6 +28,7 @@ import {
   maritalStatusList,
   raceList
 } from '../../features/PregnantRegister/SelectOptions';
+import { PostPregnant } from '../../services/PregnantServices';
 
 interface ErrorInterface {
   errorShow?: boolean;
@@ -36,48 +41,48 @@ export function PregnantRegister() {
 
   const [name, setName] = useState<string>();
   const [birthDate, setBirthDate] = useState<string | string[]>();
-  const [race, setRace] = useState<string>();
-  const [gender, setGender] = useState<string>();
-  const [cpf, setCpf] = useState<string>();
+  const [race, setRace] = useState<string>('');
+  const [gender, setGender] = useState<string>('');
+  const [cpf, setCpf] = useState<string>('');
   const [headOfHousehold, setHeadOfHousehold] = useState<number>();
-  const [maritalStatus, setMaritalStatus] = useState<string>();
-  const [educationLevel, setEducationLevel] = useState<string>();
-  const [familyIncome, setFamilyIncome] = useState<string>();
-  const [city, setCity] = useState<string>();
-  const [housing, setHousing] = useState<string>();
-  const [electricity, setElectricity] = useState<number>();
-  const [sewageNetwork, setSewageNetwork] = useState<number>();
-  const [treatedWater, setTreatedWater] = useState<number>();
+  const [maritalStatus, setMaritalStatus] = useState<string>('');
+  const [educationLevel, setEducationLevel] = useState<string>('');
+  const [familyIncome, setFamilyIncome] = useState<string>('');
+  const [city, setCity] = useState<string>('');
+  const [housing, setHousing] = useState<string>('');
+  const [electricity, setElectricity] = useState<boolean>();
+  const [sewageNetwork, setSewageNetwork] = useState<boolean>();
+  const [treatedWater, setTreatedWater] = useState<boolean>();
   const [firstPregnant, setFirstPregnant] = useState<number>();
   const [lastPregnancyDate, setLastPregnancyDate] = useState<
     string | string[]
   >();
-  const [wellFed, setWellFed] = useState<string>();
-  const [breastfeeding, setBreastfeeding] = useState<number>();
-  const [contact, setContact] = useState<string>();
-  const [emergencyContact, setEmergencyContact] = useState<string>();
+  const [wellFed, setWellFed] = useState<string>('');
+  const [breastfeeding, setBreastfeeding] = useState<boolean>();
+  const [contact, setContact] = useState<string>('');
+  const [emergencyContact, setEmergencyContact] = useState<string>('');
 
   //segunda parte
-  const [abortions, setAbortions] = useState<string>();
-  const [liveChildren, setLiveChildren] = useState<string>();
-  const [twins, setTwins] = useState<string>();
-  const [liveBirths, setLiveBirths] = useState<string>();
-  const [stillbirths, setStillbirths] = useState<string>();
-  const [birthWeight25004000, setBirthWeight25004000] = useState<string>();
-  const [birthWeightlt2500, setBirthWeightlt2500] = useState<string>();
-  const [birthWeightgt4000, setBirthWeightgt4000] = useState<string>();
-  const [deathsFirstWeek, setDeathsFirstWeek] = useState<string>();
-  const [deathsAfterFirstWeek, setDeathsAfterFirstWeek] = useState<string>();
-  const [diabetes, setDiabetes] = useState<number>();
-  const [pelvicSurgery, setPelvicSurgery] = useState<number>();
-  const [deliveries, setDeliveries] = useState<string>();
-  const [vaginalDeliveries, setVaginalDeliveries] = useState<string>();
-  const [cesareanDeliveries, setCesareanDeliveries] = useState<string>();
-  const [urinaryInfection, setUrinaryInfection] = useState<number>();
+  const [abortions, setAbortions] = useState<string>('');
+  const [liveChildren, setLiveChildren] = useState<string>('');
+  const [twins, setTwins] = useState<string>('');
+  const [liveBirths, setLiveBirths] = useState<string>('');
+  const [stillbirths, setStillbirths] = useState<string>('');
+  const [birthWeight25004000, setBirthWeight25004000] = useState<string>('');
+  const [birthWeightlt2500, setBirthWeightlt2500] = useState<string>('');
+  const [birthWeightgt4000, setBirthWeightgt4000] = useState<string>('');
+  const [deathsFirstWeek, setDeathsFirstWeek] = useState<string>('');
+  const [deathsAfterFirstWeek, setDeathsAfterFirstWeek] = useState<string>('');
+  const [diabetes, setDiabetes] = useState<boolean>();
+  const [pelvicSurgery, setPelvicSurgery] = useState<boolean>();
+  const [deliveries, setDeliveries] = useState<string>('');
+  const [vaginalDeliveries, setVaginalDeliveries] = useState<string>('');
+  const [cesareanDeliveries, setCesareanDeliveries] = useState<string>('');
+  const [urinaryInfection, setUrinaryInfection] = useState<boolean>();
   const [congenitalMalformation, setCongenitalMalformation] =
-    useState<number>();
-  const [hypertension, setHypertension] = useState<number>();
-  const [twinFamilyHistory, setTwinFamilyHistory] = useState<number>();
+    useState<boolean>();
+  const [hypertension, setHypertension] = useState<boolean>();
+  const [twinFamilyHistory, setTwinFamilyHistory] = useState<boolean>();
 
   //error states
   const [errorName, setErrorName] = useState<ErrorInterface>({
@@ -199,7 +204,7 @@ export function PregnantRegister() {
   const handleChangeName = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      pregnantSchemaPartOne.shape.name.parse(value);
+      pregnantSchemaPartOne.shape.nome.parse(value);
       setErrorName({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorName({ errorType: 'error', errorShow: true });
@@ -212,7 +217,7 @@ export function PregnantRegister() {
     dateString: string | string[]
   ) => {
     try {
-      pregnantSchemaPartOne.shape.birthDate.parse(dateString);
+      pregnantSchemaPartOne.shape.dataNascimento.parse(dateString);
       setErrorBirthDate({ errorType: '', errorShow: false });
       if (dateString == '') {
         setErrorBirthDate({ errorType: 'error', errorShow: true });
@@ -239,9 +244,7 @@ export function PregnantRegister() {
 
   const handleChangeCpf = (e: { target: { value: string } }) => {
     const { value } = e.target;
-
     const inputValue = value.replace(/\D/g, '');
-    console.log(inputValue.length);
     try {
       pregnantSchemaPartOne.shape.cpf.parse(inputValue);
       setErrorCpf({ errorType: '', errorShow: false });
@@ -270,7 +273,7 @@ export function PregnantRegister() {
   const handleChangeFamilyIncome = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      pregnantSchemaPartOne.shape.familyIncome.parse(value);
+      pregnantSchemaPartOne.shape.rendaFamiliar.parse(value);
       setErrorFamilyIncome({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorFamilyIncome({ errorType: 'error', errorShow: true });
@@ -281,7 +284,7 @@ export function PregnantRegister() {
   const handleChangeCity = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      pregnantSchemaPartOne.shape.city.parse(value);
+      pregnantSchemaPartOne.shape.municipio.parse(value);
       setErrorCity({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorCity({ errorType: 'error', errorShow: true });
@@ -316,7 +319,7 @@ export function PregnantRegister() {
     dateString: string | string[]
   ) => {
     try {
-      pregnantSchemaPartTwo.shape.lastPregnancyDate.parse(dateString);
+      pregnantSchemaPartTwo.shape.dataUltimaGestacao.parse(dateString);
       setErrorLastPregnancyDate({ errorType: '', errorShow: false });
       if (dateString == '') {
         setErrorLastPregnancyDate({ errorType: 'error', errorShow: true });
@@ -343,7 +346,7 @@ export function PregnantRegister() {
     const { value } = e.target;
     const inputValue = value.replace(/\D/g, '');
     try {
-      pregnantSchemaPartOne.shape.contact.parse(inputValue);
+      pregnantSchemaPartOne.shape.contato.parse(inputValue);
       setErrorContact({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorContact({ errorType: 'error', errorShow: true });
@@ -355,7 +358,7 @@ export function PregnantRegister() {
     const { value } = e.target;
     const inputValue = value.replace(/\D/g, '');
     try {
-      pregnantSchemaPartOne.shape.emergencyContact.parse(inputValue);
+      pregnantSchemaPartOne.shape.contatoEmergencia.parse(inputValue);
       setErrorEmergencyContact({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorEmergencyContact({ errorType: 'error', errorShow: true });
@@ -367,7 +370,7 @@ export function PregnantRegister() {
   const handleChangeAbortions = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      pregnantSchemaPartTwo.shape.abortions.parse(value);
+      pregnantSchemaPartTwo.shape.quantidadeAbortos.parse(value);
       setErrorAbortions({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorAbortions({ errorType: 'error', errorShow: true });
@@ -378,7 +381,7 @@ export function PregnantRegister() {
   const handleChangeLiveChildren = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      pregnantSchemaPartTwo.shape.liveChildren.parse(value);
+      pregnantSchemaPartTwo.shape.quantidadeFilhosVivos.parse(value);
       setErrorLiveChildren({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorLiveChildren({ errorType: 'error', errorShow: true });
@@ -389,7 +392,7 @@ export function PregnantRegister() {
   const handleChangeTwins = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      pregnantSchemaPartTwo.shape.twins.parse(value);
+      pregnantSchemaPartTwo.shape.quantidadeGemelares.parse(value);
       setErrorTwins({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorTwins({ errorType: 'error', errorShow: true });
@@ -400,7 +403,7 @@ export function PregnantRegister() {
   const handleChangeLiveBirths = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      pregnantSchemaPartTwo.shape.liveBirths.parse(value);
+      pregnantSchemaPartTwo.shape.quantidadeNascidosVivos.parse(value);
       setErrorLiveBirths({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorLiveBirths({ errorType: 'error', errorShow: true });
@@ -411,7 +414,7 @@ export function PregnantRegister() {
   const handleChangeStillbirths = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      pregnantSchemaPartTwo.shape.stillbirths.parse(value);
+      pregnantSchemaPartTwo.shape.quantidadeNascidosMortos.parse(value);
       setErrorStillbirths({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorStillbirths({ errorType: 'error', errorShow: true });
@@ -424,7 +427,7 @@ export function PregnantRegister() {
   }) => {
     const { value } = e.target;
     try {
-      pregnantSchemaPartTwo.shape.birthWeight25004000.parse(value);
+      pregnantSchemaPartTwo.shape.quantidadeRnPeso2500_4000.parse(value);
       setErrorBirthWeight25004000({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorBirthWeight25004000({ errorType: 'error', errorShow: true });
@@ -435,7 +438,7 @@ export function PregnantRegister() {
   const handleChangeBirthWeightlt2500 = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      pregnantSchemaPartTwo.shape.birthWeightlt2500.parse(value);
+      pregnantSchemaPartTwo.shape.quantidadeRnPesoMenor2500.parse(value);
       setErrorBirthWeightlt2500({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorBirthWeightlt2500({ errorType: 'error', errorShow: true });
@@ -446,7 +449,7 @@ export function PregnantRegister() {
   const handleChangeBirthWeightgt4000 = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      pregnantSchemaPartTwo.shape.birthWeightgt4000.parse(value);
+      pregnantSchemaPartTwo.shape.quantidadeRnPesoMaior4000.parse(value);
       setErrorBirthWeightgt4000({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorBirthWeightgt4000({ errorType: 'error', errorShow: true });
@@ -457,7 +460,7 @@ export function PregnantRegister() {
   const handleChangeDeathsFirstWeek = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      pregnantSchemaPartTwo.shape.deathsFirstWeek.parse(value);
+      pregnantSchemaPartTwo.shape.quantidadeObitosSemana1.parse(value);
       setErrorDeathsFirstWeek({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorDeathsFirstWeek({ errorType: 'error', errorShow: true });
@@ -470,7 +473,7 @@ export function PregnantRegister() {
   }) => {
     const { value } = e.target;
     try {
-      pregnantSchemaPartTwo.shape.deathsAfterFirstWeek.parse(value);
+      pregnantSchemaPartTwo.shape.quantidadeObitosAposSemana1.parse(value);
       setErrorDeathsAfterFirstWeek({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorDeathsAfterFirstWeek({ errorType: 'error', errorShow: true });
@@ -489,7 +492,7 @@ export function PregnantRegister() {
   const handleChangeDeliveries = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      pregnantSchemaPartTwo.shape.deliveries.parse(value);
+      pregnantSchemaPartTwo.shape.quantidadePartos.parse(value);
       setErrorDeliveries({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorDeliveries({ errorType: 'error', errorShow: true });
@@ -500,7 +503,7 @@ export function PregnantRegister() {
   const handleChangeVaginalDeliveries = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      pregnantSchemaPartTwo.shape.vaginalDeliveries.parse(value);
+      pregnantSchemaPartTwo.shape.quantidadePartosVaginais.parse(value);
       setErrorVaginalDeliveries({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorVaginalDeliveries({ errorType: 'error', errorShow: true });
@@ -511,7 +514,7 @@ export function PregnantRegister() {
   const handleChangeCesareanDeliveries = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      pregnantSchemaPartTwo.shape.cesareanDeliveries.parse(value);
+      pregnantSchemaPartTwo.shape.quantidadePartosCesarios.parse(value);
       setErrorCesareanDeliveries({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorCesareanDeliveries({ errorType: 'error', errorShow: true });
@@ -536,47 +539,108 @@ export function PregnantRegister() {
   };
 
   const pregnantFirstData = {
-    name: name,
-    birthDate: birthDate,
-    race: race,
-    gender: gender,
+    nome: name,
+    dataNascimento: birthDate,
+    raca: race,
+    sexo: gender,
     cpf: cpf,
-    headOfHousehold: headOfHousehold,
-    maritalStatus: maritalStatus,
-    educationLevel: educationLevel,
-    familyIncome: familyIncome,
-    city: city,
-    housing: housing,
-    electricity: electricity,
-    sewageNetwork: sewageNetwork,
-    treatedWater: treatedWater,
-    wellFed: wellFed,
-    breastfeeding: breastfeeding,
-    contact: contact,
-    emergencyContact: emergencyContact
+    chefeFamilia: headOfHousehold,
+    estadoCivil: maritalStatus,
+    escolaridade: educationLevel,
+    rendaFamiliar: familyIncome,
+    municipio: city,
+    tipoMoradia: housing,
+    energiaEletricaDomicilio: electricity,
+    moradiaRedeEsgoto: sewageNetwork,
+    tratamentoAgua: treatedWater,
+    amamentacao: breastfeeding,
+    diagnosticoDesnutricao: wellFed,
+    contato: contact,
+    contatoEmergencia: emergencyContact
   };
   const pregnantSecondData = {
     // Segunda parte
-    lastPregnancyDate: lastPregnancyDate || '',
-    abortions: abortions,
-    liveChildren: liveChildren,
-    twins: twins,
-    liveBirths: liveBirths,
-    stillbirths: stillbirths,
-    birthWeight25004000: birthWeight25004000,
-    birthWeightlt2500: birthWeightlt2500,
-    birthWeightgt4000: birthWeightgt4000,
-    deathsFirstWeek: deathsFirstWeek,
-    deathsAfterFirstWeek: deathsAfterFirstWeek,
+    dataUltimaGestacao: lastPregnancyDate || '',
+    quantidadeAbortos: abortions,
+    quantidadeFilhosVivos: liveChildren,
+    quantidadeGemelares: twins,
+    quantidadeNascidosVivos: liveBirths,
+    quantidadeNascidosMortos: stillbirths,
+    quantidadeRnPeso2500_4000: birthWeight25004000,
+    quantidadeRnPesoMenor2500: birthWeightlt2500,
+    quantidadeRnPesoMaior4000: birthWeightgt4000,
+    quantidadeObitosSemana1: deathsFirstWeek,
+    quantidadeObitosAposSemana1: deathsAfterFirstWeek,
     diabetes: diabetes,
-    pelvicSurgery: pelvicSurgery,
-    deliveries: deliveries,
-    vaginalDeliveries: vaginalDeliveries,
-    cesareanDeliveries: cesareanDeliveries,
-    urinaryInfection: urinaryInfection,
-    congenitalMalformation: congenitalMalformation,
-    hypertension: hypertension,
-    twinFamilyHistory: twinFamilyHistory
+    cirurgiaPelvica: pelvicSurgery,
+    quantidadePartos: deliveries,
+    quantidadePartosVaginais: vaginalDeliveries,
+    quantidadePartosCesarios: cesareanDeliveries,
+    infeccaoUrinaria: urinaryInfection,
+    maFormacaoCongenita: congenitalMalformation,
+    hipertensao: hypertension,
+    familiarGemeos: twinFamilyHistory,
+    contato: contact,
+    contatoEmergencia: emergencyContact
+  };
+
+  const pregnantData: PregnantInterface = {
+    gestante: {
+      nome: name,
+      dataNascimento: birthDate?.toString(),
+      raca: parseInt(race),
+      sexo: gender,
+      cpf: cpf
+    },
+    dadosEvolutivos: {
+      gestante: {
+        nome: name,
+        dataNascimento: birthDate?.toString(),
+        raca: parseInt(race),
+        sexo: gender,
+        cpf: cpf
+      },
+      chefeFamilia: headOfHousehold?.toString() || '',
+      estadoCivil: parseInt(maritalStatus),
+      escolaridade: parseInt(educationLevel),
+      rendaFamiliar: parseInt(familyIncome),
+      municipio: city,
+      tipoMoradia: parseInt(housing),
+      energiaEletricaDomicilio: electricity,
+      moradiaRedeEsgoto: sewageNetwork,
+      tratamentoAgua: treatedWater,
+      amamentacao: breastfeeding,
+      diagnosticoDesnutricao: parseInt(wellFed),
+      contato: contact,
+      contatoEmergencia: emergencyContact,
+      dataUltimaGestacao: lastPregnancyDate?.toString() || '',
+      quantidadeAbortos: parseInt(abortions),
+      quantidadeFilhosVivos: parseInt(liveChildren),
+      quantidadeGemelares: parseInt(twins),
+      quantidadeNascidosVivos: parseInt(liveBirths),
+      quantidadeNascidosMortos: parseInt(stillbirths),
+      quantidadeRnPeso2500_4000: parseInt(birthWeight25004000),
+      quantidadeRnPesoMenor2500: parseInt(birthWeightlt2500),
+      quantidadeRnPesoMaior4000: parseInt(birthWeightgt4000),
+      quantidadeObitosSemana1: parseInt(deathsFirstWeek),
+      quantidadeObitosAposSemana1: parseInt(deathsAfterFirstWeek),
+      diabetes: diabetes,
+      cirurgiaPelvica: pelvicSurgery,
+      quantidadePartos: parseInt(deliveries),
+      quantidadePartosVaginais: parseInt(vaginalDeliveries),
+      quantidadePartosCesarios: parseInt(cesareanDeliveries),
+      infeccaoUrinaria: urinaryInfection,
+      maFormacaoCongenita: congenitalMalformation,
+      hipertensao: hypertension,
+      familiarGemeos: twinFamilyHistory
+    }
+  };
+
+  const postPregnant = async () => {
+    const response = await PostPregnant(pregnantData);
+    if (response?.status == 200) {
+      successNotification('Gestante cadastrada com sucesso!');
+    }
   };
 
   const handleSetProgress = () => {
@@ -599,11 +663,12 @@ export function PregnantRegister() {
     try {
       if (firstPregnant == 2) {
         pregnantSchemaPartTwo.parse(pregnantSecondData);
+        postPregnant();
       } else {
         pregnantSchemaPartTwoFirstPregnant.parse(pregnantSecondData);
+        postPregnant();
       }
       setProgressBar(100);
-      alert('Cadastrado');
     } catch (error) {
       if (error instanceof ZodError) {
         warningNotification(error.errors[0].message);
@@ -721,8 +786,8 @@ export function PregnantRegister() {
                 label="Eletricidade na moradia:"
                 firstOption="Sim"
                 secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
+                firstValue={true}
+                secondValue={false}
                 radioFunction={handleChangeElectricity}
                 value={electricity}
               />
@@ -730,8 +795,8 @@ export function PregnantRegister() {
                 label="Rede de esgoto:"
                 firstOption="Sim"
                 secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
+                firstValue={true}
+                secondValue={false}
                 radioFunction={handleChangeSewageNetwork}
                 value={sewageNetwork}
               />
@@ -739,8 +804,8 @@ export function PregnantRegister() {
                 label="Água tratada:"
                 firstOption="Sim"
                 secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
+                firstValue={true}
+                secondValue={false}
                 radioFunction={handleChangeTreatedWater}
                 value={treatedWater}
               />
@@ -766,8 +831,8 @@ export function PregnantRegister() {
                 label="Amamentação:"
                 firstOption="Sim"
                 secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
+                firstValue={true}
+                secondValue={false}
                 radioFunction={handleChangeBreastfeeding}
                 value={breastfeeding}
               />
@@ -899,8 +964,8 @@ export function PregnantRegister() {
                     label="Diabetes:"
                     firstOption="Sim"
                     secondOption="Nao"
-                    firstValue={1}
-                    secondValue={2}
+                    firstValue={true}
+                    secondValue={false}
                     radioFunction={handleChangeDiabetes}
                     value={diabetes}
                   />
@@ -908,8 +973,8 @@ export function PregnantRegister() {
                     label="Cirugia pélvica:"
                     firstOption="Sim"
                     secondOption="Nao"
-                    firstValue={1}
-                    secondValue={2}
+                    firstValue={true}
+                    secondValue={false}
                     radioFunction={handleChangePelvicSurgery}
                     value={pelvicSurgery}
                   />
@@ -956,8 +1021,8 @@ export function PregnantRegister() {
                     label="Diabetes:"
                     firstOption="Sim"
                     secondOption="Nao"
-                    firstValue={1}
-                    secondValue={2}
+                    firstValue={true}
+                    secondValue={false}
                     radioFunction={handleChangeDiabetes}
                     value={diabetes}
                   />
@@ -965,8 +1030,8 @@ export function PregnantRegister() {
                     label="Cirugia pélvica:"
                     firstOption="Sim"
                     secondOption="Nao"
-                    firstValue={1}
-                    secondValue={2}
+                    firstValue={true}
+                    secondValue={false}
                     radioFunction={handleChangePelvicSurgery}
                     value={pelvicSurgery}
                   />
@@ -978,8 +1043,8 @@ export function PregnantRegister() {
                 label="Infecção urinária:"
                 firstOption="Sim"
                 secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
+                firstValue={true}
+                secondValue={false}
                 radioFunction={handleChangeUrinaryInfection}
                 value={urinaryInfection}
               />
@@ -987,8 +1052,8 @@ export function PregnantRegister() {
                 label="Má formação congênica:"
                 firstOption="Sim"
                 secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
+                firstValue={true}
+                secondValue={false}
                 radioFunction={handleChangeCongenitalMalformation}
                 value={congenitalMalformation}
               />
@@ -996,8 +1061,8 @@ export function PregnantRegister() {
                 label="Hipertensão:"
                 firstOption="Sim"
                 secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
+                firstValue={true}
+                secondValue={false}
                 radioFunction={handleChangeHypertension}
                 value={hypertension}
               />
@@ -1005,8 +1070,8 @@ export function PregnantRegister() {
                 label="Familiar gêmeos:"
                 firstOption="Sim"
                 secondOption="Nao"
-                firstValue={1}
-                secondValue={2}
+                firstValue={true}
+                secondValue={false}
                 radioFunction={handleChangeTwinFamilyHistory}
                 value={twinFamilyHistory}
               />

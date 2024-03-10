@@ -1,8 +1,8 @@
 import * as S from './styles';
 
 interface InfoProps {
-  name: string;
-  value: string;
+  name?: string;
+  value?: string;
 }
 
 export const InfoContainer: React.FC<InfoProps> = ({ name, value }) => {

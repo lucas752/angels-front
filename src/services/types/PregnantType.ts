@@ -1,14 +1,69 @@
 import { z } from 'zod';
 
+export interface PregnantInterface {
+  id?: number;
+  gestante?: PregnantInfoInterface;
+  dadosEvolutivos?: EvolutionDataInterface;
+}
+
+export interface PregnantInfoInterface {
+  id?: number;
+  nome?: string;
+  dataNascimento?: string | string[] | undefined;
+  cpf?: string;
+  raca?: number;
+  sexo?: string;
+}
+
+export interface EvolutionDataInterface {
+  id?: number;
+  gestante?: PregnantInfoInterface;
+  municipio?: string;
+  diagnosticoDesnutricao?: number;
+  energiaEletricaDomicilio?: boolean;
+  escolaridade?: number;
+  tipoMoradia?: number;
+  moradiaRedeEsgoto?: boolean;
+  rendaFamiliar?: number;
+  tratamentoAgua?: boolean;
+  amamentacao?: boolean;
+  chefeFamilia?: string;
+  dataUltimaGestacao?: string;
+  emRisco?: boolean;
+  estadoCivil?: number;
+  quantidadeAbortos?: number;
+  quantidadeFilhosVivos?: number;
+  quantidadeGemelares?: number;
+  quantidadeGestacao?: number;
+  quantidadeNascidosMortos?: number;
+  quantidadeNascidosVivos?: number;
+  quantidadeObitosSemana1?: number;
+  quantidadeObitosAposSemana1?: number;
+  quantidadePartos?: number;
+  quantidadePartosCesarios?: number;
+  quantidadePartosVaginais?: number;
+  quantidadeRnPeso2500_4000?: number;
+  quantidadeRnPesoMaior4000?: number;
+  quantidadeRnPesoMenor2500?: number;
+  hipertensao?: boolean;
+  diabetes?: boolean;
+  cirurgiaPelvica?: boolean;
+  infeccaoUrinaria?: boolean;
+  maFormacaoCongenita?: boolean;
+  familiarGemeos?: boolean;
+  contato?: string;
+  contatoEmergencia?: string;
+}
+
 export const pregnantSchemaPartOne = z.object({
-  name: z
+  nome: z
     .string({
       required_error: 'Nome é obrigatório',
       invalid_type_error: 'Nome precisa conter letras'
     })
     .min(2, { message: 'Necessário mais de 2 caracteres' })
     .max(80, { message: 'Apenas 80 caracteres permitidos' }),
-  birthDate: z.coerce
+  dataNascimento: z.coerce
     .date({
       required_error: 'Data de nascimento é obrigatória',
       invalid_type_error: 'A data precisa ser válida'
@@ -17,10 +72,10 @@ export const pregnantSchemaPartOne = z.object({
       message: 'Escolha um data depois de 1900-01-01'
     })
     .max(new Date(), { message: 'Escolha um data existente' }),
-  race: z.string({
+  raca: z.string({
     required_error: 'Raça é obrigatória'
   }),
-  gender: z.string({
+  sexo: z.string({
     required_error: 'Gênero é obrigatório'
   }),
   cpf: z
@@ -30,46 +85,46 @@ export const pregnantSchemaPartOne = z.object({
     })
     .length(11, { message: 'O CPF deve ter exatamente 11 caracteres' })
     .regex(/^\d+$/, { message: 'O CPF deve conter apenas dígitos numéricos' }),
-  headOfHousehold: z.number({
+  chefeFamilia: z.number({
     required_error: 'Chefe de família é obrigatório'
   }),
-  maritalStatus: z.string({
+  estadoCivil: z.string({
     required_error: 'Estado civil é obrigatório'
   }),
-  educationLevel: z.string({
+  escolaridade: z.string({
     required_error: 'Nível de educação é obrigatório'
   }),
-  familyIncome: z.string({
+  rendaFamiliar: z.string({
     required_error: 'Renda familiar é obrigatória',
     invalid_type_error: 'Renda familiar precisa ser válida'
   }),
-  city: z
+  municipio: z
     .string({
       required_error: 'Cidade é obrigatória',
       invalid_type_error: 'Cidade precisa conter letras9'
     })
     .min(2, { message: 'Necessário mais de 2 caracteres' })
     .max(30, { message: 'Apenas 30 caracteres permitidos' }),
-  housing: z.string({
+  tipoMoradia: z.string({
     required_error: 'Tipo de moradia é obrigatório'
   }),
-  electricity: z.number({
+  energiaEletricaDomicilio: z.boolean({
     required_error: 'Presença de eletricidade é obrigatória'
   }),
-  sewageNetwork: z.number({
+  moradiaRedeEsgoto: z.boolean({
     required_error: 'Rede de esgoto é obrigatória'
   }),
-  treatedWater: z.number({
+  tratamentoAgua: z.boolean({
     required_error: 'Água tratada é obrigatória'
   }),
 
-  wellFed: z.string({
+  diagnosticoDesnutricao: z.string({
     required_error: 'Alimentação adequada é obrigatória'
   }),
-  breastfeeding: z.number({
+  amamentacao: z.boolean({
     required_error: 'Amamentação é obrigatória'
   }),
-  contact: z
+  contato: z
     .string({
       required_error: 'Contato é obrigatório',
       invalid_type_error: 'Contato precisa ser válido'
@@ -78,7 +133,7 @@ export const pregnantSchemaPartOne = z.object({
     .regex(/^\d+$/, {
       message: 'O contato deve conter apenas dígitos numéricos'
     }),
-  emergencyContact: z
+  contatoEmergencia: z
     .string({
       required_error: 'Contato de emergência é obrigatório',
       invalid_type_error: 'Contato de emergência ser válido'
@@ -93,10 +148,10 @@ export const pregnantSchemaPartOne = z.object({
 
 export const pregnantSchemaPartTwo = z.object({
   // Segunda parte
-  lastPregnancyDate: z.string({
+  dataUltimaGestacao: z.string({
     required_error: 'Data da última gravidez é obrigatória'
   }),
-  abortions: z
+  quantidadeAbortos: z
     .string({
       required_error: 'Abortos é obrigatório',
       invalid_type_error: 'Abortos precisa conter números'
@@ -104,7 +159,7 @@ export const pregnantSchemaPartTwo = z.object({
     .regex(/^\d+$/, {
       message: 'O Campo "Abortos" deve conter apenas dígitos numéricos'
     }),
-  liveChildren: z
+  quantidadeFilhosVivos: z
     .string({
       required_error: 'Filhos vivos é obrigatório',
       invalid_type_error: 'Filhos vivos precisa conter números'
@@ -112,7 +167,7 @@ export const pregnantSchemaPartTwo = z.object({
     .regex(/^\d+$/, {
       message: 'O Campo "Filhos vivos" deve conter apenas dígitos numéricos'
     }),
-  twins: z
+  quantidadeGemelares: z
     .string({
       required_error: 'Gêmeos é obrigatório',
       invalid_type_error: 'Gêmeos precisa ser conter números'
@@ -120,7 +175,7 @@ export const pregnantSchemaPartTwo = z.object({
     .regex(/^\d+$/, {
       message: 'O Campo "Gemelares" deve conter apenas dígitos numéricos'
     }),
-  liveBirths: z
+  quantidadeNascidosVivos: z
     .string({
       required_error: 'Nascimentos vivos é obrigatório',
       invalid_type_error: 'Nascimentos vivos precisa conter números'
@@ -128,7 +183,7 @@ export const pregnantSchemaPartTwo = z.object({
     .regex(/^\d+$/, {
       message: 'O Campo "Nascidos vivos" deve conter apenas dígitos numéricos'
     }),
-  stillbirths: z
+  quantidadeNascidosMortos: z
     .string({
       required_error: 'Natimortos é obrigatório',
       invalid_type_error: 'Natimortos precisa ser conter números'
@@ -136,7 +191,7 @@ export const pregnantSchemaPartTwo = z.object({
     .regex(/^\d+$/, {
       message: 'O Campo "Nascidos mortos" deve conter apenas dígitos numéricos'
     }),
-  birthWeight25004000: z
+  quantidadeRnPeso2500_4000: z
     .string({
       required_error: 'Peso de nascimento entre 2500 e 4000g é obrigatório',
       invalid_type_error:
@@ -146,7 +201,7 @@ export const pregnantSchemaPartTwo = z.object({
       message:
         'O Campo "Peso de nascimento entre 2500 e 4000g" deve conter apenas dígitos numéricos'
     }),
-  birthWeightlt2500: z
+  quantidadeRnPesoMenor2500: z
     .string({
       required_error: 'Peso de nascimento menor que 2500g é obrigatório',
       invalid_type_error:
@@ -156,7 +211,7 @@ export const pregnantSchemaPartTwo = z.object({
       message:
         'O Campo "Peso de nascimento menor que 2500g" deve conter apenas dígitos numéricos'
     }),
-  birthWeightgt4000: z
+  quantidadeRnPesoMaior4000: z
     .string({
       required_error: 'Peso de nascimento maior que 4000g é obrigatório',
       invalid_type_error:
@@ -166,7 +221,7 @@ export const pregnantSchemaPartTwo = z.object({
       message:
         'O Campo "Peso de nascimento maior que 4000g" deve conter apenas dígitos numéricos'
     }),
-  deathsFirstWeek: z
+  quantidadeObitosSemana1: z
     .string({
       required_error: 'Mortes na primeira semana é obrigatório',
       invalid_type_error: 'Mortes na primeira semana precisa conter números'
@@ -175,7 +230,7 @@ export const pregnantSchemaPartTwo = z.object({
       message:
         'O Campo "Óbitos na primeira semana" deve conter apenas dígitos numéricos'
     }),
-  deathsAfterFirstWeek: z
+  quantidadeObitosAposSemana1: z
     .string({
       required_error: 'Mortes após a primeira semana é obrigatório',
       invalid_type_error: 'Mortes após a primeira semana precisa conter números'
@@ -184,13 +239,13 @@ export const pregnantSchemaPartTwo = z.object({
       message:
         'O Campo "Óbitos após primeira semana" deve conter apenas dígitos numéricos'
     }),
-  diabetes: z.number({
+  diabetes: z.boolean({
     required_error: 'Diabetes é obrigatório'
   }),
-  pelvicSurgery: z.number({
+  cirurgiaPelvica: z.boolean({
     required_error: 'Cirurgia pélvica é obrigatória'
   }),
-  deliveries: z
+  quantidadePartos: z
     .string({
       required_error: 'Partos é obrigatório',
       invalid_type_error: 'Partos precisa conter números'
@@ -198,7 +253,7 @@ export const pregnantSchemaPartTwo = z.object({
     .regex(/^\d+$/, {
       message: 'O Campo "Partos" deve conter apenas dígitos numéricos'
     }),
-  vaginalDeliveries: z
+  quantidadePartosVaginais: z
     .string({
       required_error: 'Partos vaginais é obrigatório',
       invalid_type_error: 'Partos vaginais precisa conter números'
@@ -206,7 +261,7 @@ export const pregnantSchemaPartTwo = z.object({
     .regex(/^\d+$/, {
       message: 'O Campo "Partos vaginais" deve conter apenas dígitos numéricos'
     }),
-  cesareanDeliveries: z
+  quantidadePartosCesarios: z
     .string({
       required_error: 'Partos cesáreos é obrigatório',
       invalid_type_error: 'Partos cesáreos precisa conter números'
@@ -214,16 +269,16 @@ export const pregnantSchemaPartTwo = z.object({
     .regex(/^\d+$/, {
       message: 'O Campo "Partos cesáreos" deve conter apenas dígitos numéricos'
     }),
-  urinaryInfection: z.number({
+  infeccaoUrinaria: z.boolean({
     required_error: 'Infecção urinária é obrigatória'
   }),
-  congenitalMalformation: z.number({
+  maFormacaoCongenita: z.boolean({
     required_error: 'Malformação congênita é obrigatória'
   }),
-  hypertension: z.number({
+  hipertensao: z.boolean({
     required_error: 'Hipertensão é obrigatória'
   }),
-  twinFamilyHistory: z.number({
+  familiarGemeos: z.boolean({
     required_error: 'Histórico familiar de gêmeos é obrigatório'
   })
 });
@@ -231,7 +286,7 @@ export const pregnantSchemaPartTwo = z.object({
 export const pregnantSchemaPartTwoFirstPregnant = z.object({
   // Segunda parte
 
-  abortions: z
+  quantidadeAbortos: z
     .string({
       required_error: 'Abortos é obrigatório',
       invalid_type_error: 'Abortos precisa conter números'
@@ -239,23 +294,23 @@ export const pregnantSchemaPartTwoFirstPregnant = z.object({
     .regex(/^\d+$/, {
       message: 'O Campo "Abortos" deve conter apenas dígitos numéricos'
     }),
-  diabetes: z.number({
+  diabetes: z.boolean({
     required_error: 'Diabetes é obrigatório'
   }),
-  pelvicSurgery: z.number({
+  cirurgiaPelvica: z.boolean({
     required_error: 'Cirurgia pélvica é obrigatória'
   }),
 
-  urinaryInfection: z.number({
+  infeccaoUrinaria: z.boolean({
     required_error: 'Infecção urinária é obrigatória'
   }),
-  congenitalMalformation: z.number({
+  maFormacaoCongenita: z.boolean({
     required_error: 'Malformação congênita é obrigatória'
   }),
-  hypertension: z.number({
+  hipertensao: z.boolean({
     required_error: 'Hipertensão é obrigatória'
   }),
-  twinFamilyHistory: z.number({
+  familiarGemeos: z.boolean({
     required_error: 'Histórico familiar de gêmeos é obrigatório'
   })
 });
