@@ -155,7 +155,7 @@ export default function PregnantInfo() {
 
   useEffect(() => {
     const getPregnantInfo = async () => {
-      const response = await GetPregnantInfo(3);
+      const response = await GetPregnantInfo(1);
       if (response?.status == 200) {
         setPregnantInfo(response.data);
         setName(response.data.nome);
@@ -181,7 +181,7 @@ export default function PregnantInfo() {
   };
 
   const putPregnant = async () => {
-    const response = await PutPregnant(3, updateData);
+    const response = await PutPregnant(1, updateData);
     if (response?.status == 200) {
       successNotification('Gestante atualizada com sucesso!');
       reloadPag();
@@ -190,7 +190,7 @@ export default function PregnantInfo() {
   };
 
   const deletePregnant = async () => {
-    const response = await DeletePregnant(3);
+    const response = await DeletePregnant(1);
     if (response?.status == 200) {
       successNotification('Gestante deletada com sucesso!');
       dashBoardScreen();
