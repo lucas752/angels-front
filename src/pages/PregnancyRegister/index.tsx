@@ -57,19 +57,19 @@ export default function PregnancyRegister() {
 
   const alcoolFreq = [
     {
-      value: '1',
+      value: '0',
       label: 'Baixo consumo de álcool'
     },
     {
-      value: '2',
+      value: '1',
       label: 'Leve consumo de álcool'
     },
     {
-      value: '3',
+      value: '2',
       label: 'Moderado consumo de álcool'
     },
     {
-      value: '4',
+      value: '3',
       label: 'Alto consumo de álcool'
     }
   ];
@@ -124,6 +124,10 @@ export default function PregnancyRegister() {
 
   const gpSang = [
     {
+      value: '0',
+      label: 'O'
+    },
+    {
       value: '1',
       label: 'A'
     },
@@ -134,10 +138,6 @@ export default function PregnancyRegister() {
     {
       value: '3',
       label: 'AB'
-    },
-    {
-      value: '4',
-      label: 'O'
     }
   ];
 
