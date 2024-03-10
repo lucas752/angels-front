@@ -9,3 +9,12 @@ export const GetPregnancies = async () => {
     errorNotification('Erro ao buscar gestações');
   }
 };
+
+export const GetPregnancyById = async (id: number) => {
+  try {
+    const response = api.get(`/gestacoes/${id}`);
+    return response;
+  } catch (error) {
+    errorNotification('Gestação não encontrada');
+  }
+};
