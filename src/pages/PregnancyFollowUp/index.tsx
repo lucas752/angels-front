@@ -10,8 +10,12 @@ import { PregnancyFollowUpSchema } from '../../services/types/PregnancyFollowUpT
 import { ZodError } from 'zod';
 import { postAcompanhamento } from '../../services/PregnancyFollowUpService';
 import { FollowUpInterface } from '../../services/PregnancyFollowUpService/interface';
+import { ArrowUUpLeft } from '@phosphor-icons/react';
+import { useNavigate } from 'react-router-dom';
 
 export function PregnancyFollowUp() {
+  const navigate = useNavigate();
+
   const [weight, setWeight] = useState<string>();
   const [weeks, setWeeks] = useState<string>();
   const [pressureS, setPressureS] = useState<string>();
@@ -121,6 +125,10 @@ export function PregnancyFollowUp() {
     setHeight(value);
   };
 
+  const handleBackArrow = () => {
+    navigate('/pregnancies');
+  };
+
   const handlePregnancyFollowUp = () => {
     let pressure = '';
     if (typeof pressureD === 'string' && typeof pressureS === 'string') {
@@ -128,7 +136,7 @@ export function PregnancyFollowUp() {
     }
     try {
       const data: FollowUpInterface = {
-        gestanteId: 1,
+        gestacaoId: 1,
         pesoAtual: weight,
         idadeGestacional: weeks,
         pressaoArterial: pressure,
@@ -152,9 +160,12 @@ export function PregnancyFollowUp() {
   return (
     <S.Container>
       <S.Content>
-        <S.LogoContainer>
-          <img src={Logo} alt="Angels Logo"></img>
-        </S.LogoContainer>
+        <S.NavContainer>
+          <ArrowUUpLeft size={22} color="#B1488A" onClick={handleBackArrow} />
+          <S.LogoContainer>
+            <img src={Logo} alt="Angels Logo"></img>
+          </S.LogoContainer>
+        </S.NavContainer>
         <S.FormContainer>
           <S.FirstRow>
             <DateSelect

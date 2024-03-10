@@ -1,5 +1,5 @@
 export interface FollowUpInterface {
-  gestanteId: number | undefined;
+  gestacaoId: number | undefined;
   dataAcompanhamento: string | string[] | undefined;
   pesoAtual: string | undefined;
   idadeGestacional: string | undefined;

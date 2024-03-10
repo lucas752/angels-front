@@ -14,7 +14,7 @@ export const Content = styled.div`
   height: 90%;
   background-color: rgba(177, 72, 138, 0.2);
   border-radius: 10px;
-  align-items: center;
+  /* align-items: center; */
   flex-direction: column;
   @media (min-width: 426px) and (max-width: 960px) {
     overflow-y: scroll;
@@ -25,7 +25,18 @@ export const Content = styled.div`
 `;
 
 export const LogoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const NavContainer = styled.div`
   margin: 1rem;
+  padding-left: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 50%;
 `;
 
 export const FormContainer = styled.div`
@@ -42,7 +53,6 @@ export const FirstRow = styled.div`
   display: flex;
   width: 100%;
   flex-direction: row;
-  /* justify-content: space-evenly; */
   align-items: center;
   flex-wrap: nowrap;
 

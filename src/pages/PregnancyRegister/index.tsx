@@ -11,10 +11,15 @@ import { ZodError } from 'zod';
 import { errorNotification } from '../../components/Notification/index.ts';
 import { postGestacao } from '../../services/PregnancyRegisterService/index.ts';
 import { PregnancyRegisterInterface } from '../../services/PregnancyRegisterService/interface.ts';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Button } from '../../components/Button/index.tsx';
+import { ArrowUUpLeft } from '@phosphor-icons/react';
 
 export default function PregnancyRegister() {
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const gestanteId = location.state.id;
 
   const [period, setPeriod] = useState<string | string[]>();
   const [beginning, setBeginning] = useState<string | string[]>();
@@ -228,10 +233,14 @@ export default function PregnancyRegister() {
     setNumberCigarettes(value);
   };
 
+  const handleBackArrow = () => {
+    navigate('/dashboard');
+  };
+
   const handlePregnancyRegister = () => {
     try {
       const data: PregnancyRegisterInterface = {
-        gestanteId: 1,
+        gestanteId: gestanteId,
         dataUltimaMenstruacao: period,
         dataInicioGestacao: beginning,
         pesoAntesGestacao: parseInt(weight),
@@ -248,8 +257,9 @@ export default function PregnancyRegister() {
         quantidadeCigarrosDia: parseInt(numberCigarettes)
       };
       PregnancyRegisterSchema.parse(data);
-      postGestacao(1, data);
-      navigate('/pregnancies');
+      postGestacao(gestanteId, data).then((resp) => {
+        navigate('/pregnancies');
+      });
     } catch (error) {
       if (error instanceof ZodError) {
         console.log(error);
@@ -261,9 +271,12 @@ export default function PregnancyRegister() {
   return (
     <S.Container>
       <S.Content>
-        <S.LogoContainer>
-          <img src={Logo} alt="Angels Logo"></img>
-        </S.LogoContainer>
+        <S.NavContainer>
+          <ArrowUUpLeft size={22} color="#B1488A" onClick={handleBackArrow} />
+          <S.LogoContainer>
+            <img src={Logo} alt="Angels Logo"></img>
+          </S.LogoContainer>
+        </S.NavContainer>
         <S.FormContainer>
           <S.FirstRow>
             <DateSelect
