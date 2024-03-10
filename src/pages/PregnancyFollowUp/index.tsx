@@ -9,6 +9,7 @@ import { InputNumber, RadioChangeEvent, message } from 'antd';
 import { PregnancyFollowUpSchema } from '../../services/types/PregnancyFollowUpType';
 import { ZodError } from 'zod';
 import { postAcompanhamento } from '../../services/PregnancyFollowUpService';
+import { FollowUpInterface } from '../../services/PregnancyFollowUpService/interface';
 
 export function PregnancyFollowUp() {
   const [weight, setWeight] = useState<string>();
@@ -123,10 +124,10 @@ export function PregnancyFollowUp() {
   const handlePregnancyFollowUp = () => {
     let pressure = '';
     if (typeof pressureD === 'string' && typeof pressureS === 'string') {
-      pressure = pressureD + pressureS;
+      pressure = pressureD + '/' + pressureS;
     }
     try {
-      const data = {
+      const data: FollowUpInterface = {
         gestanteId: 1,
         pesoAtual: weight,
         idadeGestacional: weeks,

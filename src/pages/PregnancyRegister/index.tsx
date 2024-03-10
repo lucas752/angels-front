@@ -9,22 +9,27 @@ import { RadioChangeEvent } from 'antd';
 import { PregnancyRegisterSchema } from '../../services/types/PregnancyRegisterType.ts';
 import { ZodError } from 'zod';
 import { errorNotification } from '../../components/Notification/index.ts';
+import { postGestacao } from '../../services/PregnancyRegisterService/index.ts';
+import { PregnancyRegisterInterface } from '../../services/PregnancyRegisterService/interface.ts';
+import { useNavigate } from 'react-router-dom';
 
 export default function PregnancyRegister() {
+  const navigate = useNavigate();
+
   const [period, setPeriod] = useState<string | string[]>();
   const [beginning, setBeginning] = useState<string | string[]>();
-  const [weight, setWeight] = useState<string>();
-  const [situation, setSituation] = useState<string>();
-  const [risc, setRisc] = useState<string>();
-  const [blood, setBlood] = useState<string>();
-  const [rh, setRh] = useState<number>();
-  const [hepB, setHepB] = useState<number>();
-  const [drugs, setDrugs] = useState<number>();
-  const [smoke, setSmoke] = useState<number>();
-  const [alcohol, setAlcohol] = useState<number>();
-  const [planned, setPlanned] = useState<number>();
-  const [alcoholFrequency, setAlcoholFrequency] = useState<string>();
-  const [numberCigarettes, setNumberCigarettes] = useState<string>();
+  const [weight, setWeight] = useState<string>('');
+  const [situation, setSituation] = useState<string>('');
+  const [risc, setRisc] = useState<string>('');
+  const [blood, setBlood] = useState<string>('');
+  const [rh, setRh] = useState<string>('');
+  const [hepB, setHepB] = useState<boolean>();
+  const [drugs, setDrugs] = useState<string>('');
+  const [smoke, setSmoke] = useState<boolean>();
+  const [alcohol, setAlcohol] = useState<boolean>();
+  const [planned, setPlanned] = useState<boolean>();
+  const [alcoholFrequency, setAlcoholFrequency] = useState<string>('0');
+  const [numberCigarettes, setNumberCigarettes] = useState<string>('0');
 
   interface ErrorInterface {
     errorShow?: boolean;
@@ -63,6 +68,24 @@ export default function PregnancyRegister() {
       label: 'Alto consumo de álcool'
     }
   ];
+  const drugsUse = [
+    {
+      value: '0',
+      label: 'Nenhum consumo de drogas'
+    },
+    {
+      value: '1',
+      label: 'Baixo consumo de drogas'
+    },
+    {
+      value: '2',
+      label: 'Moderado consumo de drogas'
+    },
+    {
+      value: '3',
+      label: 'Alto consumo de drogas'
+    }
+  ];
 
   const riscoGest = [
     {
@@ -96,19 +119,19 @@ export default function PregnancyRegister() {
 
   const gpSang = [
     {
-      value: 'A',
+      value: '1',
       label: 'A'
     },
     {
-      value: 'B',
+      value: '2',
       label: 'B'
     },
     {
-      value: 'AB',
+      value: '3',
       label: 'AB'
     },
     {
-      value: 'O',
+      value: '4',
       label: 'O'
     }
   ];
@@ -118,7 +141,7 @@ export default function PregnancyRegister() {
     dateString: string | string[]
   ) => {
     try {
-      PregnancyRegisterSchema.shape.period.parse(dateString);
+      PregnancyRegisterSchema.shape.dataUltimaMenstruacao.parse(dateString);
       setErrorPeriod({ errorType: '', errorShow: false });
       if (dateString == '') {
         setErrorPeriod({ errorType: 'error', errorShow: true });
@@ -134,7 +157,7 @@ export default function PregnancyRegister() {
     dateString: string | string[]
   ) => {
     try {
-      PregnancyRegisterSchema.shape.beginning.parse(dateString);
+      PregnancyRegisterSchema.shape.dataInicioGestacao.parse(dateString);
       setErrorBeginning({ errorType: '', errorShow: false });
       if (dateString == '') {
         setErrorBeginning({ errorType: 'error', errorShow: true });
@@ -147,7 +170,7 @@ export default function PregnancyRegister() {
   const handleChangeWeight = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      PregnancyRegisterSchema.shape.weight.parse(value);
+      PregnancyRegisterSchema.shape.pesoAntesGestacao.parse(parseInt(value));
       setErrorWeight({ errorType: '', errorShow: false });
     } catch (error) {
       setErrorWeight({ errorType: 'error', errorShow: true });
@@ -183,8 +206,10 @@ export default function PregnancyRegister() {
     }
   };
 
-  const handleChangeDrugs = (e: RadioChangeEvent) => {
-    setDrugs(e.target.value);
+  const handleChangeDrugs = (value: unknown) => {
+    if (typeof value === 'string') {
+      setDrugs(value);
+    }
   };
   const handleChangeSmoke = (e: RadioChangeEvent) => {
     setSmoke(e.target.value);
@@ -202,26 +227,29 @@ export default function PregnancyRegister() {
     const { value } = e.target;
     setNumberCigarettes(value);
   };
+
   const handlePregnancyRegister = () => {
     try {
-      const data = {
-        period,
-        beginning,
-        weight,
-        situation,
-        risc,
-        blood,
-        rh,
-        hepB,
-        drugs,
-        smoke,
-        planned,
-        alcohol,
-        alcoholFrequency,
-        numberCigarettes
+      const data: PregnancyRegisterInterface = {
+        gestanteId: 1,
+        dataUltimaMenstruacao: period,
+        dataInicioGestacao: beginning,
+        pesoAntesGestacao: parseInt(weight),
+        situacaoGestacional: parseInt(situation),
+        riscoGestacional: parseInt(risc),
+        grupoSanguineo: parseInt(blood),
+        fatorRh: rh,
+        vacinaHepatiteB: hepB,
+        usoDrogas: parseInt(drugs),
+        fuma: smoke,
+        gravidezPlanejada: planned,
+        consumoAlcool: alcohol,
+        frequenciaUsoAlcool: parseInt(alcoholFrequency),
+        quantidadeCigarrosDia: parseInt(numberCigarettes)
       };
-      console.log(data);
       PregnancyRegisterSchema.parse(data);
+      postGestacao(1, data);
+      navigate('/pregnancies');
     } catch (error) {
       if (error instanceof ZodError) {
         console.log(error);
@@ -281,19 +309,25 @@ export default function PregnancyRegister() {
               label="Fator RH"
               firstOption="+"
               secondOption="-"
-              firstValue={1}
-              secondValue={2}
+              firstValue={'+'}
+              secondValue={'-'}
               value={rh}
               radioFunction={handleChangeRh}
             ></RadioSelect>
           </S.FirstRow>
           <S.FirstRow>
+            <Select
+              list={drugsUse}
+              label="Frequência do uso de drogas"
+              defaut="Selecione a frequencia de uso"
+              selectFunc={handleChangeDrugs}
+            ></Select>
             <RadioSelect
               label="Gravidez planejada"
               firstOption="sim"
               secondOption="não"
-              firstValue={1}
-              secondValue={2}
+              firstValue={true}
+              secondValue={false}
               value={planned}
               radioFunction={handleChangePlanned}
             ></RadioSelect>
@@ -301,26 +335,17 @@ export default function PregnancyRegister() {
               label="Vacina hepatite b"
               firstOption="sim"
               secondOption="não"
-              firstValue={1}
-              secondValue={2}
+              firstValue={true}
+              secondValue={false}
               value={hepB}
               radioFunction={handleChangeHepB}
-            ></RadioSelect>
-            <RadioSelect
-              label="Consumo de drogas"
-              firstOption="sim"
-              secondOption="não"
-              firstValue={1}
-              secondValue={2}
-              radioFunction={handleChangeDrugs}
-              value={drugs}
             ></RadioSelect>
             <RadioSelect
               label="Fumante"
               firstOption="sim"
               secondOption="não"
-              firstValue={1}
-              secondValue={2}
+              firstValue={true}
+              secondValue={false}
               radioFunction={handleChangeSmoke}
               value={smoke}
             ></RadioSelect>
@@ -328,14 +353,14 @@ export default function PregnancyRegister() {
               label="Consumo de álcool"
               firstOption="sim"
               secondOption="não"
-              firstValue={1}
-              secondValue={2}
+              firstValue={true}
+              secondValue={false}
               radioFunction={handleChangeAlcohol}
               value={alcohol}
             ></RadioSelect>
           </S.FirstRow>
           <S.FirstRow>
-            {smoke == 1 && (
+            {smoke && (
               <Input
                 label="Quantidade de cigarro por dia"
                 type="number"
@@ -344,7 +369,7 @@ export default function PregnancyRegister() {
                 inputFunction={handleCigarettes}
               ></Input>
             )}
-            {alcohol == 1 && (
+            {alcohol && (
               <Select
                 list={alcoolFreq}
                 label="Frequência do uso de álcool"
