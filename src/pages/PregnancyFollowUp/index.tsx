@@ -8,15 +8,16 @@ import { RadioSelect } from '../../components/RadioSelect';
 import { InputNumber, RadioChangeEvent, message } from 'antd';
 import { PregnancyFollowUpSchema } from '../../services/types/PregnancyFollowUpType';
 import { ZodError } from 'zod';
+import { postAcompanhamento } from '../../services/PregnancyFollowUpService';
 
 export function PregnancyFollowUp() {
   const [weight, setWeight] = useState<string>();
   const [weeks, setWeeks] = useState<string>();
-  const [pressureS, setPressureS] = useState<number>();
-  const [pressureD, setPressureD] = useState<number>();
+  const [pressureS, setPressureS] = useState<string>();
+  const [pressureD, setPressureD] = useState<string>();
   const [height, setHeight] = useState<string>();
   const [heartBeat, setHeartBeat] = useState<string>();
-  const [radio, setRadio] = useState<number>();
+  const [radio, setRadio] = useState<string>();
   const [type, setType] = useState<string>();
   const [date, setDate] = useState<string | string[]>();
 
@@ -55,7 +56,7 @@ export function PregnancyFollowUp() {
 
   const handleChangeDate = (date: unknown, dateString: string | string[]) => {
     try {
-      PregnancyFollowUpSchema.shape.date.parse(dateString);
+      PregnancyFollowUpSchema.shape.dataAcompanhamento.parse(dateString);
       setDateError({ errorType: '', errorShow: false });
       if (dateString == '') {
         setDateError({ errorType: 'error', errorShow: true });
@@ -76,21 +77,22 @@ export function PregnancyFollowUp() {
     }
   };
 
-  const handleChangePressureD = (value: number | null) => {
+  const handleChangePressureD = (value: string | null) => {
     if (typeof value === 'number') {
-      setPressureD(value);
+      setPressureD(String(value));
     }
   };
-  const handleChangePressureS = (value: number | null) => {
+  const handleChangePressureS = (value: string | null) => {
     if (typeof value === 'number') {
-      setPressureS(value);
+      setPressureS(String(value));
     }
+    console.log(pressureS);
   };
 
   const handleChangeWeight = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      PregnancyFollowUpSchema.shape.weight.parse(value);
+      PregnancyFollowUpSchema.shape.pesoAtual.parse(value);
       setWeightError({ errorType: '', errorShow: false });
     } catch (error) {
       setWeightError({ errorType: 'error', errorShow: true });
@@ -101,7 +103,7 @@ export function PregnancyFollowUp() {
   const handleChangeWeeks = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      PregnancyFollowUpSchema.shape.weeks.parse(value);
+      PregnancyFollowUpSchema.shape.idadeGestacional.parse(value);
       setWeeksError({ errorType: '', errorShow: false });
     } catch (error) {
       setWeeksError({ errorType: 'error', errorShow: true });
@@ -119,20 +121,25 @@ export function PregnancyFollowUp() {
   };
 
   const handlePregnancyFollowUp = () => {
+    let pressure = '';
+    if (typeof pressureD === 'string' && typeof pressureS === 'string') {
+      pressure = pressureD + pressureS;
+    }
     try {
       const data = {
-        weight,
-        weeks,
-        pressureD,
-        pressureS,
-        heartBeat,
-        height,
-        type,
-        date,
-        radio
+        gestanteId: 1,
+        pesoAtual: weight,
+        idadeGestacional: weeks,
+        pressaoArterial: pressure,
+        batimentosCardiacosFeto: heartBeat,
+        alturaUterina: height,
+        tipo: type,
+        dataAcompanhamento: date,
+        realizadoPor: radio
       };
       console.log(data);
       PregnancyFollowUpSchema.parse(data);
+      postAcompanhamento(1, data);
     } catch (error) {
       if (error instanceof ZodError) {
         console.log(error);
@@ -219,8 +226,8 @@ export function PregnancyFollowUp() {
             <RadioSelect
               label="Atendido por"
               firstOption="Médico"
-              firstValue={1}
-              secondValue={2}
+              firstValue={'médico'}
+              secondValue={'enfermeiro'}
               secondOption="Enfermeiro"
               value={radio}
               radioFunction={radioOnChange}
