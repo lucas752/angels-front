@@ -42,11 +42,11 @@ export function Dashboard() {
       .map((item, index) => (
         <PregnancyCard
           key={index}
-          id={'1'}
+          id={1}
           pregnantName={item.gestante?.nome}
           weeks={currentDate.diff(item.dataInicioGestacao, 'weeks').toString()}
           gestationalRisk={true}
-          pregnancyStatus={item.situacaoGestacional.toString()}
+          pregnancyStatus={item.situacaoGestacional}
         />
       ));
   };
