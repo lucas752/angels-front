@@ -11,6 +11,15 @@ export const GetPregnantByCpf = async (cpf: string) => {
   }
 };
 
+export const GetPregnantInfo = async (id: number) => {
+  try {
+    const response = await api.get(`/gestantes/${id}`);
+    return response;
+  } catch (error) {
+    errorNotification('Erro ao buscar gestante, tente novamente.');
+  }
+};
+
 export const PostPregnant = async (data: PregnantInterface) => {
   try {
     const response = await api.post(`/gestantes`, data);
