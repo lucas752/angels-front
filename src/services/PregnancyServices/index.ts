@@ -7,6 +7,14 @@ export const GetPregnancies = async () => {
     return response;
   } catch (error) {
     errorNotification('Erro ao buscar gestações');
-    throw error; // Re-throw the error to propagate it
+  }
+};
+
+export const GetPregnancyById = async (id: number) => {
+  try {
+    const response = api.get(`/gestacoes/${id}`);
+    return response;
+  } catch (error) {
+    errorNotification('Gestação não encontrada');
   }
 };

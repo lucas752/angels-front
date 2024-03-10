@@ -29,14 +29,14 @@ export const LineContainer = styled.section`
 `;
 
 export const Container = styled.div`
-  padding-top: 50px;
+  /* padding-top: 50px;
   padding-left: 110px;
-  padding-right: 110px;
-
+  padding-right: 110px; */
+  /* 
   @media (max-width: 550px) {
     padding-left: 50px;
     padding-right: 50px;
-  }
+  } */
 `;
 
 export const ButtonContainer = styled.div`

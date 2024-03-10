@@ -1,8 +1,4 @@
-import {
-  ArrowCircleLeft,
-  PencilSimple,
-  TrashSimple
-} from '@phosphor-icons/react';
+import { PencilSimple, TrashSimple } from '@phosphor-icons/react';
 import * as S from './styles';
 import { InfoContainer } from '../../../pages/PregnantInfo/components/InfoContainer';
 import moment from 'moment';
@@ -201,33 +197,21 @@ export const PregnantInfo: React.FC<PregnantInfoProps> = ({ id }) => {
   return (
     <S.Container>
       <S.ContentContainer>
-        <S.TitleContainer>
-          <section>
-            <PencilSimple
-              size={32}
-              weight="bold"
-              color="#7c3a66"
-              onClick={showUptadeModal}
-            />
-            <TrashSimple
-              size={32}
-              weight="bold"
-              color="#7c3a66"
-              onClick={showDeleteModal}
-            />
-          </section>
-        </S.TitleContainer>
         <S.ContentContainer>
-          <S.LineContainer>
+          {/* <S.LineContainer>
             <InfoContainer name="Nome" value={pregnantInfo?.nome} />
             <InfoContainer name="CPF" value={pregnantInfo?.cpf} />
-          </S.LineContainer>
+          </S.LineContainer> */}
           <S.LineContainer>
             <InfoContainer
               name="Nascimento"
               value={moment(pregnantInfo?.dataNascimento).format('DD/MM/YYYY')}
             />
+            <S.InfoEmptyContainer />
+            <S.InfoEmptyContainer />
+            <S.InfoEmptyContainer />
             <InfoContainer name="Gênero" value={pregnantInfo?.sexo} />
+            <S.InfoEmptyContainer />
           </S.LineContainer>
           <S.LineContainer>
             <InfoContainer name="Município" value={pregnantInfo?.municipio} />
@@ -247,6 +231,7 @@ export const PregnantInfo: React.FC<PregnantInfoProps> = ({ id }) => {
               name="Má formação congênita"
               value={pregnantInfo?.maFormacaoCongenita == true ? 'Sim' : 'Não'}
             />
+            <S.InfoEmptyContainer />
           </S.LineContainer>
           <S.LineContainer>
             <InfoContainer
@@ -274,6 +259,22 @@ export const PregnantInfo: React.FC<PregnantInfoProps> = ({ id }) => {
               value={pregnantInfo?.quantidadeNascidosMortos?.toString()}
             />
           </S.LineContainer>
+          <S.TitleContainer>
+            <section>
+              <PencilSimple
+                size={28}
+                weight="bold"
+                color="#7c3a66"
+                onClick={showUptadeModal}
+              />
+              <TrashSimple
+                size={28}
+                weight="bold"
+                color="#7c3a66"
+                onClick={showDeleteModal}
+              />
+            </section>
+          </S.TitleContainer>
         </S.ContentContainer>
         <S.InfoModal
           open={isUptadeModalOpen}
