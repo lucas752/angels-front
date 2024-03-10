@@ -28,3 +28,21 @@ export const PostPregnant = async (data: PregnantInterface) => {
     errorNotification('Erro ao cadastrar uma gestante, tente novamente.');
   }
 };
+
+export const PutPregnant = async (id: number, data: PregnantInterface) => {
+  try {
+    const response = await api.put(`/gestantes/${id}`, data);
+    return response;
+  } catch (error) {
+    errorNotification('Erro ao atualizar uma gestante, tente novamente.');
+  }
+};
+
+export const DeletePregnant = async (id: number) => {
+  try {
+    const response = await api.delete(`/gestantes/${id}`);
+    return response;
+  } catch (error) {
+    errorNotification('Erro ao deletar gestante, tente novamente.');
+  }
+};

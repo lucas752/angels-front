@@ -15,6 +15,7 @@ interface DateProps {
   errorShow?: boolean;
   optional?: boolean;
   color?: string;
+  value?: string;
 }
 export const DateSelect: React.FC<DateProps> = ({
   label,
@@ -24,7 +25,8 @@ export const DateSelect: React.FC<DateProps> = ({
   errorShow,
   color,
   status,
-  optional
+  optional,
+  value
 }) => {
   return (
     <S.Container>
@@ -48,6 +50,7 @@ export const DateSelect: React.FC<DateProps> = ({
         placeholder={placeHolder}
         onChange={inputFunction}
         status={status}
+        value={value}
       />
     </S.Container>
   );

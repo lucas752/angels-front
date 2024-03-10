@@ -81,4 +81,14 @@ export const TitleContainer = styled.div`
   }
 `;
 
-export const UpdateModal = styled(Modal)``;
+export const InfoModal = styled(Modal)`
+  .ant-btn-primary {
+    background-color: var(--red-500) !important;
+    border-radius: 20px;
+  }
+
+  .ant-btn-default {
+    border-color: var(--red-500) !important;
+    border-radius: 20px;
+  }
+`;

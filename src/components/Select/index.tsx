@@ -19,6 +19,7 @@ interface SelectProps {
   errorShow?: boolean;
   optional?: boolean;
   color?: string;
+  value?: string;
 }
 
 interface ListProps {
@@ -35,7 +36,8 @@ export const Select: React.FC<SelectProps> = ({
   errorShow,
   color,
   status,
-  optional
+  optional,
+  value
 }) => {
   return (
     <S.Container>
@@ -61,6 +63,7 @@ export const Select: React.FC<SelectProps> = ({
         options={list}
         onChange={selectFunc}
         status={status}
+        value={value}
       />
     </S.Container>
   );
