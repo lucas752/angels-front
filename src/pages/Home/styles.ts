@@ -7,22 +7,18 @@ export const Container = styled.div`
     rgba(177, 72, 138, 1) 0%,
     rgba(158, 16, 106, 1) 100%
   );
-  height: 100vh;
 `;
 
 export const Content = styled.div`
-  // margin-bottom: 5rem;
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: center;
-  // align-items: center;
-  // text-align: center;
-  // gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   color: #fff;
   font-family: 'Inter', sans-serif;
 
   h1 {
     font-size: 3.6rem;
+    // font-weight: 500;
     margin-bottom: 10px;
 
     @media (max-width: 768px) {

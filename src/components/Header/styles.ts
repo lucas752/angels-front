@@ -5,6 +5,9 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   padding: 0 4rem 0 2rem;
+  box-shadow: 0 2px 4px rgba(2, 15, 29, 0.242);
+  z-index: 999;
+  position: relative;
 
   div {
     flex: 1;
@@ -67,6 +70,7 @@ export const Ul = styled.ul`
   width: 70%;
   justify-content: space-between;
   list-style: none;
+  margin-top: 2px;
 `;
 
 export const Li = styled.li``;
