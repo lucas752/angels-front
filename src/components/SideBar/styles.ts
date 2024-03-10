@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 export const SidebarContainer = styled.div`
   height: 80%;
-  padding: 1rem;
+
   background-color: #ffffff;
-  border-radius: 36px;
+  border-radius: 52px;
   border: 3px solid #7c3a66;
   display: flex;
   flex-direction: column;

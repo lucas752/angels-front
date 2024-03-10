@@ -1,3 +1,4 @@
+import { Modal } from 'antd';
 import styled from 'styled-components';
 
 export const Title = styled.h1`
@@ -46,6 +47,7 @@ export const ButtonContainer = styled.div`
 export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 25px;
 `;
 
@@ -62,4 +64,31 @@ export const ArrowButton = styled.div`
   height: 50px;
   border-radius: 25px;
   margin-top: 20px;
+`;
+
+export const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  svg {
+    cursor: pointer;
+  }
+
+  section {
+    display: flex;
+    gap: 8px;
+  }
+`;
+
+export const InfoModal = styled(Modal)`
+  .ant-btn-primary {
+    background-color: var(--red-500) !important;
+    border-radius: 20px;
+  }
+
+  .ant-btn-default {
+    border-color: var(--red-500) !important;
+    border-radius: 20px;
+  }
 `;

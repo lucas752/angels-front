@@ -1,7 +1,8 @@
 import {
   CaretCircleLeft,
   CaretCircleRight,
-  DotsThreeOutline
+  DotsThreeOutline,
+  MagnifyingGlass
 } from '@phosphor-icons/react';
 
 import * as S from './styles.ts';
@@ -9,115 +10,43 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SideBar from '../../components/SideBar/index.tsx';
 import { PregnancyCard } from '../../components/PregnancyCard/index.tsx';
+import { useData } from '../../config/Data/UseData.ts';
+import moment from 'moment';
+import { Empty } from 'antd';
+import { Input } from '../../components/Input/index.tsx';
+import { Button } from '../../components/Button/index.tsx';
 
 export function Dashboard() {
+  const { pregnanciesList } = useData();
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
-  const cardData = [
-    {
-      name: 'Maria Joana Ferreira',
-      weeks: '14',
-      status: 'Risco'
-    },
-    {
-      name: 'Ana Carolina Santos',
-      weeks: '20',
-      status: 'Alto Risco'
-    },
-    {
-      name: 'Juliana Lima',
-      weeks: '12',
-      status: 'Moderado'
-    },
-    {
-      name: 'Camila Pereira',
-      weeks: '9',
-      status: 'Estável'
-    },
-    {
-      name: 'Mariana Oliveira',
-      weeks: '7',
-      status: 'Baixo Risco'
-    },
-    {
-      name: 'Fernanda Silva',
-      weeks: '22',
-      status: 'Alto Risco'
-    },
-    {
-      name: 'Beatriz Oliveira',
-      weeks: '10',
-      status: 'Estável'
-    },
-    {
-      name: 'Gabriela Santos',
-      weeks: '18',
-      status: 'Risco Elevado'
-    },
-    {
-      name: 'Carolina Lima',
-      weeks: '15',
-      status: 'Moderado'
-    },
-    {
-      name: 'Laura Costa',
-      weeks: '16',
-      status: 'Estável'
-    },
-    {
-      name: 'Patrícia Rodrigues',
-      weeks: '11',
-      status: 'Moderado'
-    },
-    {
-      name: 'Isabela Oliveira',
-      weeks: '13',
-      status: 'Risco Elevado'
-    },
-    {
-      name: 'Larissa Silva',
-      weeks: '19',
-      status: 'Alto Risco'
-    },
-    {
-      name: 'Carla Martins',
-      weeks: '8',
-      status: 'Baixo Risco'
-    },
-    {
-      name: 'Vanessa Gonçalves',
-      weeks: '23',
-      status: 'Alto Risco'
-    },
-    {
-      name: 'Daniela Ferreira',
-      weeks: '17',
-      status: 'Risco Elevado'
-    },
-    {
-      name: 'Tatiane Oliveira',
-      weeks: '21',
-      status: 'Alto Risco'
-    },
-    {
-      name: 'Aline Santos',
-      weeks: '24',
-      status: 'Alto Risco'
-    }
-  ];
+  const [searchName, setSearchName] = useState<string>('');
+
+  const handleChangeName = (e: { target: { value: string } }) => {
+    const { value } = e.target;
+    setSearchName(value);
+  };
+
+  const filteredList = pregnanciesList.filter(
+    (item) =>
+      item.gestante?.nome &&
+      item.gestante?.nome.toLowerCase().includes(searchName.toLowerCase())
+  );
 
   const renderCards = () => {
-    return cardData
+    const currentDate = moment();
+
+    return filteredList
       .slice(currentPage, currentPage + 3)
       .map((item, index) => (
         <PregnancyCard
           key={index}
           id={'1'}
-          pregnantName={item.name}
-          weeks={item.weeks}
+          pregnantName={item.gestante?.nome}
+          weeks={currentDate.diff(item.dataInicioGestacao, 'weeks').toString()}
           gestationalRisk={true}
-          pregnancyStatus={item.weeks}
+          pregnancyStatus={item.situacaoGestacional.toString()}
         />
       ));
   };
@@ -130,10 +59,14 @@ export function Dashboard() {
   };
 
   const next = () => {
-    if (currentPage + 3 < cardData.length) {
+    if (currentPage + 3 < filteredList.length) {
       setCurrentPage(currentPage + 3);
       setPage((prev) => prev + 1);
     }
+  };
+
+  const handleCleanSearch = () => {
+    setSearchName('');
   };
   return (
     <S.Container>
@@ -142,14 +75,43 @@ export function Dashboard() {
           <SideBar />
         </S.NavBarContainer>
         <S.CardsContainer>
-          <S.Cards>{renderCards()}</S.Cards>
-          <S.Pagination>
-            <CaretCircleLeft size={32} color="#b1488a" onClick={previous} />
-            <label>{page}</label>
-            <DotsThreeOutline size={32} color="#b1488a" />
-            <label>{cardData.length / 3}</label>
-            <CaretCircleRight size={32} color="#b1488a" onClick={next} />
-          </S.Pagination>
+          <S.InputContainer>
+            {searchName !== '' && (
+              <Button
+                label="Limpar filtro"
+                buttonFunction={handleCleanSearch}
+                shape="round"
+              />
+            )}
+            {pregnanciesList.length > 0 && (
+              <Input
+                inputFunction={handleChangeName}
+                placeHolder="Digite o nome da gestante..."
+                value={searchName}
+                rightAdd={<MagnifyingGlass size={24} color="#b1488a" />}
+                color="#b1488a"
+              />
+            )}
+          </S.InputContainer>
+
+          {filteredList.length > 0 ? (
+            <S.Cards>{renderCards()}</S.Cards>
+          ) : (
+            <S.EmptyBox
+              image={Empty.PRESENTED_IMAGE_SIMPLE}
+              description="Sem gestações cadastradas"
+            />
+          )}
+
+          {filteredList.length >= 4 && (
+            <S.Pagination>
+              <CaretCircleLeft size={32} color="#b1488a" onClick={previous} />
+              <label>{page}</label>
+              <DotsThreeOutline size={32} color="#b1488a" />
+              <label>{Math.ceil(filteredList.length / 3)}</label>
+              <CaretCircleRight size={32} color="#b1488a" onClick={next} />
+            </S.Pagination>
+          )}
         </S.CardsContainer>
       </S.Content>
     </S.Container>

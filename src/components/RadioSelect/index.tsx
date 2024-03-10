@@ -10,9 +10,9 @@ interface RadioProps {
   color?: string;
   firstOption?: string;
   secondOption?: string;
-  firstValue?: string | number;
-  secondValue?: string | number;
-  value?: string | number;
+  firstValue?: string | number | boolean;
+  secondValue?: string | number | boolean;
+  value?: string | number | boolean;
   radioFunction?: (e: RadioChangeEvent) => void;
 }
 

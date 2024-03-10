@@ -1,3 +1,4 @@
+import { Empty } from 'antd';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -76,7 +77,7 @@ export const Line = styled.div`
   padding: 0 1rem;
 `;
 export const CardsContainer = styled.div`
-  width: 92%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -114,5 +115,19 @@ export const Pagination = styled.div`
 
   svg {
     cursor: pointer;
+  }
+`;
+
+export const InputContainer = styled.div`
+  width: 25%;
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+`;
+
+export const EmptyBox = styled(Empty)`
+  .ant-empty-description {
+    color: var(--red-500) !important;
+    font-weight: bold;
   }
 `;
