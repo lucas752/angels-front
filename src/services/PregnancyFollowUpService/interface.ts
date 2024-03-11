@@ -8,4 +8,5 @@ export interface FollowUpInterface {
   alturaUterina: number | undefined;
   tipo: string | undefined;
   realizadoPor: string | undefined;
+  riscoIA: boolean | undefined;
 }

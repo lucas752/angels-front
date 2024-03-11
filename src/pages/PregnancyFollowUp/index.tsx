@@ -129,7 +129,7 @@ export function PregnancyFollowUp() {
   };
 
   const handleBackArrow = () => {
-    navigate('/pregnancies');
+    navigate(`/pregnancies/${gestacaoId}`);
   };
 
   const handlePregnancyFollowUp = () => {
@@ -147,9 +147,9 @@ export function PregnancyFollowUp() {
         alturaUterina: parseInt(height),
         tipo: type,
         dataAcompanhamento: date,
-        realizadoPor: radio
+        realizadoPor: radio,
+        riscoIA: false
       };
-      console.log(data);
       PregnancyFollowUpSchema.parse(data);
       postAcompanhamento(gestacaoId, data).then(() => {
         navigate(`/pregnancies/${gestanteId}`);
@@ -175,7 +175,12 @@ export function PregnancyFollowUp() {
     <S.Container>
       <S.Content>
         <S.NavContainer>
-          <ArrowUUpLeft size={22} color="#B1488A" onClick={handleBackArrow} />
+          <ArrowUUpLeft
+            size={22}
+            color="#B1488A"
+            onClick={handleBackArrow}
+            cursor={'Pointer'}
+          />
           <S.LogoContainer>
             <img src={Logo} alt="Angels Logo"></img>
           </S.LogoContainer>
