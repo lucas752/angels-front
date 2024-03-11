@@ -1,7 +1,7 @@
 import { SliderComp } from "../SliderComp";
 import * as S from "./styles";
 
-export const Patners = () => {
+export const Partners = () => {
 
     return (
         <S.Container>

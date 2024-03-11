@@ -32,7 +32,7 @@ export const Header: React.FC<HeaderProps> = () => {
             <S.Ul>
               <S.Li>
                 <Link
-                  to="#"
+                  to="#1"
                   onClick={() => handleClick('HOME')}
                   className={activeLink === 'HOME' ? 'active' : ''}
                 >
@@ -41,7 +41,7 @@ export const Header: React.FC<HeaderProps> = () => {
               </S.Li>
               <S.Li>
                 <Link
-                  to="#"
+                  to="#2"
                   onClick={() => handleClick('SOBRE')}
                   className={activeLink === 'SOBRE' ? 'active' : ''}
                 >
@@ -50,7 +50,7 @@ export const Header: React.FC<HeaderProps> = () => {
               </S.Li>
               <S.Li>
                 <Link
-                  to="#"
+                  to="#3"
                   onClick={() => handleClick('DADOS')}
                   className={activeLink === 'DADOS' ? 'active' : ''}
                 >
@@ -59,7 +59,7 @@ export const Header: React.FC<HeaderProps> = () => {
               </S.Li>
               <S.Li>
                 <Link
-                  to="#"
+                  to="#4"
                   onClick={() => handleClick('EQUIPE')}
                   className={activeLink === 'EQUIPE' ? 'active' : ''}
                 >
@@ -68,7 +68,7 @@ export const Header: React.FC<HeaderProps> = () => {
               </S.Li>
               <S.Li>
                 <Link
-                  to="#"
+                  to="#5"
                   onClick={() => handleClick('PARCEIROS')}
                   className={activeLink === 'PARCEIROS' ? 'active' : ''}
                 >
@@ -77,7 +77,7 @@ export const Header: React.FC<HeaderProps> = () => {
               </S.Li>
               <S.Li>
                 <Link
-                  to="#"
+                  to="#6"
                   onClick={() => handleClick('FALE CONOSCO')}
                   className={activeLink === 'FALE CONOSCO' ? 'active' : ''}
                 >

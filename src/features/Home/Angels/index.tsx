@@ -12,7 +12,7 @@ export const Angels = () => {
 
     return (
         <S.NoRightPadding>
-            <S.AngelsWrapper>
+            <S.AngelsWrapper id="1">
                 <S.AngelsContent>
                     <S.AngelsContentWrapper>
                         <h1>angels</h1>
