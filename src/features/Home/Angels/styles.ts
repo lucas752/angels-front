@@ -8,10 +8,11 @@ export const AngelsWrapper = styled.div`
     width: 100%;
     display: flex;
     height: 100dvh;
+    z-index: -1;
 `;
 
 export const AngelsContent = styled.div`
-    width: 30%;
+    width: 40%;
 `;
 export const AngelsImage = styled.div`
     width: 70%;
@@ -23,6 +24,7 @@ export const AngelsImage = styled.div`
         margin-top: 1rem;
         width: 100%;
         position: absolute;
+        z-index: 1;
     }
 `;
 

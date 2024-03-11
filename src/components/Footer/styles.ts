@@ -1,33 +1,66 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    padding: 30px;
-    background: rgb(177, 72, 138);
+    padding: 2rem ;
     background: linear-gradient(
-    90deg,
-    rgba(177, 72, 138, 1) 0%,
-    rgba(158, 16, 106, 1) 100%
+        90deg,
+        rgba(177, 72, 138, 1) 0%,
+        rgba(158, 16, 106, 1) 100%
     );
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    position: fixed;
     box-shadow: 0 2px 4px rgba(2, 15, 29, 0.242);
+    
+    
 `;
 
-export const Links = styled.ul`
+export const FooterWrapper = styled.footer`    
+        
+`;
+
+export const FooterInner = styled.div`
+
+
     display: flex;
     justify-content: center;
-    list-style: none;
-    padding: 0;
+    align-items: center;
+    
+    margin: 0 auto;
+    padding: 0 2rem;
 `;
 
-export const LinkItem = styled.li`
-    margin: 0 10px;
-`;
+export const FooterLinks = styled.div`
 
-export const Info = styled.div`
-    color: white;
+    display: flex;
+    justify-content: center;
     text-align: center;
-    margin-top: 20px;
+    width: 70%;
+   
+
+    .link {
+        width: 100%;
+        
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        a {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            &:hover {
+                color: #b1488a;
+            }
+        }
+    }
+`;
+
+export const Logo = styled.img`
+   width:100%;
+    
+`;
+
+export const FooterTitle = styled.div`
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
 `;

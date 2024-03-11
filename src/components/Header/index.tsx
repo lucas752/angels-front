@@ -19,57 +19,75 @@ export const Header: React.FC<HeaderProps> = () => {
   };
 
   useEffect(() => {
-    
     setActiveLink('HOME');
   }, []);
 
-  return (
-    <S.Container>
-      <div>
-        <S.Navigation>
-          <S.Nav>
-            <S.Logo src={logo} alt="Angels logo" />
-            <S.Ul>
+  const scrollToElement = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+  
+    return (
+      <S.Container id="home">
+        <div>
+          <S.Navigation>
+            <S.Nav>
+              <S.Logo src={logo} alt="Angels logo" />
+              <S.Ul>
+                <S.Li>
+                  <Link
+                    to="#home"
+                    onClick={() => {
+                      handleClick('HOME');
+                      scrollToElement('home');
+                    }}
+                    className={activeLink === 'HOME' ? 'active' : ''}
+                  >
+                    HOME
+                  </Link>
+                </S.Li>
+                <S.Li>
+                  <Link
+                    to="#about"
+                    onClick={() => {
+                      handleClick('SOBRE');
+                      scrollToElement('about');
+                    }}
+                    className={activeLink === 'SOBRE' ? 'active' : ''}
+                  >
+                    SOBRE
+                  </Link>
+                </S.Li>
               <S.Li>
                 <Link
-                  to="#1"
-                  onClick={() => handleClick('HOME')}
-                  className={activeLink === 'HOME' ? 'active' : ''}
-                >
-                  HOME
-                </Link>
-              </S.Li>
-              <S.Li>
-                <Link
-                  to="#2"
-                  onClick={() => handleClick('SOBRE')}
-                  className={activeLink === 'SOBRE' ? 'active' : ''}
-                >
-                  SOBRE
-                </Link>
-              </S.Li>
-              <S.Li>
-                <Link
-                  to="#3"
-                  onClick={() => handleClick('DADOS')}
+                  to="#data"
+                  onClick={() => {
+                    handleClick('DADOS');
+                    scrollToElement('data');
+                  }}
                   className={activeLink === 'DADOS' ? 'active' : ''}
                 >
                   DADOS
                 </Link>
               </S.Li>
-              <S.Li>
+              {/* <S.Li>
                 <Link
-                  to="#4"
+                  to="#team"
                   onClick={() => handleClick('EQUIPE')}
                   className={activeLink === 'EQUIPE' ? 'active' : ''}
                 >
                   EQUIPE
                 </Link>
-              </S.Li>
+              </S.Li> */}
               <S.Li>
                 <Link
-                  to="#5"
-                  onClick={() => handleClick('PARCEIROS')}
+                  to="#partners"
+                  onClick={() => {
+                    handleClick('PARCEIROS');
+                    scrollToElement('partners');
+                  }}
                   className={activeLink === 'PARCEIROS' ? 'active' : ''}
                 >
                   PARCEIROS
@@ -77,11 +95,14 @@ export const Header: React.FC<HeaderProps> = () => {
               </S.Li>
               <S.Li>
                 <Link
-                  to="#6"
-                  onClick={() => handleClick('FALE CONOSCO')}
-                  className={activeLink === 'FALE CONOSCO' ? 'active' : ''}
+                  to="#footer"
+                  onClick={() => {
+                    handleClick('INFO LINKS');
+                    scrollToElement('footer');
+                  }}
+                  className={activeLink === 'INFO LINKS' ? 'active' : ''}
                 >
-                  FALE CONOSCO
+                  INFO LINKS
                 </Link>
               </S.Li>
             </S.Ul>

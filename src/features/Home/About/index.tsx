@@ -3,7 +3,7 @@ import * as S from './styles';
 export const About = () => {
 
     return (
-        <S.AboutWrapper id="2">
+        <S.AboutWrapper id="about">
             <S.AboutContainer>
                 <S.AboutHeader>
                     <h2>Sobre:</h2>

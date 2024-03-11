@@ -67,7 +67,7 @@ export const Nav = styled.nav`
 export const Ul = styled.ul`
   display: flex;
   padding: 2rem 0;
-  width: 70%;
+  width: 60%;
   justify-content: space-between;
   list-style: none;
   margin-top: 2px;
