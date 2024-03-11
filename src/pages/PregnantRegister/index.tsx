@@ -5,7 +5,7 @@ import { Select } from '../../components/Select';
 import { DateSelect } from '../../components/DateSelect';
 import { RadioSelect } from '../../components/RadioSelect';
 import { Button } from '../../components/Button';
-import { ArrowLeft, ArrowRight } from '@phosphor-icons/react';
+import { ArrowLeft, ArrowRight, ArrowUUpLeft } from '@phosphor-icons/react';
 import { useState } from 'react';
 import { RadioChangeEvent } from 'antd';
 import {
@@ -29,6 +29,7 @@ import {
   raceList
 } from '../../features/PregnantRegister/SelectOptions';
 import { PostPregnant } from '../../services/PregnantServices';
+import { useNavigate } from 'react-router-dom';
 
 interface ErrorInterface {
   errorShow?: boolean;
@@ -36,6 +37,8 @@ interface ErrorInterface {
 }
 
 export function PregnantRegister() {
+  const navigate = useNavigate();
+
   const [progress, setProgress] = useState<boolean>(false);
   const [progressBar, setProgressBar] = useState<number>(0);
 
@@ -676,6 +679,7 @@ export function PregnantRegister() {
         postPregnant();
       }
       setProgressBar(100);
+      navigate('/dashboard');
     } catch (error) {
       if (error instanceof ZodError) {
         warningNotification(error.errors[0].message);
@@ -683,12 +687,19 @@ export function PregnantRegister() {
     }
   };
 
+  const handleBackArrow = () => {
+    navigate('/dashboard');
+  };
+
   return (
     <S.Container>
       <S.Contente>
         <S.TopContainer>
           <S.ProgressBar percent={progressBar} showInfo={false} />
-          <img src={Logo} alt="angels logo" />
+          <div className="arrow">
+            <ArrowUUpLeft size={22} color="#B1488A" onClick={handleBackArrow} />
+            <img src={Logo} alt="angels logo" />
+          </div>
         </S.TopContainer>
         {!progress && (
           <S.FormContainer>

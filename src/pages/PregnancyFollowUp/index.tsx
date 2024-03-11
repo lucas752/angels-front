@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './styles';
 import Logo from '../../assets/angelsLogo.svg';
 import { Input } from '../../components/Input';
@@ -11,19 +11,23 @@ import { ZodError } from 'zod';
 import { postAcompanhamento } from '../../services/PregnancyFollowUpService';
 import { FollowUpInterface } from '../../services/PregnancyFollowUpService/interface';
 import { ArrowUUpLeft } from '@phosphor-icons/react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { GetPregnancyById } from '../../services/PregnancyServices';
 
 export function PregnancyFollowUp() {
   const navigate = useNavigate();
+  const params = useParams();
+  const gestacaoId = Number(params.gestacaoId);
 
-  const [weight, setWeight] = useState<string>();
-  const [weeks, setWeeks] = useState<string>();
-  const [pressureS, setPressureS] = useState<string>();
-  const [pressureD, setPressureD] = useState<string>();
-  const [height, setHeight] = useState<string>();
-  const [heartBeat, setHeartBeat] = useState<string>();
-  const [radio, setRadio] = useState<string>();
-  const [type, setType] = useState<string>();
+  const [gestanteId, setGestanteId] = useState<number>();
+  const [weight, setWeight] = useState<string>('');
+  const [weeks, setWeeks] = useState<string>('');
+  const [pressureS, setPressureS] = useState<string>('');
+  const [pressureD, setPressureD] = useState<string>('');
+  const [height, setHeight] = useState<string>('');
+  const [heartBeat, setHeartBeat] = useState<string>('');
+  const [radio, setRadio] = useState<string>('');
+  const [type, setType] = useState<string>('');
   const [date, setDate] = useState<string | string[]>();
 
   interface ErrorInterface {
@@ -91,13 +95,12 @@ export function PregnancyFollowUp() {
     if (typeof value === 'number') {
       setPressureS(String(value));
     }
-    console.log(pressureS);
   };
 
   const handleChangeWeight = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      PregnancyFollowUpSchema.shape.pesoAtual.parse(value);
+      PregnancyFollowUpSchema.shape.pesoAtual.parse(parseInt(value));
       setWeightError({ errorType: '', errorShow: false });
     } catch (error) {
       setWeightError({ errorType: 'error', errorShow: true });
@@ -108,7 +111,7 @@ export function PregnancyFollowUp() {
   const handleChangeWeeks = (e: { target: { value: string } }) => {
     const { value } = e.target;
     try {
-      PregnancyFollowUpSchema.shape.idadeGestacional.parse(value);
+      PregnancyFollowUpSchema.shape.idadeGestacional.parse(parseInt(value));
       setWeeksError({ errorType: '', errorShow: false });
     } catch (error) {
       setWeeksError({ errorType: 'error', errorShow: true });
@@ -136,19 +139,21 @@ export function PregnancyFollowUp() {
     }
     try {
       const data: FollowUpInterface = {
-        gestacaoId: 1,
-        pesoAtual: weight,
-        idadeGestacional: weeks,
+        gestacaoId: gestacaoId,
+        pesoAtual: parseInt(weight),
+        idadeGestacional: parseInt(weeks),
         pressaoArterial: pressure,
-        batimentosCardiacosFeto: heartBeat,
-        alturaUterina: height,
+        batimentosCardiacosFeto: parseInt(heartBeat),
+        alturaUterina: parseInt(height),
         tipo: type,
         dataAcompanhamento: date,
         realizadoPor: radio
       };
       console.log(data);
       PregnancyFollowUpSchema.parse(data);
-      postAcompanhamento(1, data);
+      postAcompanhamento(gestacaoId, data).then(() => {
+        navigate(`/pregnancies/${gestanteId}`);
+      });
     } catch (error) {
       if (error instanceof ZodError) {
         console.log(error);
@@ -156,6 +161,15 @@ export function PregnancyFollowUp() {
       }
     }
   };
+
+  useEffect(() => {
+    const pregnancy = async () => {
+      await GetPregnancyById(gestacaoId).then((data) => {
+        setGestanteId(data?.data.gestante_id);
+      });
+    };
+    pregnancy();
+  }, []);
 
   return (
     <S.Container>

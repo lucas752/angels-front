@@ -47,6 +47,7 @@ export function Dashboard() {
           weeks={currentDate.diff(item.dataInicioGestacao, 'weeks').toString()}
           gestationalRisk={true}
           pregnancyStatus={item.situacaoGestacional.toString()}
+          onClickFunc={() => handleNavigatePregnancies(item.gestante?.id)}
         />
       ));
   };
@@ -67,6 +68,10 @@ export function Dashboard() {
 
   const handleCleanSearch = () => {
     setSearchName('');
+  };
+
+  const handleNavigatePregnancies = (value: number | undefined) => {
+    navigate(`/pregnancies/${value}`);
   };
   return (
     <S.Container>

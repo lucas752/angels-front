@@ -44,7 +44,7 @@ const SideBar: React.FC = () => {
     const response = await GetPregnantByCpf(cpf);
     const id = response?.data.id;
     if (response?.status == 200) {
-      navigate('/pregnancyRegister', { state: { id } });
+      navigate(`/pregnancyRegister/${id}`);
     } else {
       navigate('/pregnantRegister');
     }

@@ -1,6 +1,7 @@
 import {
   ArrowCircleDown,
   ArrowCircleUp,
+  ArrowUUpLeft,
   CaretCircleDoubleLeft,
   CaretCircleDoubleRight,
   PlusCircle
@@ -14,8 +15,10 @@ import { PregnancyInterface } from '../../services/PregnancyServices/interfaces'
 import { PregnantInfo } from '../../features/Pregnancies/PregnantInfo';
 import { GetPregnantInfo } from '../../services/PregnantServices';
 import moment from 'moment';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function Pregnancies() {
+  const params = useParams();
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
   const [name, setName] = useState<string>('');
@@ -24,7 +27,8 @@ export default function Pregnancies() {
     []
   );
   const [toggleInfo, setToggleInfo] = useState(false);
-  const userId = 1;
+  const navigate = useNavigate();
+  const userId = Number(params?.id);
 
   useEffect(() => {
     const pregnanciesRequest = async () => {
@@ -58,6 +62,7 @@ export default function Pregnancies() {
           gestationalRisk={true}
           pregnancyStatus={item.situacaoGestacional}
           weeks={currentDate.diff(item.dataInicioGestacao, 'weeks').toString()}
+          onClickAdd={() => handleFollowUp(item?.id)}
         />
       ));
   };
@@ -80,11 +85,24 @@ export default function Pregnancies() {
     }
   };
 
+  const handleNewPregnancy = () => {
+    navigate(`/pregnancyRegister/${userId}`);
+  };
+
+  const handleFollowUp = (gestacaoId: Number) => {
+    navigate(`/pregnancyFollowUp/${gestacaoId}`);
+  };
+
+  const handleBackArrow = () => {
+    navigate('/dashboard');
+  };
+
   return (
     <S.Container>
       <S.Header>
+        <ArrowUUpLeft size={22} color="#B1488A" onClick={handleBackArrow} />
         <S.PregnanciesText>GESTAÇÕES</S.PregnanciesText>
-        <S.NewPregnancyButton>
+        <S.NewPregnancyButton onClick={handleNewPregnancy}>
           <PlusCircle size={18} weight="bold" />
           NOVA GESTAÇÃO
         </S.NewPregnancyButton>
