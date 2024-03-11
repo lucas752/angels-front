@@ -1,7 +1,7 @@
 import {
   ArrowCircleDown,
-  ArrowCircleLeft,
   ArrowCircleUp,
+  ArrowUUpLeft,
   PlusCircle
 } from '@phosphor-icons/react';
 import * as S from './styles.ts';
@@ -11,6 +11,7 @@ import { GetFollowUpsByPregnancyId } from '../../services/FollowUpServices/index
 import { useEffect, useState } from 'react';
 import { GetPregnantInfo } from '../../services/PregnantServices/index.ts';
 import { GetPregnancyById } from '../../services/PregnancyServices/index.ts';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface FollowUpResponseInterface {
   id: number;
@@ -52,8 +53,11 @@ export default function PregnancyInfo() {
   const [name, setName] = useState<string>('');
   const [cpf, setCpf] = useState<string>('');
   const [toggleInfo, setToggleInfo] = useState(false);
-  const pregnantId = 1;
-  const pregnancyId = 1;
+  const params = useParams();
+  const navigate = useNavigate();
+
+  const pregnantId = Number(params?.pregnantId);
+  const pregnancyId = Number(params?.pregnancyId);
 
   useEffect(() => {
     const getFollowUps = async () => {
@@ -87,21 +91,30 @@ export default function PregnancyInfo() {
     setToggleInfo(!toggleInfo);
   };
 
+  const handleBackArrow = () => {
+    navigate(`/pregnancies/${pregnantId}`);
+  };
+
+  const handleNewPregnancy = () => {
+    navigate(`/pregnancyRegister/${pregnantId}`);
+  };
+
   return (
     <S.Container>
       <S.Header>
         <section>
-          <ArrowCircleLeft
-            size={32}
-            weight="fill"
-            cursor={'Pointer'}
+          <ArrowUUpLeft
+            size={22}
             color="#B1488A"
+            onClick={handleBackArrow}
+            cursor={'Pointer'}
+            weight="bold"
           />
           <S.PregnanciesText>
             GESTAÇÕES {'>'} Gestação {pregnancyId}
           </S.PregnanciesText>
         </section>
-        <S.NewPregnancyButton>
+        <S.NewPregnancyButton onClick={handleNewPregnancy}>
           <PlusCircle size={18} weight="bold" />
           NOVA GESTAÇÃO
         </S.NewPregnancyButton>

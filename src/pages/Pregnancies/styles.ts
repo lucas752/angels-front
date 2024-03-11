@@ -8,7 +8,6 @@ export const Container = styled.div`
   padding-right: 190px;
   padding-top: 50px;
   gap: 28px;
-  margin-bottom: 40px;
 
   @media (max-width: 1000px) {
     padding-right: 0;

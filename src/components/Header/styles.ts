@@ -4,7 +4,10 @@ export const Container = styled.div`
   background-color: white;
   display: flex;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0 4rem 0 2rem;
+  box-shadow: 0 2px 4px rgba(2, 15, 29, 0.242);
+  z-index: 999;
+  position: relative;
 
   div {
     flex: 1;
@@ -63,10 +66,11 @@ export const Nav = styled.nav`
 
 export const Ul = styled.ul`
   display: flex;
-  padding: 3rem 0;
-  width: 50%;
+  padding: 2rem 0;
+  width: 70%;
   justify-content: space-between;
   list-style: none;
+  margin-top: 2px;
 `;
 
 export const Li = styled.li``;

@@ -22,7 +22,10 @@ export const AppRoutes = () => {
         <Route path="/pregnantInfo" element={<PregnantInfo />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/pregnancies/:id" element={<Pregnancies />} />
-        <Route path="/pregnancyInfo" element={<PregnancyInfo />} />
+        <Route
+          path="/pregnancyInfo/:pregnancyId/:pregnantId"
+          element={<PregnancyInfo />}
+        />
       </Routes>
     </BrowserRouter>
   );

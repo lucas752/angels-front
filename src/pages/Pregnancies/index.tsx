@@ -70,6 +70,7 @@ export default function Pregnancies() {
           pregnancyStatus={item.situacaoGestacional}
           weeks={currentDate.diff(item.dataInicioGestacao, 'weeks').toString()}
           onClickAdd={() => handleFollowUp(item?.id)}
+          onClickThreeDots={() => handlePregnancyScreen(item?.id, userId)}
         />
       ));
   };
@@ -98,6 +99,10 @@ export default function Pregnancies() {
 
   const handleFollowUp = (gestacaoId: Number) => {
     navigate(`/pregnancyFollowUp/${gestacaoId}`);
+  };
+
+  const handlePregnancyScreen = (gestacaoId: Number, gestanteId: Number) => {
+    navigate(`/pregnancyInfo/${gestacaoId}/${gestanteId}`);
   };
 
   const handleBackArrow = () => {

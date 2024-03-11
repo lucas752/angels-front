@@ -11,3 +11,7 @@
   box-sizing: border-box;
   font-family: roboto, sans-serif;
 }
+
+.slick-list, .slick-slider, .slick-track {
+    padding: 0.5rem 0;
+}
