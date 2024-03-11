@@ -70,7 +70,9 @@ export default function Pregnancies() {
           pregnancyStatus={item.situacaoGestacional}
           weeks={currentDate.diff(item.dataInicioGestacao, 'weeks').toString()}
           onClickAdd={() => handleFollowUp(item?.id)}
-          onClickThreeDots={() => handlePregnancyScreen(item?.id, userId)}
+          onClickThreeDots={() =>
+            handlePregnancyScreen(item?.id, parseInt(params.id || ''))
+          }
         />
       ));
   };

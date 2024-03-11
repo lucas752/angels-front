@@ -34,6 +34,14 @@ export function Dashboard() {
       item.gestante?.nome.toLowerCase().includes(searchName.toLowerCase())
   );
 
+  const handleFollowUp = (gestacaoId: Number) => {
+    navigate(`/pregnancyFollowUp/${gestacaoId}`);
+  };
+
+  const handlePregnancyScreen = (gestacaoId: Number, gestanteId: Number) => {
+    navigate(`/pregnancyInfo/${gestacaoId}/${gestanteId}`);
+  };
+
   const renderCards = () => {
     const currentDate = moment();
 
@@ -46,8 +54,12 @@ export function Dashboard() {
           pregnantName={item.gestante?.nome}
           weeks={currentDate.diff(item.dataInicioGestacao, 'weeks').toString()}
           gestationalRisk={true}
+          onClickAdd={() => handleFollowUp(item.id || 0)}
           pregnancyStatus={item.situacaoGestacional}
           onClickFunc={() => handleNavigatePregnancies(item.gestante?.id)}
+          onClickThreeDots={() =>
+            handlePregnancyScreen(item.id || 0, item.gestante?.id || 0)
+          }
         />
       ));
   };
