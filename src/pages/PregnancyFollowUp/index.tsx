@@ -129,7 +129,7 @@ export function PregnancyFollowUp() {
   };
 
   const handleBackArrow = () => {
-    navigate(`/pregnancies/${gestacaoId}`);
+    navigate(-1);
   };
 
   const handlePregnancyFollowUp = () => {

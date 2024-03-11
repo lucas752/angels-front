@@ -148,7 +148,11 @@ export default function PregnancyInfo() {
                 Última menstruação
               </S.InfoPregnancyTitleText>
               <S.InfoPregnancyValueText>
-                {pregnancyInfo?.dataUltimaMenstruacao}
+                {pregnancyInfo?.dataUltimaMenstruacao
+                  ? new Date(
+                      pregnancyInfo?.dataUltimaMenstruacao
+                    ).toLocaleDateString()
+                  : 'Sem dados'}
               </S.InfoPregnancyValueText>
             </S.InfoPregnancyContainer>
             <S.InfoPregnancyContainer>
@@ -156,7 +160,11 @@ export default function PregnancyInfo() {
                 Inicio da gestação
               </S.InfoPregnancyTitleText>
               <S.InfoPregnancyValueText>
-                {pregnancyInfo?.dataInicioGestacao}
+                {pregnancyInfo?.dataInicioGestacao
+                  ? new Date(
+                      pregnancyInfo?.dataInicioGestacao
+                    ).toLocaleDateString()
+                  : 'Sem dados'}
               </S.InfoPregnancyValueText>
             </S.InfoPregnancyContainer>
             <S.InfoPregnancyContainer>
@@ -210,7 +218,15 @@ export default function PregnancyInfo() {
                 Grupo Sanguíneo
               </S.InfoPregnancyTitleText>
               <S.InfoPregnancyValueText>
-                {pregnancyInfo?.grupoSanguineo}
+                {pregnancyInfo?.grupoSanguineo == 0
+                  ? 'O'
+                  : pregnancyInfo?.grupoSanguineo == 1
+                  ? 'A'
+                  : pregnancyInfo?.grupoSanguineo == 2
+                  ? 'B'
+                  : pregnancyInfo?.grupoSanguineo == 3
+                  ? 'AB'
+                  : 'Sem dados'}
               </S.InfoPregnancyValueText>
             </S.InfoPregnancyContainer>
             <S.InfoPregnancyContainer>
@@ -234,7 +250,11 @@ export default function PregnancyInfo() {
                 Risco Gestacional
               </S.InfoPregnancyTitleText>
               <S.InfoPregnancyValueText>
-                {pregnancyInfo?.riscoGestacional}
+                {pregnancyInfo?.riscoGestacional == 0
+                  ? 'Alto'
+                  : pregnancyInfo?.riscoGestacional == 1
+                  ? 'Habitual'
+                  : 'Não informado'}
               </S.InfoPregnancyValueText>
             </S.InfoPregnancyContainer>
             <S.InfoPregnancyContainer>
@@ -250,7 +270,13 @@ export default function PregnancyInfo() {
                 Situação Gestacional
               </S.InfoPregnancyTitleText>
               <S.InfoPregnancyValueText>
-                {pregnancyInfo?.situacaoGestacional}
+                {pregnancyInfo?.situacaoGestacional == 0
+                  ? 'Em andamento'
+                  : pregnancyInfo?.situacaoGestacional == 1
+                  ? 'Finalizada com sucesso'
+                  : pregnancyInfo?.situacaoGestacional
+                  ? 'Finalizada com desfecho negativo'
+                  : 'Sem dados'}
               </S.InfoPregnancyValueText>
             </S.InfoPregnancyContainer>
           </S.LineContainer>
