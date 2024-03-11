@@ -33,6 +33,15 @@ export const TopContainer = styled.section`
   align-items: center;
   justify-content: center;
   padding: 1rem;
+
+  .arrow {
+    display: flex;
+    flex-direction: row;
+    align-self: start;
+    align-items: center;
+    justify-content: space-between;
+    width: 52%;
+  }
 `;
 
 export const ProgressBar = styled(Progress)`

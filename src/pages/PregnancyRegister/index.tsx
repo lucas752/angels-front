@@ -11,15 +11,14 @@ import { ZodError } from 'zod';
 import { errorNotification } from '../../components/Notification/index.ts';
 import { postGestacao } from '../../services/PregnancyRegisterService/index.ts';
 import { PregnancyRegisterInterface } from '../../services/PregnancyRegisterService/interface.ts';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Button } from '../../components/Button/index.tsx';
 import { ArrowUUpLeft } from '@phosphor-icons/react';
 
 export default function PregnancyRegister() {
   const navigate = useNavigate();
-
-  const location = useLocation();
-  const gestanteId = location.state.id;
+  const params = useParams();
+  const gestanteId = Number(params.id);
 
   const [period, setPeriod] = useState<string | string[]>();
   const [beginning, setBeginning] = useState<string | string[]>();
@@ -258,7 +257,7 @@ export default function PregnancyRegister() {
       };
       PregnancyRegisterSchema.parse(data);
       postGestacao(gestanteId, data).then((resp) => {
-        navigate('/pregnancies');
+        navigate(`/pregnancies/${gestanteId}`);
       });
     } catch (error) {
       if (error instanceof ZodError) {

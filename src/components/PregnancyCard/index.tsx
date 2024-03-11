@@ -8,6 +8,8 @@ interface InfoProps {
   pregnantName?: string;
   gestationalRisk: boolean;
   pregnancyStatus: number;
+  onClickFunc?: React.MouseEventHandler<HTMLDivElement>;
+  onClickAdd?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export const PregnancyCard: React.FC<InfoProps> = ({
@@ -15,7 +17,9 @@ export const PregnancyCard: React.FC<InfoProps> = ({
   weeks,
   pregnantName,
   pregnancyStatus,
-  gestationalRisk
+  gestationalRisk,
+  onClickFunc,
+  onClickAdd
 }) => {
   const pregnancyStatusDescription =
     pregnancyStatus == 0
@@ -25,7 +29,7 @@ export const PregnancyCard: React.FC<InfoProps> = ({
       : 'Finalizada com desfecho negativo';
   return (
     <S.PregnancyCardContainer>
-      <S.PregnancyInfoContainer>
+      <S.PregnancyInfoContainer onClick={onClickFunc}>
         <S.LineContainer>
           {gestationalRisk ? <S.RedRiskLine /> : <S.RiskLine />}
         </S.LineContainer>
@@ -57,7 +61,7 @@ export const PregnancyCard: React.FC<InfoProps> = ({
       </S.PregnancyInfoContainer>
       <S.PregnancyButtonsContainer>
         {pregnancyStatus == 0 ? (
-          <S.PregnancyCardButton>
+          <S.PregnancyCardButton onClick={onClickAdd}>
             <Plus weight="bold" size={28} color="#B1488A" />
           </S.PregnancyCardButton>
         ) : (
