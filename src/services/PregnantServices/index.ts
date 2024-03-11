@@ -1,6 +1,9 @@
 import { errorNotification } from '../../components/Notification';
 import { api } from '../api';
-import { PregnantInterface } from '../types/PregnantType';
+import {
+  EvolutionDataInterface,
+  PregnantInterface
+} from '../types/PregnantType';
 
 export const GetPregnantByCpf = async (cpf: string) => {
   try {
@@ -53,5 +56,17 @@ export const GetPregnantEvolutionData = async (id: number) => {
     return response;
   } catch (error) {
     errorNotification('Erro ao buscar gestante, tente novamente.');
+  }
+};
+
+export const PostPregnantEvolutionData = async (
+  id: number,
+  data: EvolutionDataInterface
+) => {
+  try {
+    const response = await api.post(`/dados-evolutivos/gestante/${id}`, data);
+    return response;
+  } catch (error) {
+    errorNotification('Erro ao atualizar dados evolutivos, tente novamente.');
   }
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import * as S from './styles';
 import { Info } from '@phosphor-icons/react';
 import { Tooltip } from 'antd';
+import { Moment } from 'moment';
 
 interface DateProps {
   label?: string;
@@ -16,6 +17,7 @@ interface DateProps {
   optional?: boolean;
   color?: string;
   value?: string | string[] | Moment | undefined;
+  disable?: boolean;
 }
 export const DateSelect: React.FC<DateProps> = ({
   label,
@@ -26,7 +28,8 @@ export const DateSelect: React.FC<DateProps> = ({
   color,
   status,
   optional,
-  value
+  value,
+  disable
 }) => {
   return (
     <S.Container>
@@ -50,6 +53,7 @@ export const DateSelect: React.FC<DateProps> = ({
         onChange={inputFunction}
         status={status}
         value={value}
+        disabled={disable}
       />
     </S.Container>
   );

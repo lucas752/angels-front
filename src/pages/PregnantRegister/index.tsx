@@ -31,7 +31,8 @@ import {
 } from '../../features/PregnantRegister/SelectOptions';
 import {
   GetPregnantEvolutionData,
-  PostPregnant
+  PostPregnant,
+  PostPregnantEvolutionData
 } from '../../services/PregnantServices';
 import { useNavigate, useParams } from 'react-router-dom';
 import moment from 'moment';
@@ -94,6 +95,15 @@ export function PregnantRegister() {
     useState<boolean>();
   const [hypertension, setHypertension] = useState<boolean>();
   const [twinFamilyHistory, setTwinFamilyHistory] = useState<boolean>();
+
+  //disable filds
+  const [blockName, setBlockName] = useState<boolean>(false);
+  const [blockBirth, setBlockBirth] = useState<boolean>(false);
+  const [blockRace, setBlockRace] = useState<boolean>(false);
+  const [blockGender, setBlockGender] = useState<boolean>(false);
+  const [blockCpf, setBlockCpf] = useState<boolean>(false);
+  const [blockFirstPregnancy, setBlockFirstPregnancy] =
+    useState<boolean>(false);
 
   //error states
   const [errorName, setErrorName] = useState<ErrorInterface>({
@@ -218,7 +228,14 @@ export function PregnantRegister() {
         const response = await GetPregnantEvolutionData(parseInt(params.id));
         if (response?.status === 200) {
           setPregnantInfo(response.data);
-          const data = response.data[0];
+          const data = response.data[response.data.length - 1];
+
+          setBlockName(true);
+          setBlockBirth(true);
+          setBlockCpf(true);
+          setBlockGender(true);
+          setBlockRace(true);
+          setBlockFirstPregnancy(true);
 
           setName(data.gestante.nome);
           setBirthDate(data.gestante.dataNascimento);
@@ -716,6 +733,19 @@ export function PregnantRegister() {
     }
   };
 
+  const postEvolutionData = async () => {
+    if (params.id && pregnantData.dadosEvolutivos) {
+      const response = await PostPregnantEvolutionData(
+        parseInt(params.id),
+        pregnantData.dadosEvolutivos
+      );
+      if (response?.status == 200) {
+        successNotification('Dados atualizados com sucesso!');
+        navigate(`/pregnancies/${params.id}`);
+      }
+    }
+  };
+
   const handleSetProgress = () => {
     try {
       pregnantSchemaPartOne.parse(pregnantFirstData);
@@ -736,7 +766,11 @@ export function PregnantRegister() {
     try {
       if (firstPregnant == 2) {
         pregnantSchemaPartTwo.parse(pregnantSecondData);
-        postPregnant();
+        if (params.id) {
+          postEvolutionData();
+        } else {
+          postPregnant();
+        }
       } else {
         pregnantSchemaPartTwoFirstPregnant.parse(pregnantSecondData);
         postPregnant();
@@ -769,6 +803,7 @@ export function PregnantRegister() {
                 status={errorName?.errorType}
                 infoText="O nome precisa ter entre 2 e 80 letras"
                 color="#b1488a"
+                disabled={blockName}
               />
             </S.InputRow>
             <S.InputRow>
@@ -778,8 +813,11 @@ export function PregnantRegister() {
                 inputFunction={handleChangeBirthDate}
                 status={errorBirthDate.errorType}
                 value={
-                  birthDate?.toString() ? moment(birthDate.toString()) : null
+                  birthDate?.toString()
+                    ? moment(birthDate.toString())
+                    : undefined
                 }
+                disable={blockBirth}
               />
               <Select
                 label="Raça:"
@@ -787,6 +825,7 @@ export function PregnantRegister() {
                 list={raceList}
                 selectFunc={handleChangeRace}
                 value={race}
+                disable={blockRace}
               />
               <Select
                 label="Sexo:"
@@ -794,6 +833,7 @@ export function PregnantRegister() {
                 list={genderList}
                 selectFunc={handleChangeGender}
                 value={gender}
+                disable={blockGender}
               />
               <InputMask
                 mask={'999.999.999-99'}
@@ -806,6 +846,7 @@ export function PregnantRegister() {
                 status={errorCpf?.errorType}
                 infoText="O cpf precisa ser válido"
                 color="#b1488a"
+                disabled={blockCpf}
               />
             </S.InputRow>
             <S.InputRow>
@@ -909,6 +950,7 @@ export function PregnantRegister() {
                 secondValue={2}
                 radioFunction={handleChangeFirstPregnant}
                 value={firstPregnant}
+                disable={blockFirstPregnancy}
               />
               <Select
                 label="Nível de nutrição:"
