@@ -14,8 +14,11 @@ export const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/pregnantRegister/:id?" element={<PregnantRegister />} />
-        <Route path="/pregnancyFollowUp" element={<PregnancyFollowUp />} />
-        <Route path="/pregnancyRegister" element={<PregnancyRegister />} />
+        <Route
+          path="/pregnancyFollowUp/:gestacaoId"
+          element={<PregnancyFollowUp />}
+        />
+        <Route path="/pregnancyRegister/:id" element={<PregnancyRegister />} />
         <Route path="/pregnantInfo" element={<PregnantInfo />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/pregnancies/:id" element={<Pregnancies />} />

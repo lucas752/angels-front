@@ -1,6 +1,7 @@
 import {
   ArrowCircleDown,
   ArrowCircleUp,
+  ArrowUUpLeft,
   CaretCircleDoubleLeft,
   CaretCircleDoubleRight,
   PlusCircle
@@ -14,11 +15,12 @@ import { PregnancyInterface } from '../../services/PregnancyServices/interfaces'
 import { PregnantInfo } from '../../features/Pregnancies/PregnantInfo';
 import { GetPregnantInfo } from '../../services/PregnantServices';
 import moment from 'moment';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Empty } from 'antd';
 
 export default function Pregnancies() {
   const params = useParams();
+  const navigate = useNavigate();
 
   if (params.id == undefined) {
     return null;
@@ -67,6 +69,7 @@ export default function Pregnancies() {
           gestationalRisk={true}
           pregnancyStatus={item.situacaoGestacional}
           weeks={currentDate.diff(item.dataInicioGestacao, 'weeks').toString()}
+          onClickAdd={() => handleFollowUp(item?.id)}
         />
       ));
   };
@@ -89,11 +92,24 @@ export default function Pregnancies() {
     }
   };
 
+  const handleNewPregnancy = () => {
+    navigate(`/pregnancyRegister/${params.id}`);
+  };
+
+  const handleFollowUp = (gestacaoId: Number) => {
+    navigate(`/pregnancyFollowUp/${gestacaoId}`);
+  };
+
+  const handleBackArrow = () => {
+    navigate('/dashboard');
+  };
+
   return (
     <S.Container>
       <S.Header>
+        <ArrowUUpLeft size={22} color="#B1488A" onClick={handleBackArrow} />
         <S.PregnanciesText>GESTAÇÕES</S.PregnanciesText>
-        <S.NewPregnancyButton>
+        <S.NewPregnancyButton onClick={handleNewPregnancy}>
           <PlusCircle size={18} weight="bold" />
           NOVA GESTAÇÃO
         </S.NewPregnancyButton>
