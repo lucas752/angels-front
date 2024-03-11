@@ -12,6 +12,7 @@ export const PregnancyCardContainer = styled.div`
     0 8px 16px rgba(0, 0, 0, 0.11);
   border-radius: 36px;
   padding: 0px 1.5% 1.5% 1.5%;
+  cursor: pointer;
 
   @media (max-width: 1000px) {
     width: 17rem;

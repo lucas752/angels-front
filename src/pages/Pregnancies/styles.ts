@@ -25,6 +25,10 @@ export const Header = styled.section`
     gap: 10px;
     align-items: flex-start;
   }
+
+  svg {
+    cursor: pointer;
+  }
 `;
 
 export const PregnantInfoContainer = styled.section`

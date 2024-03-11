@@ -38,6 +38,9 @@ export const NavContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 50%;
+  svg {
+    cursor: pointer;
+  }
 `;
 
 export const FormContainer = styled.div`
