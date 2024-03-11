@@ -6,7 +6,7 @@ export const Logos = (props: { item: { img: any; }; }) => {
 
     return (
         <S.Container>
-            <img src={img} alt="Logo UPE" />
+            <img src={img} alt="" />
         </S.Container>
     )
 }

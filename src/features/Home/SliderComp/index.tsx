@@ -26,6 +26,8 @@ var settings = {
   slidesToShow: 3,
   slidesToScroll: 4,
   initialSlide: 0,
+  autoplay: true,
+  autoplaySpeed: 2000,
   responsive: [
     {
       breakpoint: 1024,

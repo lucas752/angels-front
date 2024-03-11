@@ -27,6 +27,7 @@ p {
   font-size: 1.6rem;
   line-height: 2;
   margin-bottom: 1.5rem;
+  text-align: justify;
 }
 `;
 
