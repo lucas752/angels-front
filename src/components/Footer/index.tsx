@@ -21,7 +21,7 @@ export const Footer = () => {
                         <S.FooterTitle>Links Úteis</S.FooterTitle>
                         <Link to="#home" onClick={() => scrollToElement('home')}>Home</Link>
                         <Link to="#about" onClick={() => scrollToElement('about')}>Sobre</Link>
-                        <Link to="#data" onClick={() => scrollToElement('data')}>Dados</Link>
+                        <Link to="#data" onClick={() => scrollToElement('data')}>Informação</Link>
                         {/* <Link to="#4">Equipe</Link> */}
                         <Link to="#partners" onClick={() => scrollToElement('partners')}>Parceiros</Link>
                     </div>

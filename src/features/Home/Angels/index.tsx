@@ -15,7 +15,6 @@ export const Angels = () => {
             <S.AngelsWrapper id="home">
                 <S.AngelsContent>
                     <S.AngelsContentWrapper>
-                        <h1>angels</h1>
                         <h1>An Intelligent Gestational Follow-up System</h1>
                         <p>"Se mudarmos o começo da história, mudamos a história toda." - Documentário "O Começo da Vida"</p>
                         <Button label="ACESSE O SISTEMA" buttonFunction={dashboardScreen} size='large'/>

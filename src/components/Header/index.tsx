@@ -64,12 +64,12 @@ export const Header: React.FC<HeaderProps> = () => {
                 <Link
                   to="#data"
                   onClick={() => {
-                    handleClick('DADOS');
+                    handleClick('INFORMAÇÃO');
                     scrollToElement('data');
                   }}
-                  className={activeLink === 'DADOS' ? 'active' : ''}
+                  className={activeLink === 'INFORMAÇÃO' ? 'active' : ''}
                 >
-                  DADOS
+                  INFORMAÇÃO
                 </Link>
               </S.Li>
               {/* <S.Li>
@@ -97,16 +97,16 @@ export const Header: React.FC<HeaderProps> = () => {
                 <Link
                   to="#footer"
                   onClick={() => {
-                    handleClick('INFO LINKS');
+                    handleClick('LINKS');
                     scrollToElement('footer');
                   }}
-                  className={activeLink === 'INFO LINKS' ? 'active' : ''}
+                  className={activeLink === 'LINKS' ? 'active' : ''}
                 >
-                  INFO LINKS
+                  LINKS
                 </Link>
               </S.Li>
             </S.Ul>
-            <Button label="ENTRAR" buttonFunction={dashboardScreen} size='large'/>
+            <Button label="ACESSE O SISTEMA" buttonFunction={dashboardScreen} size='large'/>
           </S.Nav>
         </S.Navigation>
       </div>

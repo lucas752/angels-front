@@ -4,7 +4,7 @@ export const DataAngels = () => {
     return (
       <S.Container>
         <S.DataWrapper id="data">
-          <S.DataHeader>Dados</S.DataHeader>
+          <S.DataHeader>Informação</S.DataHeader>
         </S.DataWrapper>
         <S.DataGrid>
           <S.DataCard>

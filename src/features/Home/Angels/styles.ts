@@ -29,8 +29,9 @@ export const AngelsImage = styled.div`
 `;
 
 export const AngelsContentWrapper = styled.div`
-    margin-top: 100px;
+    margin-top: 130px;
 
+    
     p {
         padding: 0 2rem 0 0;
     }
