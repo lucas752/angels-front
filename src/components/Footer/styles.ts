@@ -32,7 +32,7 @@ export const FooterLinks = styled.div`
     display: flex;
     justify-content: center;
     text-align: center;
-    width: 70%;
+    width: 80%;
    
 
     .link {

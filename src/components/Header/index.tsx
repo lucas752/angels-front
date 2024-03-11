@@ -64,12 +64,12 @@ export const Header: React.FC<HeaderProps> = () => {
                 <Link
                   to="#data"
                   onClick={() => {
-                    handleClick('INFORMAÇÃO');
+                    handleClick('INFORMAÇÕES');
                     scrollToElement('data');
                   }}
-                  className={activeLink === 'INFORMAÇÃO' ? 'active' : ''}
+                  className={activeLink === 'INFORMAÇÕES' ? 'active' : ''}
                 >
-                  INFORMAÇÃO
+                  INFORMAÇÕES
                 </Link>
               </S.Li>
               {/* <S.Li>
