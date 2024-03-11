@@ -9,7 +9,6 @@ import { ArrowLeft, ArrowRight } from '@phosphor-icons/react';
 import { useEffect, useState } from 'react';
 import { RadioChangeEvent } from 'antd';
 import {
-  EvolutionDataInterface,
   PregnantInterface,
   pregnantSchemaPartOne,
   pregnantSchemaPartTwo,
@@ -48,8 +47,6 @@ export function PregnantRegister() {
 
   const [progress, setProgress] = useState<boolean>(false);
   const [progressBar, setProgressBar] = useState<number>(0);
-  const [pregnantInfo, setPregnantInfo] = useState<EvolutionDataInterface>();
-
   const [name, setName] = useState<string>('');
   const [birthDate, setBirthDate] = useState<string | string[]>();
   const [race, setRace] = useState<string>('');
@@ -227,7 +224,6 @@ export function PregnantRegister() {
       if (params.id) {
         const response = await GetPregnantEvolutionData(parseInt(params.id));
         if (response?.status === 200) {
-          setPregnantInfo(response.data);
           const data = response.data[response.data.length - 1];
 
           setBlockName(true);
