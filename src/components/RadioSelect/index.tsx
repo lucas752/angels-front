@@ -14,6 +14,7 @@ interface RadioProps {
   secondValue?: string | number | boolean;
   value?: string | number | boolean;
   radioFunction?: (e: RadioChangeEvent) => void;
+  disable?: boolean;
 }
 
 export const RadioSelect: React.FC<RadioProps> = ({
@@ -27,7 +28,8 @@ export const RadioSelect: React.FC<RadioProps> = ({
   radioFunction,
   firstOption,
   secondOption,
-  optional
+  optional,
+  disable
 }) => {
   return (
     <S.Container>
@@ -48,7 +50,7 @@ export const RadioSelect: React.FC<RadioProps> = ({
         </S.Label>
       )}
       <div>
-        <Radio.Group onChange={radioFunction} value={value}>
+        <Radio.Group onChange={radioFunction} value={value} disabled={disable}>
           <S.RadioArea value={firstValue}>{firstOption}</S.RadioArea>
           <S.RadioArea value={secondValue}>{secondOption}</S.RadioArea>
         </Radio.Group>

@@ -42,6 +42,12 @@ export const TopContainer = styled.section`
     justify-content: space-between;
     width: 52%;
   }
+
+  div {
+    svg {
+      cursor: pointer;
+    }
+  }
 `;
 
 export const ProgressBar = styled(Progress)`

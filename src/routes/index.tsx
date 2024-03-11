@@ -13,7 +13,7 @@ export const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/pregnantRegister" element={<PregnantRegister />} />
+        <Route path="/pregnantRegister/:id?" element={<PregnantRegister />} />
         <Route
           path="/pregnancyFollowUp/:gestacaoId"
           element={<PregnancyFollowUp />}

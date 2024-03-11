@@ -16,9 +16,16 @@ import { PregnantInfo } from '../../features/Pregnancies/PregnantInfo';
 import { GetPregnantInfo } from '../../services/PregnantServices';
 import moment from 'moment';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Empty } from 'antd';
 
 export default function Pregnancies() {
   const params = useParams();
+  const navigate = useNavigate();
+
+  if (params.id == undefined) {
+    return null;
+  }
+
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
   const [name, setName] = useState<string>('');
@@ -27,8 +34,6 @@ export default function Pregnancies() {
     []
   );
   const [toggleInfo, setToggleInfo] = useState(false);
-  const navigate = useNavigate();
-  const userId = Number(params?.id);
 
   useEffect(() => {
     const pregnanciesRequest = async () => {
@@ -39,10 +44,12 @@ export default function Pregnancies() {
     };
 
     const getPregnantInfo = async () => {
-      const response = await GetPregnantInfo(userId);
-      if (response?.status == 200) {
-        setName(response.data.nome);
-        setCpf(response.data.cpf);
+      if (params.id) {
+        const response = await GetPregnantInfo(parseInt(params.id));
+        if (response?.status == 200) {
+          setName(response.data.nome);
+          setCpf(response.data.cpf);
+        }
       }
     };
 
@@ -53,7 +60,7 @@ export default function Pregnancies() {
   const renderCards = () => {
     const currentDate = moment();
     return pregnanciesData
-      .filter((item) => item.gestante.id === userId)
+      .filter((item) => item.gestante.id === parseInt(params.id || ''))
       .slice(currentPage, currentPage + 4)
       .map((item, index) => (
         <PregnancyCard
@@ -63,7 +70,9 @@ export default function Pregnancies() {
           pregnancyStatus={item.situacaoGestacional}
           weeks={currentDate.diff(item.dataInicioGestacao, 'weeks').toString()}
           onClickAdd={() => handleFollowUp(item?.id)}
-          onClickThreeDots={() => handlePregnancyScreen(item?.id, userId)}
+          onClickThreeDots={() =>
+            handlePregnancyScreen(item?.id, parseInt(params.id || ''))
+          }
         />
       ));
   };
@@ -87,7 +96,7 @@ export default function Pregnancies() {
   };
 
   const handleNewPregnancy = () => {
-    navigate(`/pregnancyRegister/${userId}`);
+    navigate(`/pregnancyRegister/${params.id}`);
   };
 
   const handleFollowUp = (gestacaoId: Number) => {
@@ -134,8 +143,16 @@ export default function Pregnancies() {
         />
       )}
 
-      {toggleInfo ? <PregnantInfo id={userId} /> : <></>}
-      <S.CardsContainer>{renderCards()}</S.CardsContainer>
+      {toggleInfo ? <PregnantInfo id={parseInt(params.id)} /> : <></>}
+      {pregnanciesData.length > 0 ? (
+        <S.CardsContainer>{renderCards()}</S.CardsContainer>
+      ) : (
+        <S.EmptyBox
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
+          description="Sem gestações cadastradas"
+        />
+      )}
+
       {pregnanciesData.length > 4 ? (
         <S.ArrowsContainer>
           {page == 1 ? (

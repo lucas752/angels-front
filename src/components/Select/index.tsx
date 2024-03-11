@@ -20,6 +20,7 @@ interface SelectProps {
   optional?: boolean;
   color?: string;
   value?: string;
+  disable?: boolean;
 }
 
 interface ListProps {
@@ -37,7 +38,8 @@ export const Select: React.FC<SelectProps> = ({
   color,
   status,
   optional,
-  value
+  value,
+  disable
 }) => {
   return (
     <S.Container>
@@ -64,7 +66,15 @@ export const Select: React.FC<SelectProps> = ({
         onChange={selectFunc}
         status={status}
         value={value}
-      />
+        disabled={disable}
+      >
+        {list &&
+          list.map((item) => (
+            <option key={item.label} value={item.label}>
+              {item.label}
+            </option>
+          ))}
+      </S.SelectArea>
     </S.Container>
   );
 };

@@ -1,3 +1,4 @@
+import { Empty } from 'antd';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -22,6 +23,10 @@ export const Header = styled.section`
     flex-direction: column;
     gap: 10px;
     align-items: flex-start;
+  }
+
+  svg {
+    cursor: pointer;
   }
 `;
 
@@ -74,5 +79,12 @@ export const CardsContainer = styled.section`
   @media (max-width: 1000px) {
     flex-direction: column;
     justify-content: flex-start;
+  }
+`;
+
+export const EmptyBox = styled(Empty)`
+  .ant-empty-description {
+    color: var(--red-500) !important;
+    font-weight: bold;
   }
 `;
