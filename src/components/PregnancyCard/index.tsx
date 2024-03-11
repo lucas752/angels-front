@@ -10,6 +10,7 @@ interface InfoProps {
   pregnancyStatus: number;
   onClickFunc?: React.MouseEventHandler<HTMLDivElement>;
   onClickAdd?: React.MouseEventHandler<HTMLButtonElement>;
+  onClickThreeDots?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export const PregnancyCard: React.FC<InfoProps> = ({
@@ -19,7 +20,8 @@ export const PregnancyCard: React.FC<InfoProps> = ({
   pregnancyStatus,
   gestationalRisk,
   onClickFunc,
-  onClickAdd
+  onClickAdd,
+  onClickThreeDots
 }) => {
   const pregnancyStatusDescription =
     pregnancyStatus == 0
@@ -49,10 +51,6 @@ export const PregnancyCard: React.FC<InfoProps> = ({
           <S.PregnancyInfoContent>{weeks} semanas</S.PregnancyInfoContent>
         </S.PregnancyInfoTextContainer>
         <S.PregnancyInfoTextContainer>
-          <S.PregnancyInfoTitle>Acompanhamentos:</S.PregnancyInfoTitle>
-          <S.PregnancyInfoContent>5</S.PregnancyInfoContent>
-        </S.PregnancyInfoTextContainer>
-        <S.PregnancyInfoTextContainer>
           <S.PregnancyInfoTitle>Status da gestação:</S.PregnancyInfoTitle>
           <S.PregnancyInfoContent>
             {pregnancyStatusDescription}
@@ -67,7 +65,7 @@ export const PregnancyCard: React.FC<InfoProps> = ({
         ) : (
           <></>
         )}
-        <S.PregnancyCardButton>
+        <S.PregnancyCardButton onClick={onClickThreeDots}>
           <DotsThree weight="bold" size={28} color="#B1488A" />
         </S.PregnancyCardButton>
       </S.PregnancyButtonsContainer>
