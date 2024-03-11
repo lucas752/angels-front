@@ -170,6 +170,10 @@ export const PregnantInfo: React.FC<PregnantInfoProps> = ({ id }) => {
     navigate('/dashboard');
   };
 
+  const pregnantRegisterScreen = () => {
+    navigate(`/pregnantRegister/${id}`);
+  };
+
   const updateData: PregnantInfoInterface = {
     nome: name,
     dataNascimento: birthDate,
@@ -265,7 +269,7 @@ export const PregnantInfo: React.FC<PregnantInfoProps> = ({ id }) => {
                 size={28}
                 weight="bold"
                 color="#7c3a66"
-                onClick={showUptadeModal}
+                onClick={pregnantRegisterScreen}
               />
               <TrashSimple
                 size={28}

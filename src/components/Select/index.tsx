@@ -64,7 +64,14 @@ export const Select: React.FC<SelectProps> = ({
         onChange={selectFunc}
         status={status}
         value={value}
-      />
+      >
+        {list &&
+          list.map((item) => (
+            <option key={item.label} value={item.label}>
+              {item.label}
+            </option>
+          ))}
+      </S.SelectArea>
     </S.Container>
   );
 };

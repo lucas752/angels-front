@@ -6,9 +6,10 @@ import { DateSelect } from '../../components/DateSelect';
 import { RadioSelect } from '../../components/RadioSelect';
 import { Button } from '../../components/Button';
 import { ArrowLeft, ArrowRight } from '@phosphor-icons/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { RadioChangeEvent } from 'antd';
 import {
+  EvolutionDataInterface,
   PregnantInterface,
   pregnantSchemaPartOne,
   pregnantSchemaPartTwo,
@@ -28,7 +29,12 @@ import {
   maritalStatusList,
   raceList
 } from '../../features/PregnantRegister/SelectOptions';
-import { PostPregnant } from '../../services/PregnantServices';
+import {
+  GetPregnantEvolutionData,
+  PostPregnant
+} from '../../services/PregnantServices';
+import { useNavigate, useParams } from 'react-router-dom';
+import moment from 'moment';
 
 interface ErrorInterface {
   errorShow?: boolean;
@@ -36,10 +42,14 @@ interface ErrorInterface {
 }
 
 export function PregnantRegister() {
+  const params = useParams();
+  const navigate = useNavigate();
+
   const [progress, setProgress] = useState<boolean>(false);
   const [progressBar, setProgressBar] = useState<number>(0);
+  const [pregnantInfo, setPregnantInfo] = useState<EvolutionDataInterface>();
 
-  const [name, setName] = useState<string>();
+  const [name, setName] = useState<string>('');
   const [birthDate, setBirthDate] = useState<string | string[]>();
   const [race, setRace] = useState<string>('');
   const [gender, setGender] = useState<string>('');
@@ -201,6 +211,61 @@ export function PregnantRegister() {
       errorType: '',
       errorShow: false
     });
+
+  useEffect(() => {
+    const getPregnantEvolutionData = async () => {
+      if (params.id) {
+        const response = await GetPregnantEvolutionData(parseInt(params.id));
+        if (response?.status === 200) {
+          setPregnantInfo(response.data);
+          const data = response.data[0];
+
+          setName(data.gestante.nome);
+          setBirthDate(data.gestante.dataNascimento);
+          setRace(data.gestante.raca.toString());
+          setGender(data.gestante.sexo);
+          setCpf(data.gestante.cpf);
+          setHeadOfHousehold(data.chefeFamilia);
+          setRisc(data.emRisco);
+          setMaritalStatus(data.estadoCivil.toString());
+          setEducationLevel(data.escolaridade.toString());
+          setFamilyIncome(data.rendaFamiliar.toString());
+          setCity(data.municipio);
+          setHousing(data.tipoMoradia.toString());
+          setElectricity(data.energiaEletricaDomicilio);
+          setSewageNetwork(data.moradiaRedeEsgoto);
+          setTreatedWater(data.tratamentoAgua);
+          setBreastfeeding(data.amamentacao);
+          setContact(data.contato);
+          setEmergencyContact(data.contatoEmergencia);
+          setWellFed(data.diagnosticoDesnutricao.toString());
+          setFirstPregnant(2);
+
+          // Segunda parte
+          setAbortions(data.quantidadeAbortos.toString());
+          setLiveChildren(data.quantidadeFilhosVivos.toString());
+          setTwins(data.quantidadeGemelares.toString());
+          setLiveBirths(data.quantidadeNascidosVivos.toString());
+          setStillbirths(data.quantidadeNascidosMortos.toString());
+          setBirthWeight25004000(data.quantidadeRnPeso2500_4000.toString());
+          setBirthWeightlt2500(data.quantidadeRnPesoMenor2500.toString());
+          setBirthWeightgt4000(data.quantidadeRnPesoMaior4000.toString());
+          setDeathsFirstWeek(data.quantidadeObitosSemana1.toString());
+          setDeathsAfterFirstWeek(data.quantidadeObitosAposSemana1.toString());
+          setDiabetes(data.diabetes);
+          setPelvicSurgery(data.cirurgiaPelvica);
+          setDeliveries(data.quantidadePartos.toString());
+          setVaginalDeliveries(data.quantidadePartosVaginais.toString());
+          setCesareanDeliveries(data.quantidadePartosCesarios.toString());
+          setUrinaryInfection(data.infeccaoUrinaria);
+          setCongenitalMalformation(data.maFormacaoCongenita);
+          setHypertension(data.hipertensao);
+          setTwinFamilyHistory(data.familiarGemeos);
+        }
+      }
+    };
+    getPregnantEvolutionData();
+  }, []);
 
   const handleChangeName = (e: { target: { value: string } }) => {
     const { value } = e.target;
@@ -647,6 +712,7 @@ export function PregnantRegister() {
     const response = await PostPregnant(pregnantData);
     if (response?.status == 200) {
       successNotification('Gestante cadastrada com sucesso!');
+      navigate(`/pregnancies/${response.data.gestante.id}`);
     }
   };
 
@@ -711,18 +777,23 @@ export function PregnantRegister() {
                 placeHolder="Selecione uma data"
                 inputFunction={handleChangeBirthDate}
                 status={errorBirthDate.errorType}
+                value={
+                  birthDate?.toString() ? moment(birthDate.toString()) : null
+                }
               />
               <Select
                 label="Raça:"
                 defaut="Selecione uma opcão"
                 list={raceList}
                 selectFunc={handleChangeRace}
+                value={race}
               />
               <Select
                 label="Sexo:"
                 defaut="Selecione uma opcão"
                 list={genderList}
                 selectFunc={handleChangeGender}
+                value={gender}
               />
               <InputMask
                 mask={'999.999.999-99'}
@@ -761,12 +832,14 @@ export function PregnantRegister() {
                 defaut="Selecione uma opcão"
                 list={maritalStatusList}
                 selectFunc={handleChangeMaritalStatus}
+                value={maritalStatus}
               />
               <Select
                 label="Escolaridade:"
                 defaut="Selecione uma opcão"
                 list={educationLevelsList}
                 selectFunc={handleChangeEducationLevel}
+                value={educationLevel}
               />
               <Input
                 label={'Renda Familiar:'}
@@ -797,6 +870,7 @@ export function PregnantRegister() {
                 defaut="Selecione uma opcão"
                 list={housingTypesList}
                 selectFunc={handleChangeHousing}
+                value={housing}
               />
               <RadioSelect
                 label="Eletricidade na moradia:"
@@ -841,6 +915,7 @@ export function PregnantRegister() {
                 defaut="Selecione uma opcão"
                 list={malnutritionLevelsList}
                 selectFunc={handleChangeWellFed}
+                value={wellFed}
               />
 
               <RadioSelect

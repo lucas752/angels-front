@@ -46,3 +46,12 @@ export const DeletePregnant = async (id: number) => {
     errorNotification('Erro ao deletar gestante, tente novamente.');
   }
 };
+
+export const GetPregnantEvolutionData = async (id: number) => {
+  try {
+    const response = await api.get(`/dados-evolutivos/gestante/${id}`);
+    return response;
+  } catch (error) {
+    errorNotification('Erro ao buscar gestante, tente novamente.');
+  }
+};

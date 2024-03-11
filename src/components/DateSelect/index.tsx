@@ -15,7 +15,7 @@ interface DateProps {
   errorShow?: boolean;
   optional?: boolean;
   color?: string;
-  value?: string;
+  value?: string | string[] | Moment | undefined;
 }
 export const DateSelect: React.FC<DateProps> = ({
   label,
