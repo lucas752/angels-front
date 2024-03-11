@@ -5,10 +5,12 @@ export const Patners = () => {
 
     return (
         <S.Container>
-           <S.Header>Parceiros</S.Header> 
-           <S.Slide>
-             <SliderComp/>
-           </S.Slide>
+          <S.Wrapper>
+            <S.Header>Parceiros</S.Header> 
+            <S.Slide>
+              <SliderComp/>
+            </S.Slide>
+          </S.Wrapper>
         </S.Container>
     )
 }

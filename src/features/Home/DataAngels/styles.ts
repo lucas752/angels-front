@@ -14,6 +14,7 @@ export const DataHeader = styled.div`
     font-weight: 600;
     color: #9D0B67;
     padding: 2rem 0;
+    text-align: center;
 `;
 
 export const DataGrid = styled.div`
