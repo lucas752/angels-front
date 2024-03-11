@@ -3,7 +3,7 @@ import * as S from "./styles";
 export const DataAngels = () => {
     return (
       <S.Container>
-        <S.DataWrapper>
+        <S.DataWrapper id="data">
           <S.DataHeader>Dados</S.DataHeader>
         </S.DataWrapper>
         <S.DataGrid>

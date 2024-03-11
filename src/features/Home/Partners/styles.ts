@@ -7,6 +7,7 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
+    padding: 0 0 3rem;
     width: 95%;
     max-width: 1280px;
     color: #b1488a;

@@ -5,7 +5,7 @@ export const Partners = () => {
 
     return (
         <S.Container>
-          <S.Wrapper>
+          <S.Wrapper id="partners">
             <S.Header>Parceiros</S.Header> 
             <S.Slide>
               <SliderComp/>
